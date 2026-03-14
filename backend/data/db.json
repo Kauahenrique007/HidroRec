@@ -1,0 +1,38 @@
+{
+  "usuarios": [
+    { "id": 1, "nome": "Sistema", "tipo": "sistema" },
+    { "id": 2, "nome": "João Cidadão", "tipo": "cidadao" },
+    { "id": 3, "nome": "Defesa Civil", "tipo": "institucional" }
+  ],
+  "bairros": [
+    { "id": 1, "nome": "Boa Viagem", "latitude": -8.126, "longitude": -34.902 },
+    { "id": 2, "nome": "Centro", "latitude": -8.064, "longitude": -34.871 },
+    { "id": 3, "nome": "Casa Amarela", "latitude": -8.023, "longitude": -34.919 },
+    { "id": 4, "nome": "Imbiribeira", "latitude": -8.109, "longitude": -34.896 },
+    { "id": 5, "nome": "Madalena", "latitude": -8.054, "longitude": -34.904 },
+    { "id": 6, "nome": "Pina", "latitude": -8.086, "longitude": -34.887 },
+    { "id": 7, "nome": "Cordeiro", "latitude": -8.029, "longitude": -34.928 },
+    { "id": 8, "nome": "Torre", "latitude": -8.042, "longitude": -34.909 }
+  ],
+  "areasRisco": [
+    { "id": 1, "bairroId": 1, "rua": "Avenida Conselheiro Aguiar", "nivel": "alto", "latitude": -8.126, "longitude": -34.902, "descricao": "Próximo ao shopping, alagamento frequente em maré alta" },
+    { "id": 2, "bairroId": 2, "rua": "Rua da Aurora", "nivel": "medio", "latitude": -8.064, "longitude": -34.871, "descricao": "Próximo ao Rio Capibaribe, transborda em chuvas intensas" },
+    { "id": 3, "bairroId": 3, "rua": "Estrada do Arraial", "nivel": "baixo", "latitude": -8.023, "longitude": -34.919, "descricao": "Ponto de alagamento localizado" },
+    { "id": 4, "bairroId": 4, "rua": "Avenida Mascarenhas de Morais", "nivel": "medio", "latitude": -8.109, "longitude": -34.896, "descricao": "Próximo ao viaduto" }
+  ],
+  "alertas": [
+    { "id": 1, "titulo": "Alagamento na Conselheiro Aguiar", "bairroId": 1, "nivel": "alto", "status": "ativo", "mensagem": "Trânsito lento no sentido praia, água na pista.", "dataHora": "2025-03-14T09:30:00.000Z", "origem": "colaborativa" },
+    { "id": 2, "titulo": "Microalagamento na Rua da Aurora", "bairroId": 2, "nivel": "medio", "status": "ativo", "mensagem": "Acúmulo de água na calçada, atenção pedestres.", "dataHora": "2025-03-14T10:15:00.000Z", "origem": "sistema" },
+    { "id": 3, "titulo": "Via bloqueada na Estrada do Arraial", "bairroId": 3, "nivel": "alto", "status": "ativo", "mensagem": "Queda de barreira interdita via.", "dataHora": "2025-03-14T11:00:00.000Z", "origem": "institucional" }
+  ],
+  "clima": [
+    { "id": 1, "local": "Recife", "chuvaMm": 15.2, "temperatura": 26, "umidade": 85, "dataHora": "2025-03-14T12:00:00.000Z", "fonte": "APAC" }
+  ],
+  "mare": [
+    { "id": 1, "local": "Porto do Recife", "nivel": 2.1, "influencia": "alta", "dataHora": "2025-03-14T12:00:00.000Z", "fonte": "DHN" }
+  ],
+  "ocorrencias": [
+    { "id": 1, "usuarioId": 2, "bairroId": 1, "rua": "Rua dos Navegantes", "tipo": "alagamento", "nivelAgua": "medio", "descricao": "Água chegando na calçada, carros passando devagar.", "latitude": -8.128, "longitude": -34.904, "status": "validada", "origem": "colaborativa", "dataHora": "2025-03-14T08:20:00.000Z" },
+    { "id": 2, "usuarioId": 3, "bairroId": 2, "rua": "Rua do Sol", "tipo": "microalagamento", "nivelAgua": "baixo", "descricao": "Pequeno acúmulo na esquina.", "latitude": -8.063, "longitude": -34.872, "status": "validada", "origem": "institucional", "dataHora": "2025-03-14T09:45:00.000Z" }
+  ]
+}
