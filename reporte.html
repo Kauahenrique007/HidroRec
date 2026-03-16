@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Reporte alagamentos e condições de risco no Recife como colaborador urbano.">
+    <meta name="author" content="Equipe HidroRec">
+    <title>HidroRec · Reporte Colaborativo</title>
+</head>
+<body>
+    <header>
+        <h1>HidroRec</h1>
+        <p>Monitoramento Urbano Inteligente</p>
+        <img src="imagens/logo-hidrorec.png" alt="HidroRec logotipo" width="150" height="80">
+        <nav>
+            <ul>
+                <li><a href="index.html" title="Página inicial">Início</a></li>
+                <li><a href="cadastro.html" title="Cadastrar nova área ou ocorrência">Cadastro</a></li>
+                <li><a href="lista.html" title="Lista completa de registros">Lista</a></li>
+                <li><a href="reporte.html" title="Reportar alagamento como colaborador">Reporte</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Reporte de Alagamento - Colaborador Urbano</h2>
+        <p>Compartilhe informações sobre alagamentos e pontos de alagamento na sua região. Sua contribuição ajuda a Defesa Civil e a comunidade.</p>
+
+        <section>
+            <h3>Seu Status</h3>
+            <p><strong>Colaborador Urbano</strong><br>
+            156 pontos · 12 reportes · Nível 3</p>
+        </section>
+
+        <form action="/api/reporte" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Localização</legend>
+                <p>
+                    <label for="endereco">Sua Localização:</label>
+                    <input type="text" id="endereco" name="endereco" value="Av. Boa Viagem, 3200" readonly>
+                    <br><small>Localização detectada automaticamente via GPS</small>
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Nível da Água</legend>
+                <p>Selecione o nível aproximado:</p>
+                <p>
+                    <input type="radio" id="pocas" name="nivel_agua" value="pocas" checked>
+                    <label for="pocas">Poças</label>
+                </p>
+                <p>
+                    <input type="radio" id="tornozelo" name="nivel_agua" value="tornozelo">
+                    <label for="tornozelo">Tornozelo</label>
+                </p>
+                <p>
+                    <input type="radio" id="joelho" name="nivel_agua" value="joelho">
+                    <label for="joelho">Joelho</label>
+                </p>
+                <p>
+                    <input type="radio" id="cintura" name="nivel_agua" value="cintura">
+                    <label for="cintura">Cintura</label>
+                </p>
+                <p>
+                    <input type="radio" id="peito" name="nivel_agua" value="peito">
+                    <label for="peito">Peito</label>
+                </p>
+                <p><strong>Nível selecionado:</strong> Poças (exemplo)</p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Foto (Opcional)</legend>
+                <p>
+                    <label for="foto">Adicionar Foto:</label>
+                    <input type="file" id="foto" name="foto" accept="image/*">
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Comentário Adicional</legend>
+                <p>
+                    <label for="comentario">Descreva o que você está observando no local...</label><br>
+                    <textarea id="comentario" name="comentario" rows="4" cols="50" placeholder="Ex: Água subindo rapidamente, trânsito lento..."></textarea>
+                </p>
+            </fieldset>
+
+            <p>
+                <button type="submit">Enviar Reporte</button>
+            </p>
+        </form>
+
+        <aside>
+            <h3>Dica de Segurança</h3>
+            <p><strong>Mantenha-se em local seguro ao fazer o reporte. Não se arrisque para obter informações.</strong></p>
+        </aside>
+
+        <section>
+            <h3>Seu Status</h3>
+            <p><strong>Colaborador Urbano</strong><br>
+            156 pontos · 12 reportes · Nível 3</p>
+        </section>
+
+        <p><a href="index.html">← Voltar ao painel principal</a></p>
+    </main>
+
+    <footer>
+        <address>
+            <p>HidroRec — Monitoramento Urbano Inteligente<br>
+            Curso: Desenvolvimento Front-End · Atividade Acadêmica HTML puro<br>
+            Equipe: HidroRec</p>
+        </address>
+        <p><a href="#" target="_blank" rel="noopener">Repositório GitHub (fictício)</a></p>
+        <p><a href="#top">Voltar ao topo</a></p>
+    </footer>
+</body>
+</html>
