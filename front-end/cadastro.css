@@ -1,0 +1,429 @@
+/* =========================
+   RESET E CONFIGURAÇÕES GERAIS
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --azul-escuro: #0A3D62;
+    --azul-medio: #145DA0;
+    --azul-claro: #3C91E6;
+    --verde: #1DD1A1;
+    --verde-escuro: #13b98d;
+    --cinza-fundo: #f4f7fb;
+    --cinza-claro: #e6ecf2;
+    --cinza-texto: #5b6573;
+    --texto-principal: #1f2d3d;
+    --branco: #ffffff;
+    --vermelho: #d9534f;
+    --sombra: 0 8px 24px rgba(10, 61, 98, 0.08);
+    --borda-radius: 16px;
+    --transicao: 0.3s ease;
+    --largura-maxima: 1100px;
+    --fonte: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--fonte);
+    background: linear-gradient(180deg, #eef4fa 0%, #f8fbff 100%);
+    color: var(--texto-principal);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+    background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+    color: var(--branco);
+    padding: 32px 20px 24px;
+    text-align: center;
+    box-shadow: var(--sombra);
+}
+
+header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+header p {
+    font-size: 1rem;
+    opacity: 0.92;
+    margin-bottom: 18px;
+}
+
+header img {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 8px;
+}
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--branco);
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+    transition: var(--transicao);
+}
+
+nav a:hover,
+nav a:focus {
+    background: var(--verde);
+    color: var(--azul-escuro);
+    border-color: var(--verde);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+main {
+    max-width: var(--largura-maxima);
+    margin: 32px auto;
+    padding: 0 20px 40px;
+}
+
+main h2 {
+    font-size: 2rem;
+    color: var(--azul-escuro);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+main > p {
+    max-width: 850px;
+    margin: 0 auto 28px;
+    text-align: center;
+    color: var(--cinza-texto);
+    font-size: 1rem;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+form {
+    background: var(--branco);
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(20, 93, 160, 0.08);
+}
+
+/* =========================
+   FIELDSETS
+========================= */
+fieldset {
+    border: 1px solid var(--cinza-claro);
+    border-radius: var(--borda-radius);
+    padding: 22px 20px 18px;
+    margin-bottom: 24px;
+    background: #fcfdff;
+    transition: var(--transicao);
+}
+
+fieldset:hover {
+    border-color: rgba(60, 145, 230, 0.45);
+    box-shadow: 0 4px 18px rgba(60, 145, 230, 0.08);
+}
+
+legend {
+    font-weight: 700;
+    color: var(--azul-escuro);
+    padding: 0 10px;
+    font-size: 1.05rem;
+}
+
+/* =========================
+   CAMPOS E TEXTOS
+========================= */
+form p {
+    margin-bottom: 16px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--texto-principal);
+}
+
+strong {
+    color: var(--azul-escuro);
+}
+
+/* =========================
+   INPUTS, SELECT, TEXTAREA
+========================= */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cfd8e3;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 0.98rem;
+    color: var(--texto-principal);
+    transition: var(--transicao);
+    outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #95a2b1;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--azul-claro);
+    box-shadow: 0 0 0 4px rgba(60, 145, 230, 0.12);
+    background: #fff;
+}
+
+/* =========================
+   RADIO E CHECKBOX
+========================= */
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: var(--azul-claro);
+    transform: scale(1.1);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+    display: inline;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* =========================
+   RANGE
+========================= */
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--verde);
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+output {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: rgba(29, 209, 161, 0.12);
+    color: #0f7f63;
+    border-radius: 999px;
+    font-weight: 700;
+    min-width: 36px;
+    text-align: center;
+}
+
+/* =========================
+   INPUT FILE
+========================= */
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #b8c7d9;
+    border-radius: 12px;
+    background: #f8fbff;
+    cursor: pointer;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+button {
+    border: none;
+    padding: 13px 22px;
+    border-radius: 12px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transicao);
+    margin-right: 10px;
+    margin-top: 8px;
+}
+
+button[type="submit"] {
+    background: linear-gradient(135deg, var(--verde), var(--verde-escuro));
+    color: var(--branco);
+    box-shadow: 0 8px 18px rgba(29, 209, 161, 0.24);
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+}
+
+button[type="reset"] {
+    background: #eef3f8;
+    color: var(--azul-escuro);
+    border: 1px solid #d7e0ea;
+}
+
+button[type="reset"]:hover,
+button[type="reset"]:focus {
+    background: #dfe9f4;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    background: var(--azul-escuro);
+    color: var(--branco);
+    padding: 28px 20px;
+    margin-top: 32px;
+    text-align: center;
+}
+
+footer address {
+    font-style: normal;
+    margin-bottom: 14px;
+    line-height: 1.7;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: var(--verde);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transicao);
+}
+
+footer a:hover,
+footer a:focus {
+    color: #7ff3d3;
+    text-decoration: underline;
+}
+
+/* =========================
+   DESTAQUE VISUAL EM CAMPOS OBRIGATÓRIOS
+========================= */
+input:required,
+select:required,
+textarea:required {
+    border-left: 4px solid var(--azul-claro);
+}
+
+/* =========================
+   ESTADOS DE VALIDAÇÃO
+========================= */
+input:invalid:focus,
+select:invalid:focus,
+textarea:invalid:focus {
+    border-color: var(--vermelho);
+    box-shadow: 0 0 0 4px rgba(217, 83, 79, 0.12);
+}
+
+input:valid,
+select:valid,
+textarea:valid {
+    border-color: #cfe9df;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main h2 {
+        font-size: 1.6rem;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    fieldset {
+        padding: 18px 16px 14px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        width: 220px;
+        text-align: center;
+    }
+
+    button {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 26px 16px 20px;
+    }
+
+    main {
+        margin: 24px auto;
+        padding: 0 14px 30px;
+    }
+
+    header h1 {
+        font-size: 1.75rem;
+    }
+
+    header p,
+    main > p,
+    label,
+    input,
+    select,
+    textarea,
+    button {
+        font-size: 0.95rem;
+    }
+}
