@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Canal colaborativo do HidroRec para reporte de alagamentos e sinais de risco em Recife.">
+  <title>HidroRec | Reporte Colaborativo</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Canal colaborativo</span>
+          <strong>HidroRec</strong>
+          <span>Entrada publica com validacao e triagem</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
     <meta charset="UTF-8">
     <meta name="description" content="Reporte alagamentos e condições de risco no Recife como colaborador urbano.">
     <meta name="author" content="Equipe HidroRec">
@@ -23,95 +53,95 @@
         </nav>
     </header>
 
-    <main>
-        <h2>Reporte de Alagamento - Colaborador Urbano</h2>
-        <p>Compartilhe informações sobre alagamentos e pontos de alagamento na sua região. Sua contribuição ajuda a Defesa Civil e a comunidade.</p>
+  <main class="shell">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Colaboracao urbana</span>
+        <h1>Reporte o que voce observa no territorio.</h1>
+        <p>As informacoes enviadas alimentam a fila de triagem do HidroRec. Priorize seguranca pessoal, contexto claro do local e descricao objetiva do impacto observado.</p>
+      </article>
+      <aside class="hero__status">
+        <div>
+          <span class="brand__eyebrow">Contexto atual</span>
+          <strong>Leitura hidrometeorologica em uso</strong>
+        </div>
+        <ul id="public-context" class="stack">
+          <li>Carregando leitura de apoio...</li>
+        </ul>
+      </aside>
+    </section>
 
-        <section>
-            <h3>Seu Status</h3>
-            <p><strong>Colaborador Urbano</strong><br>
-            156 pontos · 12 reportes · Nível 3</p>
-        </section>
-
-        <form action="/api/reporte" method="post" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Localização</legend>
-                <p>
-                    <label for="endereco">Sua Localização:</label>
-                    <input type="text" id="endereco" name="endereco" value="Av. Boa Viagem, 3200" readonly>
-                    <br><small>Localização detectada automaticamente via GPS</small>
-                </p>
-            </fieldset>
-
-            <fieldset>
-                <legend>Nível da Água</legend>
-                <p>Selecione o nível aproximado:</p>
-                <p>
-                    <input type="radio" id="pocas" name="nivel_agua" value="pocas" checked>
-                    <label for="pocas">Poças</label>
-                </p>
-                <p>
-                    <input type="radio" id="tornozelo" name="nivel_agua" value="tornozelo">
-                    <label for="tornozelo">Tornozelo</label>
-                </p>
-                <p>
-                    <input type="radio" id="joelho" name="nivel_agua" value="joelho">
-                    <label for="joelho">Joelho</label>
-                </p>
-                <p>
-                    <input type="radio" id="cintura" name="nivel_agua" value="cintura">
-                    <label for="cintura">Cintura</label>
-                </p>
-                <p>
-                    <input type="radio" id="peito" name="nivel_agua" value="peito">
-                    <label for="peito">Peito</label>
-                </p>
-                <p><strong>Nível selecionado:</strong> Poças (exemplo)</p>
-            </fieldset>
-
-            <fieldset>
-                <legend>Foto (Opcional)</legend>
-                <p>
-                    <label for="foto">Adicionar Foto:</label>
-                    <input type="file" id="foto" name="foto" accept="image/*">
-                </p>
-            </fieldset>
-
-            <fieldset>
-                <legend>Comentário Adicional</legend>
-                <p>
-                    <label for="comentario">Descreva o que você está observando no local...</label><br>
-                    <textarea id="comentario" name="comentario" rows="4" cols="50" placeholder="Ex: Água subindo rapidamente, trânsito lento..."></textarea>
-                </p>
-            </fieldset>
-
-            <p>
-                <button type="submit">Enviar Reporte</button>
-            </p>
+    <section class="page-grid">
+      <section class="form-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Envio publico</span>
+            <h2>Registrar reporte colaborativo</h2>
+          </div>
+        </div>
+        <form class="form-grid" id="public-report-form">
+          <div class="field">
+            <label for="reporterName">Seu nome</label>
+            <input id="reporterName" name="reporterName" type="text" placeholder="Nome ou identificacao">
+          </div>
+          <div class="field">
+            <label for="neighborhoodName">Bairro</label>
+            <input id="neighborhoodName" name="neighborhoodName" type="text" placeholder="Boa Viagem">
+          </div>
+          <div class="field">
+            <label for="address">Endereco de referencia</label>
+            <input id="address" name="address" type="text" placeholder="Rua, avenida, ponte, canal...">
+          </div>
+          <div class="field">
+            <label for="type">Tipo observado</label>
+            <select id="type" name="type">
+              <option value="alagamento">Alagamento</option>
+              <option value="microalagamento">Microalagamento</option>
+              <option value="drenagem">Falha de drenagem</option>
+              <option value="deslizamento">Movimento de massa</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="waterLevel">Nivel da agua</label>
+            <select id="waterLevel" name="waterLevel">
+              <option value="tornozelo">Tornozelo</option>
+              <option value="medio">Joelho / medio</option>
+              <option value="alto">Cintura / alto</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="description">Descricao</label>
+            <textarea id="description" name="description" placeholder="Explique o que esta acontecendo, se a agua esta subindo e como a via esta sendo impactada."></textarea>
+          </div>
+          <div class="actions field--full">
+            <button type="submit">Enviar reporte</button>
+          </div>
         </form>
+        <div class="feedback" id="form-feedback"></div>
+      </section>
 
-        <aside>
-            <h3>Dica de Segurança</h3>
-            <p><strong>Mantenha-se em local seguro ao fazer o reporte. Não se arrisque para obter informações.</strong></p>
-        </aside>
+      <section class="info-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Orientacao</span>
+            <h2>Boas praticas para reportar</h2>
+          </div>
+        </div>
+        <div class="stack">
+          <p>Nao se aproxime de pontos com correnteza ou energia exposta. Reportes objetivos e localizaveis ajudam a triagem a ganhar velocidade.</p>
+          <p>Se houver risco imediato a pessoas, acione os canais oficiais antes de enviar o formulario.</p>
+        </div>
+      </section>
+    </section>
+  </main>
 
-        <section>
-            <h3>Seu Status</h3>
-            <p><strong>Colaborador Urbano</strong><br>
-            156 pontos · 12 reportes · Nível 3</p>
-        </section>
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Canal colaborativo com validacao posterior pela operacao.</span>
+      <span>&copy; <span data-current-year></span> HidroRec</span>
+    </div>
+  </footer>
 
-        <p><a href="index.html">← Voltar ao painel principal</a></p>
-    </main>
-
-    <footer>
-        <address>
-            <p>HidroRec — Monitoramento Urbano Inteligente<br>
-            Curso: Desenvolvimento Front-End · Atividade Acadêmica HTML puro<br>
-            Equipe: HidroRec</p>
-        </address>
-        <p><a href="#" target="_blank" rel="noopener">Repositório GitHub (fictício)</a></p>
-        <p><a href="#top">Voltar ao topo</a></p>
-    </footer>
+  <script type="module" src="../js/modules/reportar/reportar.js"></script>
 </body>
 </html>

@@ -2,6 +2,76 @@
 <html lang="pt-BR">
 <head>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Area operacional do HidroRec para autenticacao e registro institucional de ocorrencias.">
+  <title>HidroRec | Operacao e Cadastro</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Acesso operacional</span>
+          <strong>HidroRec</strong>
+          <span>Registro institucional, autenticacao e auditoria</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Posto de operacao</span>
+        <h1>Cadastro institucional com trilha de auditoria.</h1>
+        <p>Use esta area para autenticar operadores e registrar ocorrencias validadas, mantendo origem, responsavel e historico de alteracoes coerentes com a API do HidroRec.</p>
+      </article>
+      <aside class="hero__status">
+        <div>
+          <span class="brand__eyebrow">Credenciais de demonstracao</span>
+          <strong>Operador padrao</strong>
+        </div>
+        <div class="credentials">
+          <span><code>operacao@hidrorec.local</code></span>
+          <span><code>HidroRec#2026</code></span>
+        </div>
+        <button class="button button--ghost" type="button" data-action="logout">Encerrar sessao</button>
+      </aside>
+    </section>
+
+    <section class="page-grid">
+      <section class="form-card" id="auth-gate">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Autenticacao</span>
+            <h2>Entrar como operador</h2>
+          </div>
+        </div>
+        <form class="form-grid" id="login-form">
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="operacao@hidrorec.local">
+          </div>
+          <div class="field">
+            <label for="password">Senha</label>
+            <input id="password" name="password" type="password" placeholder="Sua senha operacional">
+          </div>
+          <div class="actions field--full">
+            <button type="submit">Iniciar sessao</button>
+          </div>
+
     <meta charset="UTF-8">
     <meta name="description" content="Cadastro de áreas monitoradas e ocorrências no sistema HidroRec.">
     <meta name="author" content="Equipe HidroRec">
@@ -166,17 +236,77 @@
                 <button type="submit">Enviar cadastro</button>
                 <button type="reset">Limpar formulário</button>
             </p>
-        </form>
-    </main>
 
-    <footer>
-        <address>
-            <p>HidroRec — Monitoramento Urbano Inteligente<br>
-            Curso: Desenvolvimento Front-End · Atividade Acadêmica HTML puro<br>
-            Equipe: HidroRec</p>
-        </address>
-        <p><a href="#" target="_blank" rel="noopener">Repositório GitHub (fictício)</a></p>
-        <p><a href="#top">Voltar ao topo</a></p>
-    </footer>
+        </form>
+        <div class="feedback" id="login-feedback"></div>
+      </section>
+
+      <section class="form-card" id="operations-section" hidden>
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Registro institucional</span>
+            <h2>Novo evento operacional</h2>
+            <p>Operador autenticado: <strong id="operator-name">--</strong></p>
+          </div>
+        </div>
+        <form class="form-grid" id="operations-form">
+          <div class="field">
+            <label for="neighborhoodName">Bairro</label>
+            <input id="neighborhoodName" name="neighborhoodName" type="text" placeholder="Boa Viagem">
+          </div>
+          <div class="field">
+            <label for="address">Endereco de referencia</label>
+            <input id="address" name="address" type="text" placeholder="Avenida Conselheiro Aguiar">
+          </div>
+          <div class="field">
+            <label for="type">Tipo de evento</label>
+            <select id="type" name="type">
+              <option value="alagamento">Alagamento</option>
+              <option value="microalagamento">Microalagamento</option>
+              <option value="drenagem">Falha de drenagem</option>
+              <option value="deslizamento">Movimento de massa</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="waterLevel">Nivel observado</label>
+            <select id="waterLevel" name="waterLevel">
+              <option value="tornozelo">Tornozelo</option>
+              <option value="medio">Joelho / medio</option>
+              <option value="alto">Cintura / alto</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="reporterName">Responsavel pelo registro</label>
+            <input id="reporterName" name="reporterName" type="text" placeholder="Equipe Operacional HidroRec">
+          </div>
+          <div class="field">
+            <label for="status">Status inicial</label>
+            <select id="status" name="status">
+              <option value="em_analise">Em analise</option>
+              <option value="validado">Validado</option>
+              <option value="pendente">Pendente</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="description">Descricao operacional</label>
+            <textarea id="description" name="description" placeholder="Descreva impacto, contexto territorial, drenagem e necessidade de resposta."></textarea>
+          </div>
+          <div class="actions field--full">
+            <button type="submit">Salvar ocorrencia</button>
+          </div>
+        </form>
+        <div class="feedback" id="operations-feedback"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Area protegida para operadores do HidroRec.</span>
+      <span>&copy; <span data-current-year></span> HidroRec</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/cadastro/cadastro.js"></script>
 </body>
 </html>

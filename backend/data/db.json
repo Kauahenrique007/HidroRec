@@ -1,38 +1,434 @@
 {
-  "usuarios": [
-    { "id": 1, "nome": "Sistema", "tipo": "sistema" },
-    { "id": 2, "nome": "João Cidadão", "tipo": "cidadao" },
-    { "id": 3, "nome": "Defesa Civil", "tipo": "institucional" }
+  "organizations": [
+    {
+      "id": "org-recife-ops",
+      "name": "Centro Operacional Recife",
+      "type": "institucional"
+    }
   ],
-  "bairros": [
-    { "id": 1, "nome": "Boa Viagem", "latitude": -8.126, "longitude": -34.902 },
-    { "id": 2, "nome": "Centro", "latitude": -8.064, "longitude": -34.871 },
-    { "id": 3, "nome": "Casa Amarela", "latitude": -8.023, "longitude": -34.919 },
-    { "id": 4, "nome": "Imbiribeira", "latitude": -8.109, "longitude": -34.896 },
-    { "id": 5, "nome": "Madalena", "latitude": -8.054, "longitude": -34.904 },
-    { "id": 6, "nome": "Pina", "latitude": -8.086, "longitude": -34.887 },
-    { "id": 7, "nome": "Cordeiro", "latitude": -8.029, "longitude": -34.928 },
-    { "id": 8, "nome": "Torre", "latitude": -8.042, "longitude": -34.909 }
+  "users": [
+    {
+      "id": "usr-admin",
+      "name": "Operacao HidroRec",
+      "email": "operacao@hidrorec.local",
+      "role": "admin",
+      "organization": "Centro Operacional Recife",
+      "status": "active",
+      "salt": "usr-admin-hidrorec",
+      "passwordHash": "437194eef42be0478bb2ede6f1332ac2c28fdaa49776ad42955d0d5321b7f5af",
+      "permissions": [
+        "territories:write",
+        "incidents:write",
+        "alerts:write",
+        "users:read"
+      ],
+      "lastLoginAt": null,
+      "createdAt": "2026-03-20T09:00:00.000Z",
+      "updatedAt": "2026-03-20T09:00:00.000Z"
+    },
+    {
+      "id": "usr-analista",
+      "name": "Analista Territorial",
+      "email": "analista@hidrorec.local",
+      "role": "operator",
+      "organization": "Centro Operacional Recife",
+      "status": "active",
+      "salt": "usr-analista-hidrorec",
+      "passwordHash": "f8bd716c2300750012464ecd6ec4efda9eadf53de305e6d5ebf346600c01b9e7",
+      "permissions": [
+        "incidents:write",
+        "alerts:read",
+        "territories:read"
+      ],
+      "lastLoginAt": null,
+      "createdAt": "2026-03-20T09:00:00.000Z",
+      "updatedAt": "2026-03-20T09:00:00.000Z"
+    }
   ],
-  "areasRisco": [
-    { "id": 1, "bairroId": 1, "rua": "Avenida Conselheiro Aguiar", "nivel": "alto", "latitude": -8.126, "longitude": -34.902, "descricao": "Próximo ao shopping, alagamento frequente em maré alta" },
-    { "id": 2, "bairroId": 2, "rua": "Rua da Aurora", "nivel": "medio", "latitude": -8.064, "longitude": -34.871, "descricao": "Próximo ao Rio Capibaribe, transborda em chuvas intensas" },
-    { "id": 3, "bairroId": 3, "rua": "Estrada do Arraial", "nivel": "baixo", "latitude": -8.023, "longitude": -34.919, "descricao": "Ponto de alagamento localizado" },
-    { "id": 4, "bairroId": 4, "rua": "Avenida Mascarenhas de Morais", "nivel": "medio", "latitude": -8.109, "longitude": -34.896, "descricao": "Próximo ao viaduto" }
+  "neighborhoods": [
+    {
+      "id": "nb-boa-viagem",
+      "name": "Boa Viagem",
+      "latitude": -8.126,
+      "longitude": -34.902
+    },
+    {
+      "id": "nb-centro",
+      "name": "Santo Antonio",
+      "latitude": -8.063,
+      "longitude": -34.876
+    },
+    {
+      "id": "nb-imbiribeira",
+      "name": "Imbiribeira",
+      "latitude": -8.109,
+      "longitude": -34.896
+    },
+    {
+      "id": "nb-afogados",
+      "name": "Afogados",
+      "latitude": -8.081,
+      "longitude": -34.91
+    },
+    {
+      "id": "nb-torre",
+      "name": "Torre",
+      "latitude": -8.042,
+      "longitude": -34.909
+    }
   ],
-  "alertas": [
-    { "id": 1, "titulo": "Alagamento na Conselheiro Aguiar", "bairroId": 1, "nivel": "alto", "status": "ativo", "mensagem": "Trânsito lento no sentido praia, água na pista.", "dataHora": "2025-03-14T09:30:00.000Z", "origem": "colaborativa" },
-    { "id": 2, "titulo": "Microalagamento na Rua da Aurora", "bairroId": 2, "nivel": "medio", "status": "ativo", "mensagem": "Acúmulo de água na calçada, atenção pedestres.", "dataHora": "2025-03-14T10:15:00.000Z", "origem": "sistema" },
-    { "id": 3, "titulo": "Via bloqueada na Estrada do Arraial", "bairroId": 3, "nivel": "alto", "status": "ativo", "mensagem": "Queda de barreira interdita via.", "dataHora": "2025-03-14T11:00:00.000Z", "origem": "institucional" }
+  "territories": [
+    {
+      "id": "tr-001",
+      "name": "Corredor Conselheiro Aguiar",
+      "neighborhoodId": "nb-boa-viagem",
+      "neighborhoodName": "Boa Viagem",
+      "address": "Avenida Conselheiro Aguiar",
+      "latitude": -8.126,
+      "longitude": -34.902,
+      "vulnerabilityLevel": "alta",
+      "drainageStatus": "restrito",
+      "historicalIncidents": 8,
+      "exposureIndex": 88,
+      "drainageCapacityIndex": 35,
+      "notes": "Trecho com recorrencia de alagamento em mare alta e chuva convectiva.",
+      "createdAt": "2026-03-20T09:00:00.000Z",
+      "updatedAt": "2026-03-26T11:20:00.000Z"
+    },
+    {
+      "id": "tr-002",
+      "name": "Eixo Rua da Aurora",
+      "neighborhoodId": "nb-centro",
+      "neighborhoodName": "Santo Antonio",
+      "address": "Rua da Aurora",
+      "latitude": -8.064,
+      "longitude": -34.871,
+      "vulnerabilityLevel": "media",
+      "drainageStatus": "monitorado",
+      "historicalIncidents": 5,
+      "exposureIndex": 74,
+      "drainageCapacityIndex": 48,
+      "notes": "Sensivel a acumulados e refluxo proximo ao Capibaribe.",
+      "createdAt": "2026-03-20T09:00:00.000Z",
+      "updatedAt": "2026-03-26T11:15:00.000Z"
+    },
+    {
+      "id": "tr-003",
+      "name": "Mascarenhas de Morais",
+      "neighborhoodId": "nb-imbiribeira",
+      "neighborhoodName": "Imbiribeira",
+      "address": "Avenida Mascarenhas de Morais",
+      "latitude": -8.109,
+      "longitude": -34.896,
+      "vulnerabilityLevel": "alta",
+      "drainageStatus": "restrito",
+      "historicalIncidents": 6,
+      "exposureIndex": 82,
+      "drainageCapacityIndex": 40,
+      "notes": "Via arterial com impacto operacional alto em eventos moderados.",
+      "createdAt": "2026-03-20T09:00:00.000Z",
+      "updatedAt": "2026-03-26T11:18:00.000Z"
+    },
+    {
+      "id": "tr-004",
+      "name": "Estrada dos Remedios",
+      "neighborhoodId": "nb-afogados",
+      "neighborhoodName": "Afogados",
+      "address": "Estrada dos Remedios",
+      "latitude": -8.084,
+      "longitude": -34.912,
+      "vulnerabilityLevel": "media",
+      "drainageStatus": "monitorado",
+      "historicalIncidents": 4,
+      "exposureIndex": 68,
+      "drainageCapacityIndex": 52,
+      "notes": "Faixa com retorno frequente de agua em horarios de pico.",
+      "createdAt": "2026-03-20T09:00:00.000Z",
+      "updatedAt": "2026-03-26T11:10:00.000Z"
+    },
+    {
+      "id": "tr-005",
+      "name": "Corredor Beira Rio",
+      "neighborhoodId": "nb-torre",
+      "neighborhoodName": "Torre",
+      "address": "Avenida Beira Rio",
+      "latitude": -8.044,
+      "longitude": -34.907,
+      "vulnerabilityLevel": "media",
+      "drainageStatus": "estavel",
+      "historicalIncidents": 3,
+      "exposureIndex": 62,
+      "drainageCapacityIndex": 58,
+      "notes": "Ponto de observacao por proximidade com canal e impacto viario.",
+      "createdAt": "2026-03-20T09:00:00.000Z",
+      "updatedAt": "2026-03-26T11:05:00.000Z"
+    }
   ],
-  "clima": [
-    { "id": 1, "local": "Recife", "chuvaMm": 15.2, "temperatura": 26, "umidade": 85, "dataHora": "2025-03-14T12:00:00.000Z", "fonte": "APAC" }
+  "alerts": [
+    {
+      "id": "al-001",
+      "title": "Alagamento com impacto viario",
+      "territoryId": "tr-001",
+      "neighborhoodId": "nb-boa-viagem",
+      "severity": "severo",
+      "status": "active",
+      "source": "operacao",
+      "message": "Lamina d'agua crescente no corredor leste, com lentidao acima do padrao.",
+      "createdAt": "2026-03-26T10:35:00.000Z",
+      "updatedAt": "2026-03-26T11:10:00.000Z"
+    },
+    {
+      "id": "al-002",
+      "title": "Atenção hidrologica no centro",
+      "territoryId": "tr-002",
+      "neighborhoodId": "nb-centro",
+      "severity": "atencao",
+      "status": "active",
+      "source": "sistema",
+      "message": "Acumulado em elevacao e tendencia de piora em 2 horas.",
+      "createdAt": "2026-03-26T09:55:00.000Z",
+      "updatedAt": "2026-03-26T10:50:00.000Z"
+    },
+    {
+      "id": "al-003",
+      "title": "Observacao de drenagem comprometida",
+      "territoryId": "tr-004",
+      "neighborhoodId": "nb-afogados",
+      "severity": "observacao",
+      "status": "monitoring",
+      "source": "campo",
+      "message": "Retorno intermitente em bocas de lobo com necessidade de varricao.",
+      "createdAt": "2026-03-26T08:40:00.000Z",
+      "updatedAt": "2026-03-26T10:00:00.000Z"
+    }
   ],
-  "mare": [
-    { "id": 1, "local": "Porto do Recife", "nivel": 2.1, "influencia": "alta", "dataHora": "2025-03-14T12:00:00.000Z", "fonte": "DHN" }
+  "incidents": [
+    {
+      "id": "in-001",
+      "territoryId": "tr-001",
+      "neighborhoodId": "nb-boa-viagem",
+      "neighborhoodName": "Boa Viagem",
+      "address": "Rua dos Navegantes",
+      "type": "alagamento",
+      "waterLevel": "joelho",
+      "severity": "severo",
+      "description": "Agua sobre a faixa de rolamento com impacto em transporte coletivo.",
+      "status": "em_analise",
+      "source": "colaborativa",
+      "reporterName": "Camila Almeida",
+      "reporterChannel": "colaborativo",
+      "latitude": -8.128,
+      "longitude": -34.904,
+      "createdAt": "2026-03-26T10:42:00.000Z",
+      "updatedAt": "2026-03-26T10:42:00.000Z"
+    },
+    {
+      "id": "in-002",
+      "territoryId": "tr-003",
+      "neighborhoodId": "nb-imbiribeira",
+      "neighborhoodName": "Imbiribeira",
+      "address": "Avenida Mascarenhas de Morais",
+      "type": "microalagamento",
+      "waterLevel": "medio",
+      "severity": "atencao",
+      "description": "Acumulo persistente em trecho de retorno com lentidao moderada.",
+      "status": "validado",
+      "source": "operacional",
+      "reporterName": "Equipe Mobilidade",
+      "reporterChannel": "operacional",
+      "latitude": -8.109,
+      "longitude": -34.896,
+      "createdAt": "2026-03-26T09:35:00.000Z",
+      "updatedAt": "2026-03-26T10:15:00.000Z"
+    },
+    {
+      "id": "in-003",
+      "territoryId": "tr-002",
+      "neighborhoodId": "nb-centro",
+      "neighborhoodName": "Santo Antonio",
+      "address": "Rua da Aurora",
+      "type": "alagamento",
+      "waterLevel": "medio",
+      "severity": "atencao",
+      "description": "Via com formacao de bolsao e necessidade de desvio local.",
+      "status": "pendente",
+      "source": "campo",
+      "reporterName": "Equipe Centro",
+      "reporterChannel": "operacional",
+      "latitude": -8.064,
+      "longitude": -34.871,
+      "createdAt": "2026-03-26T10:05:00.000Z",
+      "updatedAt": "2026-03-26T10:05:00.000Z"
+    },
+    {
+      "id": "in-004",
+      "territoryId": "tr-004",
+      "neighborhoodId": "nb-afogados",
+      "neighborhoodName": "Afogados",
+      "address": "Estrada dos Remedios",
+      "type": "alagamento",
+      "waterLevel": "tornozelo",
+      "severity": "observacao",
+      "description": "Agua concentrada em borda de via com reducao pontual de velocidade.",
+      "status": "resolvido",
+      "source": "institucional",
+      "reporterName": "Defesa Civil",
+      "reporterChannel": "institucional",
+      "latitude": -8.084,
+      "longitude": -34.912,
+      "createdAt": "2026-03-25T18:10:00.000Z",
+      "updatedAt": "2026-03-25T19:00:00.000Z"
+    }
   ],
-  "ocorrencias": [
-    { "id": 1, "usuarioId": 2, "bairroId": 1, "rua": "Rua dos Navegantes", "tipo": "alagamento", "nivelAgua": "medio", "descricao": "Água chegando na calçada, carros passando devagar.", "latitude": -8.128, "longitude": -34.904, "status": "validada", "origem": "colaborativa", "dataHora": "2025-03-14T08:20:00.000Z" },
-    { "id": 2, "usuarioId": 3, "bairroId": 2, "rua": "Rua do Sol", "tipo": "microalagamento", "nivelAgua": "baixo", "descricao": "Pequeno acúmulo na esquina.", "latitude": -8.063, "longitude": -34.872, "status": "validada", "origem": "institucional", "dataHora": "2025-03-14T09:45:00.000Z" }
-  ]
+  "climateReadings": [
+    {
+      "id": "cl-001",
+      "city": "Recife",
+      "observedRainMm": 18.4,
+      "accumulatedRain24h": 57.2,
+      "forecastRainMm": 34.8,
+      "temperatureC": 26,
+      "humidityPct": 88,
+      "source": "fallback",
+      "collectedAt": "2026-03-26T10:40:00.000Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-26T11:00:00.000Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-26T13:46:15.108Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-26T14:02:37.537Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-26T14:02:54.915Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-26T14:05:36.718Z"
+    }
+  ],
+  "tideReadings": [
+    {
+      "id": "td-001",
+      "station": "Porto do Recife",
+      "levelMeters": 2.05,
+      "influence": "media",
+      "source": "fallback",
+      "collectedAt": "2026-03-26T10:40:00.000Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-26T11:00:00.000Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-26T13:46:15.108Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-26T14:02:37.537Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-26T14:02:54.916Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-26T14:05:36.718Z"
+    }
+  ],
+  "meteorologicalWarnings": [
+    {
+      "id": "wr-001",
+      "title": "Aviso hidrometeorologico para faixa litoranea",
+      "severity": "atencao",
+      "source": "APAC",
+      "summary": "Persistencia de chuva moderada a forte com acumulados relevantes para zonas baixas.",
+      "validFrom": "2026-03-26T06:00:00.000Z",
+      "validTo": "2026-03-26T18:00:00.000Z"
+    }
+  ],
+  "operationalContexts": [
+    {
+      "id": "ctx-001",
+      "status": "mobilizacao",
+      "description": "Equipes em campo monitorando drenagem e corredores viarios priorizados.",
+      "updatedAt": "2026-03-26T10:55:00.000Z"
+    }
+  ],
+  "integrationRuns": [
+    {
+      "id": "run-001",
+      "source": "fallback",
+      "collectedAt": "2026-03-26T11:00:00.000Z",
+      "status": "degraded"
+    }
+  ],
+  "auditLogs": [],
+  "systemConfig": {
+    "city": "Recife",
+    "state": "PE",
+    "refreshWindowMinutes": 30
+  }
 }

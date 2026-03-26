@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Area administrativa do HidroRec com usuarios, auditoria, integrações e governanca tecnica.">
+  <title>HidroRec | Governanca</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Governanca tecnica</span>
+          <strong>HidroRec</strong>
+          <span>Usuarios, trilha de auditoria e operacao da plataforma</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Area restrita</span>
+        <h1>Gestao tecnica e rastreabilidade da plataforma.</h1>
+        <p>Este modulo reune usuarios operacionais, execucao de integrações, trilha de auditoria e atalhos para documentacao da API, ajudando a profissionalizar manutencao e evolucao do HidroRec.</p>
+      </article>
+      <aside class="hero__status">
+        <div>
+          <span class="brand__eyebrow">Atalhos</span>
+          <strong><a id="docs-link" class="text-link text-link--light" href="#" target="_blank" rel="noreferrer">Abrir OpenAPI</a></strong>
+        </div>
+        <div>
+          <strong><a id="status-link" class="text-link text-link--light" href="#" target="_blank" rel="noreferrer">Ver status da API</a></strong>
+        </div>
+      </aside>
+    </section>
+
+    <section class="page-grid">
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Resumo</span>
+            <h2>Indicadores de governanca</h2>
+          </div>
+        </div>
+        <div class="stats-grid" id="admin-summary"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Usuarios</span>
+            <h2>Acesso e papeis</h2>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Papel</th>
+                <th>Permissoes</th>
+                <th>Ultimo login</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Auditoria</span>
+            <h2>Eventos recentes</h2>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Acao</th>
+                <th>Ator</th>
+                <th>Recurso</th>
+                <th>Quando</th>
+              </tr>
+            </thead>
+            <tbody id="admin-audit"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Integracoes</span>
+            <h2>Execucoes recentes</h2>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Fonte</th>
+                <th>Status</th>
+                <th>Coletado em</th>
+              </tr>
+            </thead>
+            <tbody id="admin-runs"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Modulo administrativo e de observabilidade do HidroRec.</span>
+      <span>&copy; <span data-current-year></span> HidroRec</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/admin/admin.js"></script>
+</body>
+</html>

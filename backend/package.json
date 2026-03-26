@@ -1,7 +1,7 @@
 {
   "name": "hidrorec-backend",
   "version": "1.0.0",
-  "description": "Backend do HidroRec - Monitoramento de alagamentos em Recife",
+  "description": "Backend do HidroRec - API operacional para monitoramento hidroclimatico e risco urbano",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
