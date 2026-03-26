@@ -1,170 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Listagem de registros de monitoramento do HidroRec: áreas, níveis, status e alertas ativos.">
-    <meta name="author" content="Equipe HidroRec">
-    <title>HidroRec · Listagem de Dados</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Diretorio territorial do HidroRec com mapa operacional, alertas e ocorrencias por area monitorada.">
+  <title>HidroRec | Diretorio Territorial</title>
+  <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
-    <header>
-        <h1>HidroRec</h1>
-        <p>Monitoramento Urbano Inteligente</p>
-        <img src="imagens/logo-hidrorec.png" alt="HidroRec logotipo" width="150" height="80">
-        <nav>
-            <ul>
-                <li><a href="index.html" title="Página inicial">Início</a></li>
-                <li><a href="cadastro.html" title="Cadastrar nova área ou ocorrência">Cadastro</a></li>
-                <li><a href="lista.html" title="Lista completa de registros">Lista</a></li>
-                <li><a href="reporte.html" title="Reportar alagamento como colaborador">Reporte</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Camada territorial</span>
+          <strong>HidroRec</strong>
+          <span>Leitura geografica, filas e ocorrencias</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
 
-    <main>
-        <h2>Registros monitorados do HidroRec</h2>
-        <p>Veja abaixo a tabela com os últimos dados coletados nas áreas de risco do Recife, além de alertas ativos e áreas em atenção.</p>
+  <main class="shell">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Diretorio territorial</span>
+        <h1>Visualizacao operacional por territorio monitorado.</h1>
+        <p>Use filtros para focar bairros, nivel de risco e eventos prioritarios. O painel combina score explicavel, incidentes recentes e alertas vigentes por area.</p>
+      </article>
+      <aside class="hero__status">
+        <div>
+          <span class="brand__eyebrow">Uso recomendado</span>
+          <strong>Despacho, triagem e acompanhamento de resposta</strong>
+        </div>
+        <p>As marcacoes no mapa sintetizam score de risco atual por territorio.</p>
+      </aside>
+    </section>
 
-        <section>
-            <h3>Tabela de ocorrências recentes</h3>
-            <table border="1">
-                <caption>Registros de monitoramento - HidroRec (últimas 24h)</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Área monitorada</th>
-                        <th scope="col">Bairro</th>
-                        <th scope="col">Nível da água (cm)</th>
-                        <th scope="col">Volume de chuva (mm/h)</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Última atualização</th>
-                        <th scope="col">Responsável</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">101</th>
-                        <td>Av. Caxangá (RioMar)</td>
-                        <td>Caxangá</td>
-                        <td>35</td>
-                        <td>12.5</td>
-                        <td><mark>Alagamento</mark></td>
-                        <td><time datetime="2026-03-16T09:45-03:00">16/03 09:45</time></td>
-                        <td>Ana Sousa</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">102</th>
-                        <td>Av. Agamenon Magalhães</td>
-                        <td>Espinheiro</td>
-                        <td>15</td>
-                        <td>8.2</td>
-                        <td><mark>Atenção</mark></td>
-                        <td><time datetime="2026-03-16T09:38-03:00">16/03 09:38</time></td>
-                        <td>Carlos M.</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">103</th>
-                        <td>Rua da Aurora</td>
-                        <td>Centro</td>
-                        <td>28</td>
-                        <td>10.0</td>
-                        <td><mark>Atenção</mark></td>
-                        <td><time datetime="2026-03-16T09:42-03:00">16/03 09:42</time></td>
-                        <td>Mariana L.</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">104</th>
-                        <td>Av. Norte</td>
-                        <td>Casa Forte</td>
-                        <td>18</td>
-                        <td>7.5</td>
-                        <td><mark>Atenção</mark></td>
-                        <td><time datetime="2026-03-16T09:46-03:00">16/03 09:46</time></td>
-                        <td>João P.</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">105</th>
-                        <td>Rua Imperial</td>
-                        <td>Boa Vista</td>
-                        <td>5</td>
-                        <td>2.0</td>
-                        <td>Normal</td>
-                        <td><time datetime="2026-03-16T09:30-03:00">16/03 09:30</time></td>
-                        <td>Fernanda R.</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">106</th>
-                        <td>Estrada dos Remédios</td>
-                        <td>Afogados</td>
-                        <td>22</td>
-                        <td>15.3</td>
-                        <td><mark>Atenção</mark></td>
-                        <td><time datetime="2026-03-16T09:20-03:00">16/03 09:20</time></td>
-                        <td>Roberto S.</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">107</th>
-                        <td>Av. Beira Rio</td>
-                        <td>Torre</td>
-                        <td>42</td>
-                        <td>18.0</td>
-                        <td><mark>Alagamento</mark></td>
-                        <td><time datetime="2026-03-16T09:15-03:00">16/03 09:15</time></td>
-                        <td>Luiza M.</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">108</th>
-                        <td>Rua da Harmonia</td>
-                        <td>Graças</td>
-                        <td>3</td>
-                        <td>1.5</td>
-                        <td>Normal</td>
-                        <td><time datetime="2026-03-16T09:05-03:00">16/03 09:05</time></td>
-                        <td>Paulo C.</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="8"><em>Dados simulados para fins acadêmicos. Última atualização: <time datetime="2026-03-16T10:00-03:00">16/03/2026 10:00</time></em></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
+    <section class="page-grid">
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Filtros</span>
+            <h2>Consulta operacional</h2>
+          </div>
+        </div>
+        <form class="filters" id="filters-form">
+          <div class="field">
+            <label for="search">Busca territorial</label>
+            <input id="search" name="search" type="search" placeholder="Boa Viagem, Aurora, Mascarenhas...">
+          </div>
+          <div class="field">
+            <label for="riskLevel">Nivel de risco</label>
+            <select id="riskLevel" name="riskLevel">
+              <option value="">Todos</option>
+              <option value="baixo">Baixo</option>
+              <option value="moderado">Moderado</option>
+              <option value="alto">Alto</option>
+              <option value="critico">Critico</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="status">Status de ocorrencia</label>
+            <select id="status" name="status">
+              <option value="">Todos</option>
+              <option value="pendente">Pendente</option>
+              <option value="em_analise">Em analise</option>
+              <option value="validado">Validado</option>
+              <option value="resolvido">Resolvido</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>&nbsp;</label>
+            <button type="submit">Aplicar filtros</button>
+          </div>
+        </form>
+      </section>
 
-        <section>
-            <h3>Alertas ativos</h3>
-            <ul>
-                <li><strong>Alagamento</strong> - Av. Caxangá (RioMar) - Nível 35 cm</li>
-                <li><strong>Alagamento</strong> - Av. Beira Rio (Torre) - Nível 42 cm</li>
-                <li><strong>Atenção</strong> - Rua da Aurora (Centro) - Nível 28 cm</li>
-                <li><strong>Atenção</strong> - Estrada dos Remédios (Afogados) - Nível 22 cm</li>
-            </ul>
-        </section>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Mapa sintetico</span>
+            <h2>Territorios e score atual</h2>
+          </div>
+        </div>
+        <div id="territory-map"></div>
+      </section>
 
-        <section>
-            <h3>Áreas em atenção</h3>
-            <ul>
-                <li>Av. Agamenon Magalhães, Espinheiro</li>
-                <li>Rua da Aurora, Centro</li>
-                <li>Av. Norte, Casa Forte</li>
-                <li>Estrada dos Remédios, Afogados</li>
-            </ul>
-        </section>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Territorios</span>
+            <h2>Carteira priorizada</h2>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Territorio</th>
+                <th>Bairro</th>
+                <th>Risco</th>
+                <th>Score</th>
+                <th>Alertas</th>
+              </tr>
+            </thead>
+            <tbody id="territory-table"></tbody>
+          </table>
+        </div>
+      </section>
 
-        <section>
-            <h3>Resumo institucional</h3>
-            <p>O HidroRec atualmente monitora <strong>18 áreas críticas</strong> na cidade do Recife. Nas últimas 24 horas, foram registrados <strong>4 pontos com alagamento</strong> e <strong>9 com atenção</strong>. Os dados são atualizados a cada 10 minutos com base nas estações telemétricas da <abbr title="Agência Pernambucana de Águas e Clima">APAC</abbr> e observações em campo. Reportes colaborativos complementam as informações.</p>
-        </section>
-    </main>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Ocorrencias</span>
+            <h2>Fila de campo e colaboracao</h2>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Bairro</th>
+                <th>Endereco</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Atualizado</th>
+              </tr>
+            </thead>
+            <tbody id="incident-table"></tbody>
+          </table>
+        </div>
+      </section>
 
-    <footer>
-        <address>
-            <p>HidroRec — Monitoramento Urbano Inteligente<br>
-            Curso: Desenvolvimento Front-End · Atividade Acadêmica HTML puro<br>
-            Equipe: HidroRec</p>
-        </address>
-        <p><a href="#" target="_blank" rel="noopener">Repositório GitHub (fictício)</a></p>
-        <p><a href="#top">Voltar ao topo</a></p>
-    </footer>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Alertas em fila</span>
+            <h2>Comunicacao e risco ativo</h2>
+          </div>
+        </div>
+        <div class="alert-stream" id="alert-queue"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Diretorio territorial integrado a ocorrencias, alertas e score de risco.</span>
+      <span>&copy; <span data-current-year></span> HidroRec</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/lista/lista.js"></script>
 </body>
 </html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Console profissional de alertas e fila de ocorrencias do HidroRec.">
+  <title>HidroRec | Console de Alertas</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Comando e alerta</span>
+          <strong>HidroRec</strong>
+          <span>Fila ativa de sinais, ocorrencias e resposta</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Console operacional</span>
+        <h1>Alertas ativos e fila de triagem em uma unica tela.</h1>
+        <p>Use este console para acompanhar severidade, localidade, eventos associados e, quando houver sessao operacional, atualizar o status das ocorrencias mais recentes.</p>
+      </article>
+      <aside class="hero__status">
+        <div>
+          <span class="brand__eyebrow">Permissao</span>
+          <strong id="alerts-session-hint">Verificando sessao...</strong>
+        </div>
+      </aside>
+    </section>
+
+    <section class="page-grid">
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Filtros</span>
+            <h2>Recorte da fila</h2>
+          </div>
+        </div>
+        <form class="filters" id="alerts-filter-form">
+          <div class="field">
+            <label for="search">Busca</label>
+            <input id="search" name="search" type="search" placeholder="Boa Viagem, drenagem, Aurora...">
+          </div>
+          <div class="field">
+            <label for="severity">Severidade</label>
+            <select id="severity" name="severity">
+              <option value="">Todas</option>
+              <option value="observacao">Observacao</option>
+              <option value="atencao">Atencao</option>
+              <option value="severo">Severo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="status">Status do alerta</label>
+            <select id="status" name="status">
+              <option value="">Todos</option>
+              <option value="active">Ativo</option>
+              <option value="monitoring">Monitoramento</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="incidentStatus">Status da ocorrencia</label>
+            <select id="incidentStatus" name="incidentStatus">
+              <option value="">Todos</option>
+              <option value="pendente">Pendente</option>
+              <option value="em_analise">Em analise</option>
+              <option value="validado">Validado</option>
+              <option value="resolvido">Resolvido</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>&nbsp;</label>
+            <button type="submit">Aplicar filtros</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Alertas</span>
+            <h2>Pilha ativa de comunicacao</h2>
+          </div>
+        </div>
+        <div class="alert-stream" id="alerts-grid"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Triagem</span>
+            <h2>Ocorrencias recentes</h2>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Bairro</th>
+                <th>Endereco</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Atualizado</th>
+              </tr>
+            </thead>
+            <tbody id="incident-queue"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Console de alertas, triagem e resposta operacional do HidroRec.</span>
+      <span>&copy; <span data-current-year></span> HidroRec</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/alertas/alertas.js"></script>
+</body>
+</html>

@@ -1,6 +1,11 @@
-const CONFIG = {
-  API_BASE_URL: 'http://localhost:3000/api', // Ajuste conforme necessidade
-  MAP_TILE_LAYER: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  MAP_ATTRIBUTION: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  REFRESH_INTERVAL: 60000, // 1 minuto
+const SERVER_ORIGIN = window.location.protocol === 'file:' ? 'http://localhost:3000' : window.location.origin;
+
+export const CONFIG = {
+  APP_ORIGIN: SERVER_ORIGIN,
+  API_BASE_URL: `${SERVER_ORIGIN}/api/v1`,
+  REQUEST_TIMEOUT_MS: 8000,
+  RETRY_ATTEMPTS: 1,
+  STORAGE_KEYS: {
+    session: 'hidrorec.session'
+  }
 };

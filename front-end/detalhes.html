@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalhe territorial do HidroRec com score de risco explicavel, alertas e ocorrencias relacionadas.">
+  <title>HidroRec | Detalhe Territorial</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Leitura explicavel</span>
+          <strong>HidroRec</strong>
+          <span>Analise territorial orientada a operacao</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Territorio monitorado</span>
+        <h1 id="detail-title">Carregando territorio...</h1>
+        <p id="detail-meta">--</p>
+      </article>
+      <aside class="hero__status">
+        <div>
+          <span class="brand__eyebrow">Score atual</span>
+          <div id="detail-score" class="score-badge">--</div>
+        </div>
+        <p id="detail-recommendation">Aguardando leitura de recomendacao operacional.</p>
+      </aside>
+    </section>
+
+    <section class="page-grid">
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Explicabilidade</span>
+            <h2>Como o score foi montado</h2>
+          </div>
+        </div>
+        <div class="explanation-grid" id="detail-explanation"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Alertas relacionados</span>
+            <h2>Comunicacao territorial</h2>
+          </div>
+        </div>
+        <div class="alert-stream" id="detail-alerts"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Ocorrencias</span>
+            <h2>Historico recente do territorio</h2>
+          </div>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Endereco</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Atualizado</th>
+              </tr>
+            </thead>
+            <tbody id="detail-incidents"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Territorio com score de risco explicavel e rastreabilidade de eventos.</span>
+      <span>&copy; <span data-current-year></span> HidroRec</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/detalhes/detalhes.js"></script>
+</body>
+</html>
