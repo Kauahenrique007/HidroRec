@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Area operacional do HidroRec para autenticacao e registro institucional de ocorrencias.">
@@ -70,6 +71,172 @@
           <div class="actions field--full">
             <button type="submit">Iniciar sessao</button>
           </div>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Cadastro de áreas monitoradas e ocorrências no sistema HidroRec.">
+    <meta name="author" content="Equipe HidroRec">
+    <link rel="shortcut icon" href="../HidroRec/img/logo.png" type="image/x-icon">
+    <title>HidroRec · Cadastro de Área / Ocorrência</title>
+    <link rel="stylesheet" href="../front-end/cadastro.css">
+</head>
+<body>
+    <header>
+        <h1>HidroRec</h1>
+        <p>Monitoramento Urbano Inteligente</p>
+        <img src="/HidroRec/img/logo.png" alt="HidroRec logotipo" width="150" height="80">
+        <nav>
+            <ul>
+                <li><a href="index.html" title="Página inicial">Início</a></li>
+                <li><a href="cadastro.html" title="Cadastrar nova área ou ocorrência">Cadastro</a></li>
+                <li><a href="lista.html" title="Lista completa de registros">Lista</a></li>
+                <li><a href="reporte.html" title="Reportar alagamento como colaborador">Reporte</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Cadastro de Área Monitorada / Ocorrência</h2>
+        <p>Utilize o formulário abaixo para registrar uma nova área de monitoramento, alerta ou ocorrência de alagamento no sistema HidroRec. Todos os campos são importantes para a análise territorial.</p>
+
+        <form action="/api/cadastro" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Identificação da área</legend>
+
+                <p>
+                    <label for="nome_area">Nome da área monitorada:</label>
+                    <input type="text" id="nome_area" name="nome_area" required autocomplete="off" placeholder="Ex: Av. Caxangá (RioMar)">
+                </p>
+
+                <p>
+                    <label for="bairro">Bairro:</label>
+                    <input type="text" id="bairro" name="bairro" required autocomplete="address-level2" placeholder="Ex: Caxangá">
+                </p>
+
+                <p>
+                    <label for="regiao">Região administrativa:</label>
+                    <select id="regiao" name="regiao">
+                        <option value="">Selecione uma opção</option>
+                        <option value="RPA1">RPA 1 (Centro)</option>
+                        <option value="RPA2">RPA 2 (Norte)</option>
+                        <option value="RPA3">RPA 3 (Nordeste)</option>
+                        <option value="RPA4">RPA 4 (Oeste)</option>
+                        <option value="RPA5">RPA 5 (Sudoeste)</option>
+                        <option value="RPA6">RPA 6 (Sul)</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="endereco">Endereço de referência:</label>
+                    <input type="text" id="endereco" name="endereco" placeholder="Ex: Av. Caxangá, próximo ao Shopping" autocomplete="street-address">
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Dados hidrológicos e climáticos</legend>
+
+                <p>
+                    <label for="nivel_agua">Nível da água (cm):</label>
+                    <input type="number" id="nivel_agua" name="nivel_agua" min="0" step="1" placeholder="0">
+                </p>
+
+                <p>
+                    <label for="volume_chuva">Volume de chuva (mm/h):</label>
+                    <input type="number" id="volume_chuva" name="volume_chuva" min="0" step="0.1" placeholder="0.0">
+                </p>
+
+                <p>
+                    <label for="data_registro">Data do registro:</label>
+                    <input type="date" id="data_registro" name="data_registro" value="2026-03-16">
+                </p>
+
+                <p>
+                    <label for="hora_registro">Hora do registro:</label>
+                    <input type="time" id="hora_registro" name="hora_registro" value="10:00">
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Responsável / Contato</legend>
+
+                <p>
+                    <label for="email">E-mail do responsável:</label>
+                    <input type="email" id="email" name="email" placeholder="exemplo@hidrorec.gov" autocomplete="email">
+                </p>
+
+                <p>
+                    <label for="telefone">Telefone de contato:</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(81) 91234-5678" autocomplete="tel">
+                </p>
+
+                <p>
+                    <label for="senha">Senha de acesso administrativo:</label>
+                    <input type="password" id="senha" name="senha" autocomplete="new-password">
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Classificação de risco</legend>
+
+                <p><strong>Status do local:</strong></p>
+                <p>
+                    <input type="radio" id="status_normal" name="status" value="normal">
+                    <label for="status_normal">Normal</label>
+                </p>
+                <p>
+                    <input type="radio" id="status_atencao" name="status" value="atencao">
+                    <label for="status_atencao">Atenção</label>
+                </p>
+                <p>
+                    <input type="radio" id="status_alagamento" name="status" value="alagamento">
+                    <label for="status_alagamento">Alagamento</label>
+                </p>
+
+                <p><strong>Fatores de risco observados:</strong></p>
+                <p>
+                    <input type="checkbox" id="fator_chuva" name="fatores" value="chuva_forte">
+                    <label for="fator_chuva">Chuva forte</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="fator_mare" name="fatores" value="mare_alta">
+                    <label for="fator_mare">Maré alta</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="fator_drenagem" name="fatores" value="drenagem_comprometida">
+                    <label for="fator_drenagem">Drenagem comprometida</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="fator_recorrencia" name="fatores" value="recorrencia_historica">
+                    <label for="fator_recorrencia">Recorrência histórica</label>
+                </p>
+
+                <p>
+                    <label for="criticidade">Nível de criticidade (0-10):</label>
+                    <input type="range" id="criticidade" name="criticidade" min="0" max="10" step="1" value="5">
+                    <output for="criticidade" name="valor_criticidade">5</output>
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Informações complementares</legend>
+
+                <p>
+                    <label for="observacoes">Observações adicionais:</label><br>
+                    <textarea id="observacoes" name="observacoes" rows="4" cols="50" placeholder="Descreva outras informações relevantes..."></textarea>
+                </p>
+
+                <p>
+                    <label for="evidencia">Envio de imagem ou evidência:</label>
+                    <input type="file" id="evidencia" name="evidencia" accept="image/*">
+                </p>
+            </fieldset>
+
+            <input type="hidden" name="id_interno" value="novo_registro">
+
+            <p>
+                <button type="submit">Enviar cadastro</button>
+                <button type="reset">Limpar formulário</button>
+            </p>
+
         </form>
         <div class="feedback" id="login-feedback"></div>
       </section>

@@ -29,6 +29,28 @@
       <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
     </div>
   </header>
+=======
+    <meta charset="UTF-8">
+    <meta name="description" content="HidroRec - Plataforma de inteligência territorial para monitoramento e prevenção de alagamentos no Recife. Dados hidroclimáticos em tempo real.">
+    <meta name="author" content="Equipe HidroRec">
+    <link rel="shortcut icon" href="/HidroRec/img/logo.png" type="image/x-icon">
+    <title>HidroRec · Monitoramento Urbano Inteligente</title>
+</head>
+<body>
+    <header>
+        <h1>HidroRec</h1>
+        <p>Monitoramento Urbano Inteligente</p>
+        <img src="/HidroRec/img/logo.png" alt="HidroRec: logotipo com ondas e mapa do Recife" width="150" height="80">
+        <nav>
+            <ul>
+                <li><a href="index.html" title="Página inicial">Início</a></li>
+                <li><a href="/HidroRec/front-end/cadastro.html" title="Cadastrar nova área ou ocorrência">Cadastro</a></li>
+                <li><a href="/HidroRec/front-end/lista.html" title="Lista completa de registros">Lista</a></li>
+                <li><a href="/HidroRec/front-end/reporte.html" title="Reportar alagamento como colaborador">Reporte</a></li>
+            </ul>
+        </nav>
+    </header>
+
 
   <main class="shell">
     <section class="hero">
@@ -142,6 +164,71 @@
     </div>
   </footer>
 
+
   <script type="module" src="../js/modules/dashboard/dashboard.js"></script>
+
+            <article>
+                <h3>Mapa de Monitoramento</h3>
+                <figure>
+                    <img src="/HidroRec/img/mapa.png" alt="Mapa do Recife com manchas de risco: áreas em normal (verde), atenção (amarelo) e alagamento (vermelho)" width="400" height="300">
+                    <figcaption>Camadas de risco sobre o território do Recife.</figcaption>
+                </figure>
+                <h4>Legenda</h4>
+                <ul>
+                    <li><mark>Normal</mark></li>
+                    <li><mark>Atenção</mark></li>
+                    <li><mark>Alagamento</mark></li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Pontos de atenção</h3>
+                <ul>
+                    <li><strong>Av. Caxangá, próximo ao Shopping RioMar</strong><br>Nível: 35 cm · <time datetime="PT5M">5 min atrás</time> · <mark>Alagamento</mark></li>
+                    <li><strong>Av. Agamenon Magalhães, Espinheiro</strong><br>Nível: 15 cm · <time datetime="PT12M">12 min atrás</time> · <mark>Atenção</mark></li>
+                    <li><strong>Rua da Aurora, Centro</strong><br>Nível: 28 cm · <time datetime="PT8M">8 min atrás</time> · <mark>Atenção</mark></li>
+                    <li><strong>Av. Norte, Casa Forte</strong><br>Nível: 18 cm · <time datetime="PT4M">4 min atrás</time> · <mark>Atenção</mark></li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Alertas ativos <span>(+ informações)</span></h3>
+                <ul>
+                    <li><strong>Alagamento</strong> - Av. Caxangá (RioMar) - Nível 35 cm</li>
+                    <li><strong>Alagamento</strong> - Av. Beira Rio (Torre) - Nível 42 cm (fonte: reporte colaborador)</li>
+                    <li><strong>Atenção</strong> - Rua da Aurora (Centro) - Nível 28 cm</li>
+                    <li><strong>Atenção</strong> - Estrada dos Remédios (Afogados) - Nível 22 cm</li>
+                </ul>
+                <p><a href="reporte.html">+ Reportar novo alerta</a></p>
+            </article>
+
+            <article>
+                <h3>Fontes de dados integradas</h3>
+                <ul>
+                    <li><abbr title="Agência Pernambucana de Águas e Clima">APAC</abbr></li>
+                    <li><abbr title="Instituto Nacional de Meteorologia">INMET</abbr></li>
+                    <li>Canais institucionais de alerta</li>
+                    <li>Dados territoriais (Prefeitura do Recife)</li>
+                    <li>Histórico de ocorrências (Defesa Civil)</li>
+                    <li>Reportes colaborativos (cidadãos)</li>
+                </ul>
+            </article>
+        </section>
+
+        <details>
+            <summary>Como os dados são processados?</summary>
+            <p>Utilizamos algoritmos de correlação espacial e séries históricas para classificar o risco em cada microrregião. As estações da APAC fornecem dados pluviométricos em tempo real, cruzados com cotas de maré e registros de ocorrências. Reportes colaborativos são validados por nossa equipe.</p>
+        </details>
+    </main>
+
+    <footer>
+        <address>
+            <p>HidroRec — Monitoramento Urbano Inteligente<br>
+            Curso: Desenvolvimento Front-End · Atividade Acadêmica HTML puro<br>
+            Equipe: HidroRec</p>
+        </address>
+        <p><a href="#" target="_blank" rel="noopener">Repositório GitHub (fictício)</a></p>
+        <p><a href="#top">Voltar ao topo</a></p>
+    </footer>
 </body>
 </html>
