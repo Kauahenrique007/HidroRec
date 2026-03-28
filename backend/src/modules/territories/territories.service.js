@@ -31,12 +31,9 @@ function sortTerritories(items, sortBy, order) {
   });
 }
 
-async function listTerritories(query = {}) {
-  const database = await readDatabase();
-  const territories = await enrichTerritories(database);
-  const pagination = parsePagination(query);
+function filterTerritories(territories, query = {}) {
+  let filtered = [...territories];
 
-  let filtered = territories;
   if (query.search) {
     const search = query.search.toLowerCase();
     filtered = filtered.filter(
@@ -50,8 +47,68 @@ async function listTerritories(query = {}) {
     filtered = filtered.filter((item) => item.risk.level === query.riskLevel);
   }
 
+  if (query.hasAlerts === 'true') {
+    filtered = filtered.filter((item) => item.activeAlerts > 0);
+  }
+
+  if (query.minScore) {
+    const minScore = Number(query.minScore);
+    if (Number.isFinite(minScore)) {
+      filtered = filtered.filter((item) => item.risk.score >= minScore);
+    }
+  }
+
+  if (query.neighborhoodName) {
+    const neighborhood = String(query.neighborhoodName).toLowerCase();
+    filtered = filtered.filter((item) => item.neighborhoodName.toLowerCase().includes(neighborhood));
+  }
+
+  return filtered;
+}
+
+async function listTerritories(query = {}) {
+  const database = await readDatabase();
+  const territories = await enrichTerritories(database);
+  const pagination = parsePagination(query);
+  const filtered = filterTerritories(territories, query);
   const sorted = sortTerritories(filtered, pagination.sortBy, pagination.order);
   return paginate(sorted, pagination);
+}
+
+async function getTerritoriesSummary(query = {}) {
+  const database = await readDatabase();
+  const territories = filterTerritories(await enrichTerritories(database), query);
+  const sortedByScore = sortTerritories(territories, 'score', 'desc');
+  const riskLevels = {
+    baixo: 0,
+    moderado: 0,
+    alto: 0,
+    critico: 0
+  };
+
+  territories.forEach((territory) => {
+    if (territory.risk.level in riskLevels) {
+      riskLevels[territory.risk.level] += 1;
+    }
+  });
+
+  return {
+    total: territories.length,
+    withAlerts: territories.filter((item) => item.activeAlerts > 0).length,
+    averageScore: territories.length > 0
+      ? Number((territories.reduce((total, item) => total + item.risk.score, 0) / territories.length).toFixed(1))
+      : 0,
+    highestScore: sortedByScore[0]?.risk.score || 0,
+    topTerritory: sortedByScore[0]
+      ? {
+          id: sortedByScore[0].id,
+          name: sortedByScore[0].name,
+          neighborhoodName: sortedByScore[0].neighborhoodName,
+          score: sortedByScore[0].risk.score
+        }
+      : null,
+    riskLevels
+  };
 }
 
 async function getTerritoryById(id) {
@@ -78,5 +135,6 @@ async function getTerritoryById(id) {
 
 module.exports = {
   getTerritoryById,
+  getTerritoriesSummary,
   listTerritories
 };

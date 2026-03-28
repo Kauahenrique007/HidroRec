@@ -5,6 +5,7 @@ const controller = require('./alerts.controller');
 const router = express.Router();
 
 router.get('/', asyncHandler(controller.list));
+router.get('/summary', asyncHandler(controller.summary));
 router.get('/:id', asyncHandler(controller.getById));
 
 module.exports = router;

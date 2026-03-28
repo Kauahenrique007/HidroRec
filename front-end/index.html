@@ -3,232 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HidroRec: painel institucional para monitoramento hidroclimatico, risco territorial e apoio operacional no Recife.">
-  <title>HidroRec | Painel Operacional</title>
+  <meta name="description" content="HidroRec: monitoramento urbano inteligente com mapa, pontos de atencao e status operacional.">
+  <title>HidroRec | Inicio</title>
   <link rel="stylesheet" href="../style/style.css">
 </head>
-<body>
-  <header class="app-header">
-    <div class="shell app-header__inner">
-      <a class="brand" href="./index.html">
+<body class="proto-body">
+  <header class="proto-topbar">
+    <div class="shell proto-topbar__inner">
+      <a class="proto-brand" href="./index.html">
         <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
         <div>
-          <span class="brand__eyebrow">Plataforma institucional</span>
           <strong>HidroRec</strong>
-          <span>Monitoramento hidroclimatico e risco urbano</span>
+          <span>Monitoramento Urbano Inteligente</span>
         </div>
       </a>
-      <nav class="app-nav" aria-label="Navegacao principal">
-        <a href="./index.html" data-nav="dashboard">Painel</a>
-        <a href="./lista.html" data-nav="lista">Territorios</a>
-        <a href="./alertas.html" data-nav="alertas">Alertas</a>
-        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
-        <a href="./reporte.html" data-nav="reportar">Reporte</a>
-        <a href="./admin.html" data-nav="admin">Governanca</a>
-      </nav>
-      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+      <button class="proto-cloud" type="button" aria-label="Sincronizacao em nuvem">
+        <span></span>
+      </button>
     </div>
   </header>
-=======
-    <meta charset="UTF-8">
-    <meta name="description" content="HidroRec - Plataforma de inteligência territorial para monitoramento e prevenção de alagamentos no Recife. Dados hidroclimáticos em tempo real.">
-    <meta name="author" content="Equipe HidroRec">
-    <link rel="shortcut icon" href="/HidroRec/img/logo.png" type="image/x-icon">
-    <title>HidroRec · Monitoramento Urbano Inteligente</title>
-</head>
-<body>
-    <header>
-        <h1>HidroRec</h1>
-        <p>Monitoramento Urbano Inteligente</p>
-        <img src="/HidroRec/img/logo.png" alt="HidroRec: logotipo com ondas e mapa do Recife" width="150" height="80">
-        <nav>
-            <ul>
-                <li><a href="index.html" title="Página inicial">Início</a></li>
-                <li><a href="/HidroRec/front-end/cadastro.html" title="Cadastrar nova área ou ocorrência">Cadastro</a></li>
-                <li><a href="/HidroRec/front-end/lista.html" title="Lista completa de registros">Lista</a></li>
-                <li><a href="/HidroRec/front-end/reporte.html" title="Reportar alagamento como colaborador">Reporte</a></li>
-            </ul>
-        </nav>
-    </header>
 
+  <div class="proto-subnav">
+    <div class="shell proto-subnav__inner">
+      <nav class="proto-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Inicio</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./admin.html" data-nav="admin">Admin</a>
+      </nav>
+      <div class="proto-system">
+        <strong>Sistema</strong>
+        <span>Operacional</span>
+      </div>
+    </div>
+  </div>
 
-  <main class="shell">
-    <section class="hero">
-      <article class="hero__panel">
-        <span class="hero__eyebrow">Recife - leitura operacional</span>
-        <h1>Painel territorial para resposta a risco urbano.</h1>
-        <p>O HidroRec consolida chuva, mare, ocorrencias, historico e vulnerabilidade territorial em um quadro unico de decisao para equipes de monitoramento e resposta.</p>
-        <div class="hero__meta">
-          <div class="meta-pill">
-            <strong>Cidade monitorada</strong>
-            <div>Recife, Pernambuco</div>
-          </div>
-          <div class="meta-pill">
-            <strong>Janela operacional</strong>
-            <div>Atualizacao continua a cada 30 minutos</div>
-          </div>
-          <div class="meta-pill">
-            <strong>API</strong>
-            <div>Versionada em <code>/api/v1</code></div>
-          </div>
-        </div>
-      </article>
-
-      <aside class="hero__status">
-        <div>
-          <span class="brand__eyebrow">Status do cenario</span>
-          <h2 id="scenario-status">Carregando</h2>
-        </div>
-        <div>
-          <strong>Ultima leitura consolidada</strong>
-          <p id="scenario-updated-at">--</p>
-        </div>
-        <div class="credentials">
-          <strong>Acesso operacional</strong>
-          <span>Use a area <a href="./cadastro.html">Operacao</a> para login e registro institucional.</span>
-        </div>
-      </aside>
+  <main class="shell proto-main">
+    <section class="floating-toast">
+      <span class="floating-toast__dot"></span>
+      <p id="dashboard-toast">Chuva moderada detectada. Monitorando 3 pontos criticos.</p>
     </section>
 
-    <section class="page-grid page-grid--dashboard">
-      <section class="content-card grid-span">
-        <div class="section-title">
-          <div>
-            <span class="section-title__eyebrow">Resumo executivo</span>
-            <h2>Indicadores de risco e monitoramento</h2>
-          </div>
-        </div>
-        <div class="stats-grid" id="overview-stats"></div>
-      </section>
+    <section class="alert-strip" id="dashboard-alert-strip">2 alagamentos ativos detectados. Evite as areas afetadas.</section>
 
-      <section class="panel-card">
-        <div class="section-title">
-          <div>
-            <span class="section-title__eyebrow">Monitoramento</span>
-            <h2>Condicoes hidrometeorologicas</h2>
-          </div>
+    <section class="proto-panel">
+      <div class="proto-panel__header">
+        <div>
+          <span class="section-kicker">Status da Cidade</span>
+          <h1 id="scenario-status">Risco Alto</h1>
         </div>
-        <div id="monitoring-summary"></div>
-      </section>
+        <a class="chip-link" href="./previsoes.html">Previsoes</a>
+      </div>
+      <div class="status-counter-grid" id="city-status-counts"></div>
+    </section>
 
-      <section class="panel-card">
-        <div class="section-title">
-          <div>
-            <span class="section-title__eyebrow">Prioridade territorial</span>
-            <h2>Hotlist de territorios</h2>
-          </div>
+    <section class="inline-metric-grid">
+      <article class="mini-metric-card">
+        <div class="mini-metric-card__icon mini-metric-card__icon--tide"></div>
+        <div>
+          <span class="section-kicker">Mare Atual</span>
+          <strong id="dashboard-tide-level">Alta</strong>
+          <small id="dashboard-tide-meta">2.3m • Proxima mudanca: 14:35</small>
         </div>
-        <div class="stack" id="territories-hotlist"></div>
-      </section>
+      </article>
+      <article class="mini-metric-card">
+        <div class="mini-metric-card__icon mini-metric-card__icon--rain"></div>
+        <div>
+          <span class="section-kicker">Volume de Chuva</span>
+          <strong id="dashboard-rain-level">12mm/h</strong>
+          <small id="dashboard-rain-meta">Moderada • Diminuiu em 30min</small>
+        </div>
+      </article>
+    </section>
 
-      <section class="content-card">
-        <div class="section-title">
-          <div>
-            <span class="section-title__eyebrow">Alertas</span>
-            <h2>Fila operacional</h2>
-          </div>
-          <a class="text-link" href="./alertas.html">Abrir console de alertas</a>
-        </div>
-        <div class="alert-stream" id="alerts-list"></div>
-      </section>
+    <section class="proto-panel">
+      <div class="panel-heading">
+        <h2>Mapa de Monitoramento</h2>
+      </div>
+      <div id="territory-map"></div>
+    </section>
 
-      <section class="content-card">
-        <div class="section-title">
-          <div>
-            <span class="section-title__eyebrow">Ocorrencias recentes</span>
-            <h2>Triagem e validacao</h2>
-          </div>
-        </div>
-        <div class="table-shell">
-          <table>
-            <thead>
-              <tr>
-                <th>Bairro</th>
-                <th>Endereco</th>
-                <th>Tipo</th>
-                <th>Status</th>
-                <th>Atualizado</th>
-              </tr>
-            </thead>
-            <tbody id="incidents-table"></tbody>
-          </table>
-        </div>
-      </section>
+    <section class="proto-panel">
+      <div class="panel-heading">
+        <h2>Pontos de Atencao</h2>
+      </div>
+      <div class="attention-list" id="attention-points"></div>
     </section>
   </main>
 
-  <footer class="app-footer">
-    <div class="shell app-footer__inner">
-      <span>HidroRec - Inteligencia territorial para gestao de risco urbano.</span>
-      <span>&copy; <span data-current-year></span> HidroRec</span>
-    </div>
-  </footer>
-
-
   <script type="module" src="../js/modules/dashboard/dashboard.js"></script>
-
-            <article>
-                <h3>Mapa de Monitoramento</h3>
-                <figure>
-                    <img src="/HidroRec/img/mapa.png" alt="Mapa do Recife com manchas de risco: áreas em normal (verde), atenção (amarelo) e alagamento (vermelho)" width="400" height="300">
-                    <figcaption>Camadas de risco sobre o território do Recife.</figcaption>
-                </figure>
-                <h4>Legenda</h4>
-                <ul>
-                    <li><mark>Normal</mark></li>
-                    <li><mark>Atenção</mark></li>
-                    <li><mark>Alagamento</mark></li>
-                </ul>
-            </article>
-
-            <article>
-                <h3>Pontos de atenção</h3>
-                <ul>
-                    <li><strong>Av. Caxangá, próximo ao Shopping RioMar</strong><br>Nível: 35 cm · <time datetime="PT5M">5 min atrás</time> · <mark>Alagamento</mark></li>
-                    <li><strong>Av. Agamenon Magalhães, Espinheiro</strong><br>Nível: 15 cm · <time datetime="PT12M">12 min atrás</time> · <mark>Atenção</mark></li>
-                    <li><strong>Rua da Aurora, Centro</strong><br>Nível: 28 cm · <time datetime="PT8M">8 min atrás</time> · <mark>Atenção</mark></li>
-                    <li><strong>Av. Norte, Casa Forte</strong><br>Nível: 18 cm · <time datetime="PT4M">4 min atrás</time> · <mark>Atenção</mark></li>
-                </ul>
-            </article>
-
-            <article>
-                <h3>Alertas ativos <span>(+ informações)</span></h3>
-                <ul>
-                    <li><strong>Alagamento</strong> - Av. Caxangá (RioMar) - Nível 35 cm</li>
-                    <li><strong>Alagamento</strong> - Av. Beira Rio (Torre) - Nível 42 cm (fonte: reporte colaborador)</li>
-                    <li><strong>Atenção</strong> - Rua da Aurora (Centro) - Nível 28 cm</li>
-                    <li><strong>Atenção</strong> - Estrada dos Remédios (Afogados) - Nível 22 cm</li>
-                </ul>
-                <p><a href="reporte.html">+ Reportar novo alerta</a></p>
-            </article>
-
-            <article>
-                <h3>Fontes de dados integradas</h3>
-                <ul>
-                    <li><abbr title="Agência Pernambucana de Águas e Clima">APAC</abbr></li>
-                    <li><abbr title="Instituto Nacional de Meteorologia">INMET</abbr></li>
-                    <li>Canais institucionais de alerta</li>
-                    <li>Dados territoriais (Prefeitura do Recife)</li>
-                    <li>Histórico de ocorrências (Defesa Civil)</li>
-                    <li>Reportes colaborativos (cidadãos)</li>
-                </ul>
-            </article>
-        </section>
-
-        <details>
-            <summary>Como os dados são processados?</summary>
-            <p>Utilizamos algoritmos de correlação espacial e séries históricas para classificar o risco em cada microrregião. As estações da APAC fornecem dados pluviométricos em tempo real, cruzados com cotas de maré e registros de ocorrências. Reportes colaborativos são validados por nossa equipe.</p>
-        </details>
-    </main>
-
-    <footer>
-        <address>
-            <p>HidroRec — Monitoramento Urbano Inteligente<br>
-            Curso: Desenvolvimento Front-End · Atividade Acadêmica HTML puro<br>
-            Equipe: HidroRec</p>
-        </address>
-        <p><a href="#" target="_blank" rel="noopener">Repositório GitHub (fictício)</a></p>
-        <p><a href="#top">Voltar ao topo</a></p>
-    </footer>
 </body>
 </html>

@@ -7,6 +7,11 @@ async function list(req, res) {
   sendSuccess(res, { data: result.data, meta: result.meta });
 }
 
+async function summary(req, res) {
+  const data = await service.getAlertsSummary(req.query);
+  sendSuccess(res, { data });
+}
+
 async function getById(req, res) {
   const alert = await service.getAlertById(req.params.id);
   if (!alert) {
@@ -21,5 +26,6 @@ async function getById(req, res) {
 
 module.exports = {
   getById,
-  list
+  list,
+  summary
 };

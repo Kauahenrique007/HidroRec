@@ -22,9 +22,9 @@
         "alerts:write",
         "users:read"
       ],
-      "lastLoginAt": null,
+      "lastLoginAt": "2026-03-28T00:16:53.809Z",
       "createdAt": "2026-03-20T09:00:00.000Z",
-      "updatedAt": "2026-03-20T09:00:00.000Z"
+      "updatedAt": "2026-03-28T00:16:53.809Z"
     },
     {
       "id": "usr-analista",
@@ -346,6 +346,76 @@
       "humidityPct": 91,
       "source": "fallback",
       "collectedAt": "2026-03-26T14:05:36.718Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-27T23:37:22.568Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:01:32.870Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:01:32.948Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:16:06.515Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:16:53.888Z"
+    },
+    {
+      "id": "cl-002",
+      "city": "Recife",
+      "observedRainMm": 21.1,
+      "accumulatedRain24h": 63.9,
+      "forecastRainMm": 39.5,
+      "temperatureC": 25,
+      "humidityPct": 91,
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:23:45.939Z",
+      "sourceDetails": [
+        "base local"
+      ],
+      "forecastTimeline": []
     }
   ],
   "tideReadings": [
@@ -396,6 +466,54 @@
       "influence": "alta",
       "source": "fallback",
       "collectedAt": "2026-03-26T14:05:36.718Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-27T23:37:22.568Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:01:32.870Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:01:32.948Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:16:06.515Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:16:53.888Z"
+    },
+    {
+      "id": "td-002",
+      "station": "Porto do Recife",
+      "levelMeters": 2.21,
+      "influence": "alta",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:23:45.939Z"
     }
   ],
   "meteorologicalWarnings": [
@@ -423,9 +541,57 @@
       "source": "fallback",
       "collectedAt": "2026-03-26T11:00:00.000Z",
       "status": "degraded"
+    },
+    {
+      "id": "run-1774654642574",
+      "source": "fallback",
+      "collectedAt": "2026-03-27T23:37:22.574Z",
+      "status": "degraded"
+    },
+    {
+      "id": "run-1774656092877",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:01:32.877Z",
+      "status": "degraded"
+    },
+    {
+      "id": "run-1774656092954",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:01:32.954Z",
+      "status": "degraded"
+    },
+    {
+      "id": "run-1774656966528",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:16:06.528Z",
+      "status": "degraded"
+    },
+    {
+      "id": "run-1774657013897",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:16:53.897Z",
+      "status": "degraded"
+    },
+    {
+      "id": "run-1774657425946",
+      "source": "fallback",
+      "collectedAt": "2026-03-28T00:23:45.946Z",
+      "status": "degraded"
     }
   ],
-  "auditLogs": [],
+  "auditLogs": [
+    {
+      "id": "29319737-439a-431c-8f76-4c7e0c102f3f",
+      "timestamp": "2026-03-28T00:16:53.818Z",
+      "actorId": "usr-admin",
+      "action": "auth.login",
+      "resource": "session",
+      "metadata": {
+        "ip": "::ffff:127.0.0.1",
+        "userAgent": "node"
+      }
+    }
+  ],
   "systemConfig": {
     "city": "Recife",
     "state": "PE",

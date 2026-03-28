@@ -5,6 +5,40 @@ import { tideService } from '../../services/tideService.js';
 import { clearFeedback, serializeForm, setButtonBusy, setFeedback } from '../../utils/helpers.js';
 import { validateIncidentPayload } from '../../utils/validators.js';
 
+function ensureHiddenField(form, name) {
+  let field = form.querySelector(`[name="${name}"]`);
+  if (field) return field;
+
+  field = document.createElement('input');
+  field.type = 'hidden';
+  field.name = name;
+  form.append(field);
+  return field;
+}
+
+function captureLocation(form, feedback) {
+  ensureHiddenField(form, 'latitude');
+  ensureHiddenField(form, 'longitude');
+
+  if (!('geolocation' in navigator)) {
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      form.elements.latitude.value = String(position.coords.latitude);
+      form.elements.longitude.value = String(position.coords.longitude);
+      setFeedback(feedback, {
+        type: 'success',
+        title: 'Localizacao anexada',
+        message: 'Seu reporte sera enviado com coordenadas aproximadas para acelerar a triagem.'
+      });
+    },
+    () => {},
+    { enableHighAccuracy: true, timeout: 6000, maximumAge: 300000 }
+  );
+}
+
 async function initReportPage() {
   await initializeShell('reportar');
 
@@ -28,6 +62,8 @@ async function initReportPage() {
     climateTarget.innerHTML = '<li>Contexto hidrometeorologico indisponivel no momento.</li>';
   }
 
+  captureLocation(form, feedback);
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     clearFeedback(feedback);
@@ -50,6 +86,7 @@ async function initReportPage() {
       });
       await reportsService.createPublicReport(payload);
       form.reset();
+      captureLocation(form, feedback);
       setFeedback(feedback, {
         type: 'success',
         title: 'Reporte registrado',

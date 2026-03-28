@@ -1,5 +1,50 @@
 const { appendAuditLog, readDatabase, updateDatabase } = require('../../infrastructure/repositories/jsonDatabase');
-const { fetchMonitoringSnapshot } = require('../integrations/adapters/apac.adapter');
+const { buildFallbackSnapshot, fetchApacSnapshot } = require('../integrations/adapters/apac.adapter');
+const { fetchWeatherApiSnapshot } = require('../integrations/adapters/weatherapi.adapter');
+
+function mergeSnapshots(...snapshots) {
+  const validSnapshots = snapshots.filter(Boolean);
+  const fallback = validSnapshots[0];
+  const sources = validSnapshots
+    .map((snapshot) => snapshot.source)
+    .filter(Boolean);
+
+  const climateCandidates = validSnapshots.map((snapshot) => snapshot.climate).filter(Boolean);
+  const tideCandidates = validSnapshots.map((snapshot) => snapshot.tide).filter(Boolean);
+  const warningCandidates = validSnapshots.find((snapshot) => Array.isArray(snapshot.warnings) && snapshot.warnings.length > 0)?.warnings
+    || fallback.warnings;
+
+  const primaryClimate = climateCandidates.find((item) => item.source === 'APAC')
+    || climateCandidates.find((item) => item.source === 'WeatherAPI')
+    || climateCandidates[0];
+  const weatherClimate = climateCandidates.find((item) => item.source === 'WeatherAPI');
+  const primaryTide = tideCandidates.find((item) => item.source === 'APAC') || tideCandidates[0];
+
+  return {
+    climate: {
+      ...primaryClimate,
+      forecastTimeline: weatherClimate?.forecastTimeline || primaryClimate.forecastTimeline || [],
+      source: sources.join('+'),
+      sourceDetails: [...new Set(validSnapshots.flatMap((snapshot) => snapshot.climate?.sourceDetails || [snapshot.source]).filter(Boolean))]
+    },
+    tide: {
+      ...primaryTide,
+      source: primaryTide?.source || fallback.tide.source
+    },
+    warnings: warningCandidates,
+    source: sources.join('+') || fallback.source
+  };
+}
+
+async function fetchMonitoringSnapshot(database) {
+  const fallback = buildFallbackSnapshot(database);
+  const [apacSnapshot, weatherSnapshot] = await Promise.all([
+    fetchApacSnapshot(database),
+    fetchWeatherApiSnapshot(database)
+  ]);
+
+  return mergeSnapshots(fallback, apacSnapshot, weatherSnapshot);
+}
 
 function uniqueByTimestamp(items, key) {
   const seen = new Set();
@@ -82,7 +127,7 @@ async function getIntegrationStatus() {
   return {
     lastRun,
     mode: lastRun?.status === 'degraded' ? 'fallback' : 'live',
-    sources: ['APAC', 'base local', 'operacao'],
+    sources: ['APAC', 'WeatherAPI', 'base local', 'operacao'],
     refreshWindowMinutes: database.systemConfig.refreshWindowMinutes
   };
 }

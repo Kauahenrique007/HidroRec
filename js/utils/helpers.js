@@ -61,3 +61,31 @@ export function setButtonBusy(button, busy, labels = {}) {
     ? labels.busyLabel || 'Processando...'
     : labels.defaultLabel || button.dataset.defaultLabel;
 }
+
+export function buildQueryString(params = {}) {
+  const query = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === undefined || value === null) return;
+    if (typeof value === 'string' && value.trim() === '') return;
+    query.set(key, String(value));
+  });
+
+  return query.toString();
+}
+
+export function syncFormWithQuery(form, params) {
+  if (!form) return;
+
+  Object.entries(params).forEach(([key, value]) => {
+    const field = form.elements.namedItem(key);
+    if (!field) return;
+    field.value = value;
+  });
+}
+
+export function updateUrlQuery(params = {}) {
+  const query = buildQueryString(params);
+  const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}`;
+  window.history.replaceState({}, '', nextUrl);
+}

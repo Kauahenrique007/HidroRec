@@ -7,6 +7,11 @@ async function list(req, res) {
   sendSuccess(res, { data: result.data, meta: result.meta });
 }
 
+async function summary(req, res) {
+  const data = await service.getIncidentsSummary(req.query);
+  sendSuccess(res, { data });
+}
+
 async function createPublic(req, res) {
   const incident = await service.createIncident(req.validated.body, null);
   sendSuccess(
@@ -46,6 +51,7 @@ module.exports = {
   createOperational,
   createPublic,
   getById,
+  summary,
   list,
   updateStatus
 };

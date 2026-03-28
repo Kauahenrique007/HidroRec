@@ -10,6 +10,7 @@ const validators = require('./incidents.validators');
 const router = express.Router();
 
 router.get('/', asyncHandler(controller.list));
+router.get('/summary', asyncHandler(controller.summary));
 router.get('/:id', asyncHandler(controller.getById));
 router.post(
   '/public-report',

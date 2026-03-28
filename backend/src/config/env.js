@@ -15,5 +15,11 @@ module.exports = {
   authSecret: process.env.AUTH_SECRET || 'hidrorec-dev-secret',
   authTtlHours: Number(process.env.AUTH_TTL_HOURS || 12),
   corsOrigin: process.env.CORS_ORIGIN || '*',
-  externalTimeoutMs: Number(process.env.EXTERNAL_TIMEOUT_MS || 4000)
+  externalTimeoutMs: Number(process.env.EXTERNAL_TIMEOUT_MS || 4000),
+  apacApiUrl: process.env.APAC_API_URL || '',
+  apacApiToken: process.env.APAC_API_TOKEN || '',
+  weatherApiBaseUrl: process.env.WEATHER_API_BASE_URL || 'https://api.weatherapi.com/v1',
+  weatherApiKey: process.env.WEATHER_API_KEY || '',
+  weatherApiQuery: process.env.WEATHER_API_QUERY || 'Recife',
+  weatherApiForecastDays: Number(process.env.WEATHER_API_FORECAST_DAYS || 2)
 };

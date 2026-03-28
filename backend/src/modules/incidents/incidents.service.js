@@ -14,22 +14,29 @@ function severityFromWaterLevel(value) {
   return 'observacao';
 }
 
-async function listIncidents(query = {}) {
-  const database = await readDatabase();
-  const pagination = parsePagination(query);
-  let incidents = [...database.incidents];
+function filterIncidents(incidents, query = {}) {
+  let filtered = [...incidents];
 
   if (query.status) {
-    incidents = incidents.filter((item) => item.status === query.status);
+    filtered = filtered.filter((item) => item.status === query.status);
   }
 
   if (query.source) {
-    incidents = incidents.filter((item) => item.source === query.source);
+    filtered = filtered.filter((item) => item.source === query.source);
+  }
+
+  if (query.severity) {
+    filtered = filtered.filter((item) => item.severity === query.severity);
+  }
+
+  if (query.neighborhoodName) {
+    const neighborhood = String(query.neighborhoodName).toLowerCase();
+    filtered = filtered.filter((item) => item.neighborhoodName.toLowerCase().includes(neighborhood));
   }
 
   if (query.search) {
     const search = query.search.toLowerCase();
-    incidents = incidents.filter(
+    filtered = filtered.filter(
       (item) =>
         item.neighborhoodName.toLowerCase().includes(search) ||
         item.address.toLowerCase().includes(search) ||
@@ -37,8 +44,30 @@ async function listIncidents(query = {}) {
     );
   }
 
-  incidents.sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt));
+  filtered.sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt));
+  return filtered;
+}
+
+async function listIncidents(query = {}) {
+  const database = await readDatabase();
+  const pagination = parsePagination(query);
+  const incidents = filterIncidents(database.incidents, query);
   return paginate(incidents, pagination);
+}
+
+async function getIncidentsSummary(query = {}) {
+  const database = await readDatabase();
+  const incidents = filterIncidents(database.incidents, query);
+
+  return {
+    total: incidents.length,
+    pending: incidents.filter((item) => item.status === 'pendente').length,
+    inAnalysis: incidents.filter((item) => item.status === 'em_analise').length,
+    resolved: incidents.filter((item) => item.status === 'resolvido').length,
+    severe: incidents.filter((item) => item.severity === 'severo').length,
+    collaborative: incidents.filter((item) => item.source === 'colaborativa').length,
+    latestCreatedAt: incidents[0]?.createdAt || null
+  };
 }
 
 async function getIncidentById(id) {
@@ -149,6 +178,7 @@ async function updateIncidentStatus(id, payload, actor) {
 module.exports = {
   createIncident,
   getIncidentById,
+  getIncidentsSummary,
   listIncidents,
   updateIncidentStatus
 };

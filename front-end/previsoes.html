@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Painel administrativo do HidroRec com eficiencia, sensores, hotspots e log de atividades.">
-  <title>HidroRec | Admin</title>
+  <meta name="description" content="Previsoes operacionais do HidroRec com probabilidade de alagamento, chuva e mare.">
+  <title>HidroRec | Previsoes</title>
   <link rel="stylesheet" href="../style/style.css">
 </head>
 <body class="proto-body">
@@ -13,7 +13,7 @@
       <a class="proto-brand" href="./index.html">
         <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
         <div>
-          <strong>Painel Administrativo</strong>
+          <strong>Inteligencia Preditiva</strong>
           <span>Monitoramento Urbano Inteligente</span>
         </div>
       </a>
@@ -39,56 +39,56 @@
   </div>
 
   <main class="shell proto-main">
-    <section class="admin-summary-grid" id="admin-summary"></section>
+    <section class="forecast-hero">
+      <div>
+        <span class="section-kicker section-kicker--light">Previsao proximas 3 horas</span>
+        <strong id="forecast-probability">45%</strong>
+        <p>Probabilidade de Alagamento</p>
+      </div>
+      <div class="forecast-hero__indicator"></div>
+      <div class="forecast-hero__stats">
+        <article class="forecast-hero__stat">
+          <span>Chuva prevista</span>
+          <strong id="forecast-rain-total">--</strong>
+        </article>
+        <article class="forecast-hero__stat">
+          <span>Pico de mare</span>
+          <strong id="forecast-tide-peak">--</strong>
+        </article>
+      </div>
+    </section>
 
     <section class="proto-panel">
       <div class="panel-heading">
-        <h2>Acoes Rapidas</h2>
+        <h2>Probabilidade de Alagamento (%)</h2>
       </div>
-      <div class="quick-actions-grid">
-        <a class="quick-action" id="export-csv" href="#">Exportar CSV</a>
-        <a class="quick-action" id="export-pdf" href="#">Exportar PDF</a>
-        <a class="quick-action quick-action--ghost" id="open-diagnostics" href="#">Diagnostico</a>
-        <a class="quick-action quick-action--ghost" id="open-report" href="#">Relatorio</a>
-      </div>
+      <div class="chart-card chart-card--large" id="probability-chart"></div>
     </section>
 
     <section class="two-column-grid">
       <section class="proto-panel">
         <div class="panel-heading">
-          <h2>Pontos Criticos Recorrentes</h2>
+          <h2>Volume de Chuva (mm/h)</h2>
         </div>
-        <div id="hotspots-list"></div>
+        <div class="chart-card" id="rain-bars-chart"></div>
       </section>
 
       <section class="proto-panel">
         <div class="panel-heading">
-          <h2>Status dos Sensores IoT</h2>
+          <h2>Altura da Mare (m)</h2>
         </div>
-        <div class="sensor-status-shell">
-          <div class="sensor-donut" id="sensor-donut"></div>
-          <div class="sensor-legend" id="sensor-legend"></div>
-        </div>
+        <div class="chart-card" id="tide-line-chart"></div>
       </section>
     </section>
 
     <section class="proto-panel">
       <div class="panel-heading">
-        <h2>Taxa de Resposta da Drenagem por Regiao</h2>
+        <h2>Historico da Ultima Semana</h2>
       </div>
-      <div class="chart-card" id="response-chart"></div>
+      <div class="chart-card" id="weekly-history-chart"></div>
     </section>
-
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Log de Atividades Recentes</h2>
-      </div>
-      <div class="activity-log" id="activity-log"></div>
-    </section>
-
-    <section class="bottom-kpis-grid" id="bottom-kpis"></section>
   </main>
 
-  <script type="module" src="../js/modules/admin/admin.js"></script>
+  <script type="module" src="../js/modules/previsoes/previsoes.js"></script>
 </body>
 </html>

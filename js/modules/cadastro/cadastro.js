@@ -1,7 +1,9 @@
 import { initializeShell } from '../../app.js';
+import { climateService } from '../../services/climateService.js';
 import { login } from '../../services/authService.js';
 import { reportsService } from '../../services/reportsService.js';
 import { clearFeedback, serializeForm, setButtonBusy, setFeedback, toggleVisibility } from '../../utils/helpers.js';
+import { tideService } from '../../services/tideService.js';
 import { validateIncidentPayload, validateLoginPayload } from '../../utils/validators.js';
 
 async function mountAuthenticatedView(user) {
@@ -11,12 +13,68 @@ async function mountAuthenticatedView(user) {
   });
   toggleVisibility(document.getElementById('auth-gate'), false);
   toggleVisibility(document.getElementById('operations-section'), true);
+
+  const reporterField = document.getElementById('reporterName');
+  if (reporterField && !reporterField.value) {
+    reporterField.value = user.name;
+  }
+}
+
+function ensureHiddenField(form, name) {
+  let field = form.querySelector(`[name="${name}"]`);
+  if (field) return field;
+
+  field = document.createElement('input');
+  field.type = 'hidden';
+  field.name = name;
+  form.append(field);
+  return field;
+}
+
+async function attachGeolocation(form) {
+  ensureHiddenField(form, 'latitude');
+  ensureHiddenField(form, 'longitude');
+
+  if (!('geolocation' in navigator)) {
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      form.elements.latitude.value = String(position.coords.latitude);
+      form.elements.longitude.value = String(position.coords.longitude);
+    },
+    () => {},
+    { enableHighAccuracy: true, timeout: 6000, maximumAge: 300000 }
+  );
+}
+
+function ensureOpsContextSection() {
+  let card = document.getElementById('operations-context-card');
+  if (card) return card.querySelector('[data-ops-context]');
+
+  const authGate = document.getElementById('auth-gate');
+  card = document.createElement('section');
+  card.className = 'info-card';
+  card.id = 'operations-context-card';
+  card.innerHTML = `
+    <div class="section-title">
+      <div>
+        <span class="section-title__eyebrow">Contexto atual</span>
+        <h2>Apoio ao registro operacional</h2>
+      </div>
+    </div>
+    <div class="stack" data-ops-context></div>
+  `;
+
+  authGate.insertAdjacentElement('afterend', card);
+  return card.querySelector('[data-ops-context]');
 }
 
 async function initCadastroPage() {
-  const user = await initializeShell('cadastro');
-  if (user) {
-    mountAuthenticatedView(user);
+  let currentUser = await initializeShell('cadastro');
+  if (currentUser) {
+    mountAuthenticatedView(currentUser);
   }
 
   const authForm = document.getElementById('login-form');
@@ -25,6 +83,26 @@ async function initCadastroPage() {
   const operationsFeedback = document.getElementById('operations-feedback');
   const authSubmit = authForm.querySelector('button[type="submit"]');
   const operationsSubmit = operationsForm.querySelector('button[type="submit"]');
+  const opsContextTarget = ensureOpsContextSection();
+
+  opsContextTarget.innerHTML = '<p>Carregando contexto hidroclimatico para apoiar a decisao operacional...</p>';
+
+  try {
+    const [climate, tide] = await Promise.all([
+      climateService.getCurrentClimate(),
+      tideService.getCurrentTide()
+    ]);
+
+    opsContextTarget.innerHTML = `
+      <p>Chuva observada: <strong>${climate.observedRainMm} mm</strong> e acumulado de <strong>${climate.accumulatedRain24h} mm</strong> nas ultimas 24h.</p>
+      <p>Mare atual em <strong>${tide.levelMeters} m</strong> com influencia <strong>${tide.influence}</strong>.</p>
+      <p>Descreva impacto viario, comportamento da drenagem e necessidade de resposta.</p>
+    `;
+  } catch (error) {
+    opsContextTarget.innerHTML = '<p>Contexto hidroclimatico indisponivel no momento. O formulario segue operacional.</p>';
+  }
+
+  attachGeolocation(operationsForm);
 
   authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -47,7 +125,9 @@ async function initCadastroPage() {
         busyLabel: 'Autenticando...'
       });
       const session = await login(payload);
-      await mountAuthenticatedView(session.user);
+      currentUser = session.user;
+      await mountAuthenticatedView(currentUser);
+      attachGeolocation(operationsForm);
       setFeedback(authFeedback, {
         type: 'success',
         title: 'Acesso liberado',
@@ -88,6 +168,11 @@ async function initCadastroPage() {
       });
       await reportsService.createOperationalReport(payload);
       operationsForm.reset();
+      if (currentUser) {
+        const reporterField = document.getElementById('reporterName');
+        if (reporterField) reporterField.value = currentUser.name;
+      }
+      attachGeolocation(operationsForm);
       setFeedback(operationsFeedback, {
         type: 'success',
         title: 'Registro operacional salvo',

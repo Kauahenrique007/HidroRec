@@ -21,14 +21,16 @@ export const mapService = {
     return territories.map((territory) => {
       const top = 100 - scale(territory.latitude, minLat, maxLat);
       const left = scale(territory.longitude, minLng, maxLng);
+
       return `
         <button
           class="territory-marker territory-marker--${territory.risk.level}"
           style="top:${top}%; left:${left}%"
-          title="${territory.name} · ${formatRisk(territory.risk.level)}"
+          title="${territory.name} - ${formatRisk(territory.risk.level)}"
           type="button"
         >
-          <span>${territory.risk.score}</span>
+          <span class="territory-marker__pulse"></span>
+          <span class="territory-marker__core">${territory.risk.score}</span>
         </button>
       `;
     }).join('');
