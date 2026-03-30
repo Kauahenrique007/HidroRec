@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HidroRec | Previsões</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/previsoes.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./index.html">
+        <img src="./assets/logo/logo-hidrorec.png?v=20260330-1505" alt="Logo do HidroRec">
+        <div class="brand__text">
+          <strong>HidroRec</strong>
+          <span>Monitoramento Urbano Inteligente</span>
+        </div>
+      </a>
+      <div class="system-pill">Sistema Operacional</div>
+    </div>
+  </header>
+
+  <div class="nav-shell">
+    <div class="container nav-shell__inner">
+      <nav class="nav-links">
+        <a class="nav-link" href="./index.html">Inicio</a>
+        <a class="nav-link is-active" href="./previsoes.html">Previsoes</a>
+        <a class="nav-link" href="./alertas.html">Alertas</a>
+        <a class="nav-link" href="./admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="button button--secondary" href="./reporte.html">Novo reporte</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="container">
+      <section class="page-header">
+        <span class="eyebrow">Previsão operacional</span>
+        <h1 class="page-title">Chuva, maré e próximos períodos críticos</h1>
+        <p class="page-subtitle">Painel sintético para leitura rápida das condições atmosféricas e hidrológicas que influenciam a severidade urbana nas próximas horas.</p>
+      </section>
+
+      <section class="cards-grid cards-grid--forecast" id="forecast-cards"></section>
+
+      <section class="card section-card" style="margin-top: 20px;">
+        <div class="section-card__header">
+          <div>
+            <span class="eyebrow">Períodos críticos</span>
+            <h2 class="section-card__title">Janelas de atenção</h2>
+          </div>
+        </div>
+        <div id="critical-windows" class="list-stack forecast-window-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container page-footer__inner">
+      <span>Leitura preditiva pronta para integração com serviços externos.</span>
+      <span>Recife, PE</span>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/previsoes.js"></script>
+</body>
+</html>

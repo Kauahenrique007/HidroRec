@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HidroRec | Admin</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./index.html">
+        <img src="./assets/logo/logo-hidrorec.png?v=20260330-1505" alt="Logo do HidroRec">
+        <div class="brand__text">
+          <strong>HidroRec</strong>
+          <span>Monitoramento Urbano Inteligente</span>
+        </div>
+      </a>
+      <div class="system-pill">Painel administrativo</div>
+    </div>
+  </header>
+
+  <div class="nav-shell">
+    <div class="container nav-shell__inner">
+      <nav class="nav-links">
+        <a class="nav-link" href="./index.html">Inicio</a>
+        <a class="nav-link" href="./previsoes.html">Previsoes</a>
+        <a class="nav-link" href="./alertas.html">Alertas</a>
+        <a class="nav-link is-active" href="./admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions nav-actions--session">
+        <div class="session-summary">
+          <span class="auth-chip" id="admin-auth-status">Acesso restrito</span>
+          <strong id="session-profile-badge" class="session-profile-badge">Visitante</strong>
+          <small id="session-user-label" class="session-user-label">Autentique-se com um perfil operacional para acessar governanca, triagem e auditoria.</small>
+        </div>
+        <a class="button button--secondary" id="session-access-link" href="./acesso.html">Entrar</a>
+        <button class="button button--ghost hidden" id="session-logout-button" type="button">Sair</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="container">
+      <section class="page-header">
+        <span class="eyebrow">Administracao</span>
+        <h1 class="page-title">Governanca inicial de reportes e monitoramento</h1>
+        <p class="page-subtitle">Area de triagem operacional com autenticao por perfil, atualizacao de status e leitura dos eventos recentes do sistema.</p>
+      </section>
+
+      <section class="grid admin-layout">
+        <article class="card section-card admin-login-card" id="admin-login-card">
+          <div class="section-card__header">
+            <div>
+              <span class="eyebrow">Sessao operacional</span>
+              <h2 class="section-card__title">Acesso e perfis</h2>
+            </div>
+          </div>
+
+          <div class="admin-session-card">
+            <div class="admin-session-card__header">
+              <span class="auth-chip" id="admin-session-chip">Nao autenticado</span>
+              <strong id="admin-session-role">Visitante</strong>
+            </div>
+            <p id="admin-session-copy" class="page-subtitle">Use uma conta de Gestor ou Administrador para liberar o painel.</p>
+            <div class="admin-session-card__actions">
+              <a class="button button--primary" href="./acesso.html">Ir para acesso</a>
+              <a class="button button--ghost" href="./reporte.html">Reporte publico</a>
+            </div>
+          </div>
+
+          <form id="admin-login-form" class="report-form">
+            <div class="field">
+              <label for="admin-email">E-mail</label>
+              <input id="admin-email" type="email" value="admin@hidrorec.local" maxlength="180" autocomplete="username" required>
+            </div>
+            <div class="field">
+              <label for="admin-password">Senha</label>
+              <input id="admin-password" type="password" value="HidroRec#2026" minlength="8" autocomplete="current-password" required>
+            </div>
+            <button id="admin-login-button" class="button button--primary" type="submit">Acessar painel</button>
+          </form>
+
+          <div class="admin-credential-hint">
+            <span class="eyebrow">Perfis seed</span>
+            <small>Administrador: admin@hidrorec.local | Gestor: gestor@hidrorec.local | Senha: HidroRec#2026</small>
+          </div>
+        </article>
+
+        <section class="grid admin-panel" id="admin-panel">
+          <section class="metrics-grid" id="admin-metrics"></section>
+
+          <section class="card section-card">
+            <div class="section-card__header">
+              <div>
+                <span class="eyebrow">Reportes</span>
+                <h2 class="section-card__title">Fila administrativa</h2>
+              </div>
+              <div class="nav-actions">
+                <input id="admin-bairro-filter" class="input-control admin-filter-input" type="text" placeholder="Filtrar por bairro">
+                <button class="button button--secondary" id="admin-refresh-button" type="button">Atualizar</button>
+              </div>
+            </div>
+            <div class="table-shell">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Titulo</th>
+                    <th>Bairro</th>
+                    <th>Severidade</th>
+                    <th>Status</th>
+                    <th>Acao</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-reportes-table"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="grid admin-two-columns">
+            <article class="card section-card">
+              <div class="section-card__header">
+                <div>
+                  <span class="eyebrow">Auditoria</span>
+                  <h2 class="section-card__title">Eventos recentes</h2>
+                </div>
+              </div>
+              <div id="admin-auditoria" class="list-stack"></div>
+            </article>
+            <article class="card section-card">
+              <div class="section-card__header">
+                <div>
+                  <span class="eyebrow">Logs</span>
+                  <h2 class="section-card__title">Logs basicos</h2>
+                </div>
+              </div>
+              <div id="admin-logs" class="list-stack"></div>
+            </article>
+          </section>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container page-footer__inner">
+      <span>Painel administrativo preparado para revisao, moderacao e expansao de workflows.</span>
+      <span>HidroRec</span>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/admin.js"></script>
+</body>
+</html>

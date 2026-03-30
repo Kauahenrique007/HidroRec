@@ -1,0 +1,36 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: hidrorec-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      SA_PASSWORD: "HidroRec#2026"
+    ports:
+      - "1433:1433"
+    volumes:
+      - hidrorec-sql-data:/var/opt/mssql
+
+  api:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    container_name: hidrorec-api
+    depends_on:
+      - sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=HidroRecDb;User Id=sa;Password=HidroRec#2026;TrustServerCertificate=True;Encrypt=False;MultipleActiveResultSets=True"
+      Jwt__Issuer: "HidroRec"
+      Jwt__Audience: "HidroRecClients"
+      Jwt__Key: "HidroRec.Super.Secret.Key.2026.MVP"
+      Jwt__ExpiresInMinutes: "480"
+    ports:
+      - "8080:8080"
+    volumes:
+      - hidrorec-uploads:/app/uploads
+
+volumes:
+  hidrorec-sql-data:
+  hidrorec-uploads:
