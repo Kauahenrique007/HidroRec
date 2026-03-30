@@ -1,0 +1,30 @@
+.cards-grid--forecast {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.cards-grid--forecast .metric-card {
+  min-height: 180px;
+  background: linear-gradient(180deg, #ffffff, #f7fbff);
+}
+
+.forecast-window-list .list-item {
+  border-left: 4px solid rgba(60, 145, 230, 0.18);
+}
+
+.forecast-window-list .status-badge {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cards-grid--forecast {
+    grid-template-columns: 1fr;
+  }
+
+  .cards-grid--forecast .metric-card {
+    min-height: 0;
+  }
+
+  .forecast-window-list .status-badge {
+    white-space: normal;
+  }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HidroRec | Acesso</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/acesso.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./index.html">
+        <img src="./assets/logo/logo-hidrorec.png?v=20260330-1505" alt="Logo do HidroRec">
+        <div class="brand__text">
+          <strong>HidroRec</strong>
+          <span>Monitoramento Urbano Inteligente</span>
+        </div>
+      </a>
+      <div class="system-pill">Acesso e identidade</div>
+    </div>
+  </header>
+
+  <div class="nav-shell">
+    <div class="container nav-shell__inner">
+      <nav class="nav-links">
+        <a class="nav-link" href="./index.html">Inicio</a>
+        <a class="nav-link" href="./previsoes.html">Previsoes</a>
+        <a class="nav-link" href="./alertas.html">Alertas</a>
+        <a class="nav-link" href="./admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions nav-actions--session">
+        <div class="session-summary">
+          <span class="auth-chip" id="session-chip">Modo visitante</span>
+          <strong id="session-profile-badge" class="session-profile-badge">Visitante</strong>
+          <small id="session-user-label" class="session-user-label">Entre como colaborador ou com perfil operacional.</small>
+        </div>
+        <a class="button button--secondary" id="session-access-link" href="./acesso.html">Entrar</a>
+        <a class="button button--ghost hidden" id="admin-shortcut-link" href="./admin.html">Painel</a>
+        <button class="button button--ghost hidden" id="session-logout-button" type="button">Sair</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="container">
+      <section class="page-header acesso-header">
+        <div>
+          <span class="eyebrow">Sessao HidroRec</span>
+          <h1 class="page-title">Entre ou crie sua conta para operar e colaborar</h1>
+          <p class="page-subtitle">Cidadaos podem registrar ocorrencias e acompanhar seus envios. Perfis de Gestor e Administrador acessam governanca e triagem operacional.</p>
+        </div>
+        <div class="acesso-hero-card">
+          <span class="eyebrow">Perfis iniciais</span>
+          <strong>Colaborador cidadao, Gestor e Administrador</strong>
+          <small>Login seed operacional: admin@hidrorec.local e gestor@hidrorec.local com senha HidroRec#2026.</small>
+        </div>
+      </section>
+
+      <section class="acesso-layout">
+        <article class="card section-card acesso-panel">
+          <div class="tab-strip">
+            <button class="tab-strip__button is-active" type="button" data-auth-tab="login">Entrar</button>
+            <button class="tab-strip__button" type="button" data-auth-tab="register">Criar conta</button>
+          </div>
+
+          <form id="login-form" class="stack-form">
+            <div class="field">
+              <label for="login-email">E-mail</label>
+              <input id="login-email" type="email" value="admin@hidrorec.local" maxlength="180" autocomplete="username" required>
+            </div>
+            <div class="field">
+              <label for="login-password">Senha</label>
+              <input id="login-password" type="password" value="HidroRec#2026" minlength="8" autocomplete="current-password" required>
+            </div>
+            <button id="login-submit-button" class="button button--primary" type="submit">Entrar no HidroRec</button>
+          </form>
+
+          <form id="register-form" class="stack-form hidden">
+            <div class="field-grid">
+              <div class="field">
+                <label for="register-name">Nome</label>
+                <input id="register-name" type="text" maxlength="120" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="register-phone">Telefone</label>
+                <input id="register-phone" type="text" maxlength="40" autocomplete="tel">
+              </div>
+            </div>
+            <div class="field">
+              <label for="register-email">E-mail</label>
+              <input id="register-email" type="email" maxlength="180" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="register-password">Senha</label>
+              <input id="register-password" type="password" minlength="8" autocomplete="new-password" required>
+            </div>
+            <button id="register-submit-button" class="button button--primary" type="submit">Criar conta colaborativa</button>
+          </form>
+        </article>
+
+        <aside class="grid acesso-side">
+          <article class="card section-card">
+            <span class="eyebrow">Sessao atual</span>
+            <h2 class="section-card__title" id="access-session-title">Nao autenticado</h2>
+            <p class="page-subtitle" id="access-session-description">Ao entrar, seu perfil passa a ser exibido no topo das paginas e o painel administrativo e liberado apenas para perfis operacionais.</p>
+          </article>
+
+          <article class="card section-card">
+            <span class="eyebrow">Acesso por perfil</span>
+            <div class="list-stack acesso-profile-list">
+              <div class="list-item">
+                <strong>Cidadao</strong>
+                <small class="muted">Cadastro publico, envio de reportes e acompanhamento colaborativo.</small>
+              </div>
+              <div class="list-item">
+                <strong>Gestor</strong>
+                <small class="muted">Triagem, analise de ocorrencias e moderacao operacional.</small>
+              </div>
+              <div class="list-item">
+                <strong>Administrador</strong>
+                <small class="muted">Acesso total a usuarios, auditoria, logs e governanca do sistema.</small>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container page-footer__inner">
+      <span>Acesso institucional do ecossistema HidroRec.</span>
+      <span>Recife, PE</span>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/acesso.js"></script>
+</body>
+</html>

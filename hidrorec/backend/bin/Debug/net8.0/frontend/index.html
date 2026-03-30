@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HidroRec - dashboard operacional de monitoramento urbano inteligente no Recife.">
+  <title>HidroRec | Dashboard</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/mapa.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./index.html">
+        <img src="./assets/logo/logo-hidrorec.png?v=20260330-1505" alt="Logo do HidroRec">
+        <div class="brand__text">
+          <strong>HidroRec</strong>
+          <span>Monitoramento Urbano Inteligente</span>
+        </div>
+      </a>
+      <div class="system-pill" id="system-status-chip">Centro operacional ativo</div>
+    </div>
+  </header>
+
+  <div class="nav-shell">
+    <div class="container nav-shell__inner">
+      <nav class="nav-links">
+        <a class="nav-link is-active" href="./index.html">Inicio</a>
+        <a class="nav-link" href="./previsoes.html">Previsoes</a>
+        <a class="nav-link" href="./alertas.html">Alertas</a>
+        <a class="nav-link" href="./admin.html">Admin</a>
+      </nav>
+      <div class="nav-actions nav-actions--session">
+        <div class="session-summary">
+          <span class="auth-chip" id="session-chip">Modo visitante</span>
+          <strong id="session-profile-badge" class="session-profile-badge">Visitante</strong>
+          <small id="session-user-label" class="session-user-label">Entre para acompanhar seus reportes e acessar o painel operacional.</small>
+        </div>
+        <a class="button button--secondary" id="session-access-link" href="./acesso.html">Entrar</a>
+        <a class="button button--ghost hidden" id="admin-shortcut-link" href="./admin.html">Painel</a>
+        <button class="button button--ghost hidden" id="session-logout-button" type="button">Sair</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="container">
+      <section class="page-header page-header--dashboard">
+        <div>
+          <span class="eyebrow">Centro de comando</span>
+          <h1 class="page-title">Situacao operacional da cidade em tempo real</h1>
+          <p class="page-subtitle">Console institucional para leitura rapida de chuva, mare, reportes colaborativos e pontos criticos de mobilidade urbana no Recife.</p>
+        </div>
+        <div class="operations-ribbon">
+          <span class="operations-ribbon__label">Protocolo atual</span>
+          <strong>Monitoramento hidrourbano e resposta territorial</strong>
+          <small>Fluxo integrado entre colaboracao cidada, triagem e acompanhamento operacional.</small>
+        </div>
+      </section>
+
+      <section id="alert-banner" class="alert-banner hidden"></section>
+
+      <section class="hero-grid">
+        <article class="card city-status-card">
+          <span class="eyebrow">Status da Cidade</span>
+          <h2 id="city-risk-title">Carregando...</h2>
+          <p id="city-risk-description">Consolidando reportes e indicadores hidrologicos.</p>
+          <div class="stats-grid" id="city-status-counts"></div>
+        </article>
+
+        <aside class="hero-side-panel">
+          <article class="card metric-card metric-card--highlight">
+            <span class="eyebrow">Mare Atual</span>
+            <strong id="metric-tide">--</strong>
+            <small id="metric-tide-meta">Aguardando leitura</small>
+          </article>
+          <article class="card metric-card metric-card--highlight">
+            <span class="eyebrow">Chuva APAC (24h)</span>
+            <strong id="metric-rain">--</strong>
+            <small id="metric-rain-meta">Aguardando leitura</small>
+          </article>
+          <article class="card operation-card">
+            <span class="eyebrow">Acao recomendada</span>
+            <h2 class="section-card__title">Priorize trechos com reincidencia e lamina acima do joelho</h2>
+            <p class="page-subtitle">Cadastre ocorrencias de campo, acompanhe os alertas ativos e encaminhe validacao administrativa quando houver persistencia do evento.</p>
+            <div class="operation-card__actions">
+              <a class="button button--primary" href="./reporte.html">Registrar ocorrencia</a>
+              <a class="button button--ghost" href="./alertas.html">Ver alertas</a>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="dashboard-layout">
+        <section class="card section-card">
+          <div class="section-card__header">
+            <div>
+              <span class="eyebrow">Mapa de Monitoramento</span>
+              <h2 class="section-card__title">Pontos criticos no Recife</h2>
+            </div>
+            <div class="legend">
+              <span class="legend__item"><span class="legend__dot legend__dot--normal"></span>Normal</span>
+              <span class="legend__item"><span class="legend__dot legend__dot--atencao"></span>Atencao</span>
+              <span class="legend__item"><span class="legend__dot legend__dot--alagamento"></span>Alagamento</span>
+            </div>
+          </div>
+          <div id="monitoring-map" class="map-shell">
+            <div class="map-shell__water"></div>
+            <div class="map-shell__area"></div>
+          </div>
+        </section>
+
+        <section class="card section-card">
+          <div class="section-card__header">
+            <div>
+              <span class="eyebrow">Pontos de Atencao</span>
+              <h2 class="section-card__title">Ultimos reportes monitorados</h2>
+            </div>
+          </div>
+          <div id="attention-list" class="list-stack attention-list"></div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container page-footer__inner">
+      <span>HidroRec | Inteligencia territorial para microalagamentos, alagamentos e resposta urbana.</span>
+      <span>Recife, PE</span>
+    </div>
+  </footer>
+
+  <a class="button button--primary fab-report" href="./reporte.html">Reportar ocorrencia</a>
+
+  <script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>
