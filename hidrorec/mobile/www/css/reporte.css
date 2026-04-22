@@ -1,0 +1,158 @@
+.report-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.report-form {
+  display: grid;
+  gap: 18px;
+}
+
+.field-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  font-weight: 700;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.field textarea {
+  min-height: 124px;
+  resize: vertical;
+}
+
+.water-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.water-option {
+  display: grid;
+  gap: 8px;
+  padding: 18px 12px;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  background: #f8fbff;
+  text-align: center;
+  cursor: pointer;
+  transition: 160ms ease;
+  min-height: 112px;
+}
+
+.water-option.is-selected {
+  border-color: var(--color-secondary);
+  box-shadow: 0 10px 24px rgba(60, 145, 230, 0.16);
+}
+
+.water-option__bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8fd3ff, var(--color-secondary));
+}
+
+.water-intensity {
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(29, 209, 161, 0.18), rgba(255, 59, 74, 0.28));
+  overflow: hidden;
+}
+
+.water-intensity__fill {
+  width: 20%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-danger));
+  transition: width 180ms ease;
+}
+
+.location-card,
+.safety-card,
+.contributor-card {
+  padding: 22px;
+}
+
+.image-preview {
+  min-height: 160px;
+  border: 1px dashed var(--color-line);
+  border-radius: 18px;
+  background: #f9fbfd;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 980px) {
+  .report-layout,
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .water-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .water-option {
+    padding: 16px 10px;
+  }
+
+  .location-card,
+  .safety-card,
+  .contributor-card {
+    padding: 18px;
+  }
+
+  .image-preview {
+    min-height: 120px;
+  }
+
+  .report-form .button--primary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .report-layout {
+    gap: 14px;
+  }
+
+  .water-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .water-option {
+    min-height: 0;
+  }
+
+  .location-card {
+    padding: 16px;
+  }
+}
