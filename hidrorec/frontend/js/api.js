@@ -3,20 +3,35 @@ function unique(items) {
 }
 
 function resolveApiOrigins() {
+  const configuredBases = Array.isArray(window.HIDROREC_API_BASE_URLS)
+    ? window.HIDROREC_API_BASE_URLS
+    : [];
   const configuredBase = window.HIDROREC_API_BASE_URL?.trim();
-  if (configuredBase) {
-    return [configuredBase.replace(/\/+$/, '')];
+  const explicitOrigins = unique([
+    ...configuredBases,
+    configuredBase
+  ].map((item) => String(item || '').trim().replace(/\/+$/, '')));
+
+  if (explicitOrigins.length) {
+    return explicitOrigins;
   }
 
   const { protocol, hostname, port, origin } = window.location;
   const isFileProtocol = protocol === 'file:';
+  const isNativeShell = protocol === 'capacitor:';
   const localApiOrigins = unique([
+    'http://10.0.2.2:8090',
+    'http://10.0.2.2:8080',
     hostname ? `${protocol}//${hostname}:8080` : '',
+    hostname ? `http://${hostname}:8090` : '',
+    hostname ? `http://${hostname}:8080` : '',
     'http://localhost:8080',
-    'http://127.0.0.1:8080'
+    'http://localhost:8090',
+    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8090'
   ]);
 
-  if (isFileProtocol) {
+  if (isFileProtocol || isNativeShell) {
     return localApiOrigins;
   }
 

@@ -1,0 +1,15 @@
+{
+  "appId": "br.com.hidrorec.app",
+  "appName": "HidroRec",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  }
+}

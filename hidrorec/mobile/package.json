@@ -1,0 +1,20 @@
+{
+  "name": "hidrorec-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicativo Android do HidroRec com frontend web embarcado.",
+  "scripts": {
+    "prepare:www": "node ./scripts/prepare-www.js",
+    "sync": "npm run prepare:www && npx cap sync android",
+    "build:android": "npm run sync && cd android && gradlew.bat assembleDebug",
+    "copy:apk": "node ./scripts/copy-apk.js",
+    "apk": "npm run build:android && npm run copy:apk"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.3.1",
+    "@capacitor/core": "^8.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.3.1"
+  }
+}
