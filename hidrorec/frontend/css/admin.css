@@ -91,6 +91,14 @@
     width: 100%;
   }
 
+  .admin-session-card__actions {
+    flex-direction: column;
+  }
+
+  .admin-session-card__actions .button {
+    width: 100%;
+  }
+
   .table-shell {
     border: 0;
     background: transparent;
@@ -149,5 +157,11 @@
 @media (max-width: 420px) {
   tr {
     padding: 14px;
+  }
+
+  .admin-layout,
+  .admin-panel,
+  .admin-two-columns {
+    gap: 14px;
   }
 }

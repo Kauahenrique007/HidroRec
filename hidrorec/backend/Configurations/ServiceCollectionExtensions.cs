@@ -31,7 +31,14 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddHidroRecData(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<HidroRecDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(
+                configuration.GetConnectionString("DefaultConnection"),
+                sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                    sqlOptions.CommandTimeout(30);
+                    sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                }));
 
         services.AddScoped<IReporteRepository, ReporteRepository>();
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -76,6 +83,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddHidroRecApplication(this IServiceCollection services)
     {
+        services.AddMemoryCache();
         services.AddRateLimiter(options =>
         {
             options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -127,15 +135,19 @@ public static class ServiceCollectionExtensions
         services.AddValidatorsFromAssemblyContaining<CreateReporteRequestDtoValidator>();
 
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IDataFusionService, DataFusionService>();
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<IRiskEngineService, RiskEngineService>();
         services.AddScoped<IReporteService, ReporteService>();
         services.AddScoped<IAlertaService, AlertaService>();
         services.AddScoped<IPrevisaoService, PrevisaoService>();
         services.AddScoped<IAdminService, AdminService>();
         services.AddScoped<IUsuarioService, UsuarioService>();
+        services.AddSingleton<IExternalDataCache, ExternalDataCache>();
         services.AddHttpClient<WeatherService>();
+        services.AddHttpClient<TideService>();
         services.AddScoped<IWeatherService>(provider => provider.GetRequiredService<WeatherService>());
-        services.AddScoped<ITideService, TideService>();
+        services.AddScoped<ITideService>(provider => provider.GetRequiredService<TideService>());
 
         return services;
     }

@@ -39,9 +39,12 @@ public sealed class AdminController(IAdminService adminService) : ControllerBase
     }
 
     [HttpGet("logs")]
-    public async Task<ActionResult<ApiResponse<IReadOnlyCollection<LogSistemaDto>>>> GetLogs(CancellationToken cancellationToken)
+    public async Task<ActionResult<ApiResponse<IReadOnlyCollection<LogSistemaDto>>>> GetLogs(
+        [FromQuery] string? contexto = null,
+        [FromQuery] string? evento = null,
+        CancellationToken cancellationToken = default)
     {
-        var result = await adminService.GetLogsAsync(cancellationToken);
+        var result = await adminService.GetLogsAsync(contexto, evento, cancellationToken);
         return Ok(ApiResponse<IReadOnlyCollection<LogSistemaDto>>.Ok(result));
     }
 }

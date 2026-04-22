@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HidroRec | Acesso</title>
-  <link rel="stylesheet" href="./css/global.css">
-  <link rel="stylesheet" href="./css/layout.css">
-  <link rel="stylesheet" href="./css/components.css">
-  <link rel="stylesheet" href="./css/acesso.css">
+  <link rel="stylesheet" href="./css/global.css?v=20260406-2042">
+  <link rel="stylesheet" href="./css/layout.css?v=20260406-2042">
+  <link rel="stylesheet" href="./css/components.css?v=20260406-2042">
+  <link rel="stylesheet" href="./css/acesso.css?v=20260406-2042">
 </head>
 <body>
   <header class="topbar">
@@ -19,7 +19,7 @@
           <span>Monitoramento Urbano Inteligente</span>
         </div>
       </a>
-      <div class="system-pill">Acesso e identidade</div>
+      <div class="system-pill">Acesso</div>
     </div>
   </header>
 
@@ -29,13 +29,14 @@
         <a class="nav-link" href="./index.html">Inicio</a>
         <a class="nav-link" href="./previsoes.html">Previsoes</a>
         <a class="nav-link" href="./alertas.html">Alertas</a>
+        <a class="nav-link hidden" id="account-nav-link" href="./conta.html">Conta</a>
         <a class="nav-link" href="./admin.html">Admin</a>
       </nav>
       <div class="nav-actions nav-actions--session">
         <div class="session-summary">
           <span class="auth-chip" id="session-chip">Modo visitante</span>
           <strong id="session-profile-badge" class="session-profile-badge">Visitante</strong>
-          <small id="session-user-label" class="session-user-label">Entre como colaborador ou com perfil operacional.</small>
+          <small id="session-user-label" class="session-user-label">Sem sessao.</small>
         </div>
         <a class="button button--secondary" id="session-access-link" href="./acesso.html">Entrar</a>
         <a class="button button--ghost hidden" id="admin-shortcut-link" href="./admin.html">Painel</a>
@@ -48,14 +49,13 @@
     <div class="container">
       <section class="page-header acesso-header">
         <div>
-          <span class="eyebrow">Sessao HidroRec</span>
-          <h1 class="page-title">Entre ou crie sua conta para operar e colaborar</h1>
-          <p class="page-subtitle">Cidadaos podem registrar ocorrencias e acompanhar seus envios. Perfis de Gestor e Administrador acessam governanca e triagem operacional.</p>
+          <span class="eyebrow">Sessao</span>
+          <h1 class="page-title">Acesso</h1>
         </div>
         <div class="acesso-hero-card">
-          <span class="eyebrow">Perfis iniciais</span>
-          <strong>Colaborador cidadao, Gestor e Administrador</strong>
-          <small>Login seed operacional: admin@hidrorec.local e gestor@hidrorec.local com senha HidroRec#2026.</small>
+          <span class="eyebrow">Seed</span>
+          <strong>admin@hidrorec.local</strong>
+          <small>HidroRec#2026</small>
         </div>
       </section>
 
@@ -75,7 +75,7 @@
               <label for="login-password">Senha</label>
               <input id="login-password" type="password" value="HidroRec#2026" minlength="8" autocomplete="current-password" required>
             </div>
-            <button id="login-submit-button" class="button button--primary" type="submit">Entrar no HidroRec</button>
+            <button id="login-submit-button" class="button button--primary" type="submit">Entrar</button>
           </form>
 
           <form id="register-form" class="stack-form hidden">
@@ -97,31 +97,31 @@
               <label for="register-password">Senha</label>
               <input id="register-password" type="password" minlength="8" autocomplete="new-password" required>
             </div>
-            <button id="register-submit-button" class="button button--primary" type="submit">Criar conta colaborativa</button>
+            <button id="register-submit-button" class="button button--primary" type="submit">Criar conta</button>
           </form>
         </article>
 
         <aside class="grid acesso-side">
           <article class="card section-card">
-            <span class="eyebrow">Sessao atual</span>
+            <span class="eyebrow">Sessao</span>
             <h2 class="section-card__title" id="access-session-title">Nao autenticado</h2>
-            <p class="page-subtitle" id="access-session-description">Ao entrar, seu perfil passa a ser exibido no topo das paginas e o painel administrativo e liberado apenas para perfis operacionais.</p>
+            <p class="page-subtitle" id="access-session-description">Sem sessao ativa.</p>
           </article>
 
           <article class="card section-card">
-            <span class="eyebrow">Acesso por perfil</span>
+            <span class="eyebrow">Perfis</span>
             <div class="list-stack acesso-profile-list">
               <div class="list-item">
                 <strong>Cidadao</strong>
-                <small class="muted">Cadastro publico, envio de reportes e acompanhamento colaborativo.</small>
+                <small class="muted">Reporte</small>
               </div>
               <div class="list-item">
                 <strong>Gestor</strong>
-                <small class="muted">Triagem, analise de ocorrencias e moderacao operacional.</small>
+                <small class="muted">Triagem</small>
               </div>
               <div class="list-item">
                 <strong>Administrador</strong>
-                <small class="muted">Acesso total a usuarios, auditoria, logs e governanca do sistema.</small>
+                <small class="muted">Controle total</small>
               </div>
             </div>
           </article>
@@ -132,11 +132,11 @@
 
   <footer class="page-footer">
     <div class="container page-footer__inner">
-      <span>Acesso institucional do ecossistema HidroRec.</span>
+      <span>HidroRec</span>
       <span>Recife, PE</span>
     </div>
   </footer>
 
-  <script type="module" src="./js/acesso.js"></script>
+  <script type="module" src="./js/acesso.js?v=20260406-2042"></script>
 </body>
 </html>

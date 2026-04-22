@@ -40,7 +40,7 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Criticidade")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("datetime2");
@@ -59,6 +59,12 @@ namespace HidroRec.Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -66,6 +72,9 @@ namespace HidroRec.Backend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BairroId");
+
+                    b.HasIndex("Ativo", "Criticidade", "BairroId", "DataCriacao")
+                        .HasDatabaseName("IX_Alertas_Ativo_Criticidade_Bairro_DataCriacao");
 
                     b.ToTable("Alertas");
                 });
@@ -83,6 +92,148 @@ namespace HidroRec.Backend.Migrations
                     b.HasIndex("ReporteId");
 
                     b.ToTable("AlertasReportes");
+                });
+
+            modelBuilder.Entity("HidroRec.Backend.Domain.Entities.AreaMonitorada", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativa")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("BairroId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cobertura")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CriticidadeOperacional")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Latitude")
+                        .HasPrecision(10, 6)
+                        .HasColumnType("decimal(10,6)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasPrecision(10, 6)
+                        .HasColumnType("decimal(10,6)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrganizacaoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RegiaoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Vulnerabilidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BairroId");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.HasIndex("OrganizacaoId");
+
+                    b.HasIndex("RegiaoId");
+
+                    b.HasIndex("Ativa", "OrganizacaoId", "RegiaoId")
+                        .HasDatabaseName("IX_AreasMonitoradas_Ativa_Organizacao_Regiao");
+
+                    b.ToTable("AreasMonitoradas");
+                });
+
+            modelBuilder.Entity("HidroRec.Backend.Domain.Entities.AtivoMonitorado", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("AreaMonitoradaId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DataAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Latitude")
+                        .HasPrecision(10, 6)
+                        .HasColumnType("decimal(10,6)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasPrecision(10, 6)
+                        .HasColumnType("decimal(10,6)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrganizacaoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sensibilidade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusOperacional")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AreaMonitoradaId");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.HasIndex("OrganizacaoId");
+
+                    b.HasIndex("Ativo", "OrganizacaoId", "AreaMonitoradaId")
+                        .HasDatabaseName("IX_AtivosMonitorados_Ativo_Organizacao_Area");
+
+                    b.ToTable("AtivosMonitorados");
                 });
 
             modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Auditoria", b =>
@@ -107,11 +258,11 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Entidade")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("EntidadeId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Excluido")
                         .HasColumnType("bit");
@@ -121,7 +272,11 @@ namespace HidroRec.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuarioId", "DataCriacao")
+                        .HasDatabaseName("IX_Auditorias_Usuario_DataCriacao");
+
+                    b.HasIndex("Entidade", "EntidadeId", "DataCriacao")
+                        .HasDatabaseName("IX_Auditorias_Entidade_EntidadeId_DataCriacao");
 
                     b.ToTable("Auditorias");
                 });
@@ -153,14 +308,15 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("RegiaoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RegiaoId");
+                    b.HasIndex("RegiaoId", "Nome")
+                        .IsUnique();
 
                     b.ToTable("Bairros");
                 });
@@ -239,7 +395,8 @@ namespace HidroRec.Backend.Migrations
 
                     b.HasIndex("AlteradoPorUsuarioId");
 
-                    b.HasIndex("ReporteId");
+                    b.HasIndex("ReporteId", "DataAlteracao")
+                        .HasDatabaseName("IX_HistoricosReporte_Reporte_DataAlteracao");
 
                     b.ToTable("HistoricosReporte");
                 });
@@ -252,7 +409,7 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Categoria")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("datetime2");
@@ -291,7 +448,8 @@ namespace HidroRec.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FonteDadoId");
+                    b.HasIndex("FonteDadoId", "Categoria", "ReferenciaEm")
+                        .HasDatabaseName("IX_IndicadoresClimaticos_Fonte_Categoria_Referencia");
 
                     b.ToTable("IndicadoresClimaticos");
                 });
@@ -304,7 +462,7 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Contexto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("datetime2");
@@ -314,7 +472,7 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Evento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Excluido")
                         .HasColumnType("bit");
@@ -325,11 +483,61 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Nivel")
                         .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Contexto", "DataCriacao")
+                        .HasDatabaseName("IX_LogsSistema_Contexto_DataCriacao");
+
+                    b.HasIndex("Nivel", "Evento", "DataCriacao")
+                        .HasDatabaseName("IX_LogsSistema_Nivel_Evento_DataCriacao");
+
+                    b.ToTable("LogsSistema");
+                });
+
+            modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Organizacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativa")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DataAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Segmento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("LogsSistema");
+                    b.HasIndex("Codigo")
+                        .IsUnique();
+
+                    b.ToTable("Organizacoes");
                 });
 
             modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Perfil", b =>
@@ -429,9 +637,12 @@ namespace HidroRec.Backend.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Nome")
+                        .IsUnique();
 
                     b.ToTable("Regioes");
                 });
@@ -441,6 +652,9 @@ namespace HidroRec.Backend.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("AreaMonitoradaId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("BairroId")
                         .HasColumnType("int");
@@ -507,13 +721,19 @@ namespace HidroRec.Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.Property<string>("Severidade")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TipoOcorrencia")
                         .IsRequired()
@@ -528,11 +748,28 @@ namespace HidroRec.Backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AreaMonitoradaId");
+
                     b.HasIndex("BairroId");
 
                     b.HasIndex("RegiaoId");
 
                     b.HasIndex("UsuarioId");
+
+                    b.HasIndex("Excluido", "AreaMonitoradaId", "DataOcorrencia")
+                        .HasDatabaseName("IX_Reportes_AreaMonitorada_DataOcorrencia");
+
+                    b.HasIndex("Excluido", "BairroId", "DataOcorrencia")
+                        .HasDatabaseName("IX_Reportes_Bairro_DataOcorrencia");
+
+                    b.HasIndex("Excluido", "RegiaoId", "DataOcorrencia")
+                        .HasDatabaseName("IX_Reportes_Regiao_DataOcorrencia");
+
+                    b.HasIndex("Excluido", "UsuarioId", "DataCriacao")
+                        .HasDatabaseName("IX_Reportes_Usuario_DataCriacao");
+
+                    b.HasIndex("Excluido", "DataOcorrencia", "Status", "Severidade")
+                        .HasDatabaseName("IX_Reportes_DashboardLookup");
 
                     b.ToTable("Reportes");
                 });
@@ -579,7 +816,7 @@ namespace HidroRec.Backend.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("PerfilId");
+                    b.HasIndex("PerfilId", "Ativo", "DataCriacao");
 
                     b.ToTable("Usuarios");
                 });
@@ -610,6 +847,49 @@ namespace HidroRec.Backend.Migrations
                     b.Navigation("Alerta");
 
                     b.Navigation("Reporte");
+                });
+
+            modelBuilder.Entity("HidroRec.Backend.Domain.Entities.AreaMonitorada", b =>
+                {
+                    b.HasOne("HidroRec.Backend.Domain.Entities.Bairro", "Bairro")
+                        .WithMany()
+                        .HasForeignKey("BairroId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HidroRec.Backend.Domain.Entities.Organizacao", "Organizacao")
+                        .WithMany("AreasMonitoradas")
+                        .HasForeignKey("OrganizacaoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HidroRec.Backend.Domain.Entities.Regiao", "Regiao")
+                        .WithMany()
+                        .HasForeignKey("RegiaoId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Bairro");
+
+                    b.Navigation("Organizacao");
+
+                    b.Navigation("Regiao");
+                });
+
+            modelBuilder.Entity("HidroRec.Backend.Domain.Entities.AtivoMonitorado", b =>
+                {
+                    b.HasOne("HidroRec.Backend.Domain.Entities.AreaMonitorada", "AreaMonitorada")
+                        .WithMany("AtivosMonitorados")
+                        .HasForeignKey("AreaMonitoradaId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("HidroRec.Backend.Domain.Entities.Organizacao", "Organizacao")
+                        .WithMany("AtivosMonitorados")
+                        .HasForeignKey("OrganizacaoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AreaMonitorada");
+
+                    b.Navigation("Organizacao");
                 });
 
             modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Auditoria", b =>
@@ -683,6 +963,11 @@ namespace HidroRec.Backend.Migrations
 
             modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Reporte", b =>
                 {
+                    b.HasOne("HidroRec.Backend.Domain.Entities.AreaMonitorada", "AreaMonitorada")
+                        .WithMany("Reportes")
+                        .HasForeignKey("AreaMonitoradaId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("HidroRec.Backend.Domain.Entities.Bairro", "Bairro")
                         .WithMany("Reportes")
                         .HasForeignKey("BairroId")
@@ -696,6 +981,8 @@ namespace HidroRec.Backend.Migrations
                     b.HasOne("HidroRec.Backend.Domain.Entities.Usuario", "Usuario")
                         .WithMany("Reportes")
                         .HasForeignKey("UsuarioId");
+
+                    b.Navigation("AreaMonitorada");
 
                     b.Navigation("Bairro");
 
@@ -720,6 +1007,13 @@ namespace HidroRec.Backend.Migrations
                     b.Navigation("AlertaReportes");
                 });
 
+            modelBuilder.Entity("HidroRec.Backend.Domain.Entities.AreaMonitorada", b =>
+                {
+                    b.Navigation("AtivosMonitorados");
+
+                    b.Navigation("Reportes");
+                });
+
             modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Bairro", b =>
                 {
                     b.Navigation("Alertas");
@@ -730,6 +1024,13 @@ namespace HidroRec.Backend.Migrations
             modelBuilder.Entity("HidroRec.Backend.Domain.Entities.FonteDado", b =>
                 {
                     b.Navigation("IndicadoresClimaticos");
+                });
+
+            modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Organizacao", b =>
+                {
+                    b.Navigation("AreasMonitoradas");
+
+                    b.Navigation("AtivosMonitorados");
                 });
 
             modelBuilder.Entity("HidroRec.Backend.Domain.Entities.Perfil", b =>

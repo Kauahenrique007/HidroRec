@@ -1,0 +1,232 @@
+2026-04-06 21:49:45.077 -03:00 [INF] User profile is available. Using 'C:\Users\ACPGROUP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-06 21:49:45.149 -03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:8080: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Normalmente é permitida apenas uma utilização de cada endereço de soquete (protocolo/endereço de rede/porta).
+ ---> System.Net.Sockets.SocketException (10048): Normalmente é permitida apenas uma utilização de cada endereço de soquete (protocolo/endereço de rede/porta).
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-04-06 21:50:04.107 -03:00 [INF] User profile is available. Using 'C:\Users\ACPGROUP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-06 21:50:04.175 -03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:8080: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Normalmente é permitida apenas uma utilização de cada endereço de soquete (protocolo/endereço de rede/porta).
+ ---> System.Net.Sockets.SocketException (10048): Normalmente é permitida apenas uma utilização de cada endereço de soquete (protocolo/endereço de rede/porta).
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-04-06 21:52:36.805 -03:00 [INF] User profile is available. Using 'C:\Users\ACPGROUP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-06 21:52:36.877 -03:00 [INF] Now listening on: http://localhost:8080
+2026-04-06 21:52:36.879 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-06 21:52:36.881 -03:00 [INF] Hosting environment: Development
+2026-04-06 21:52:36.882 -03:00 [INF] Content root path: C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend
+2026-04-06 21:52:44.927 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/ - null null
+2026-04-06 21:52:45.020 -03:00 [INF] Executing endpoint 'HTTP: GET /'
+2026-04-06 21:52:45.042 -03:00 [INF] Executed endpoint 'HTTP: GET /'
+2026-04-06 21:52:45.049 -03:00 [INF] HTTP GET / responded 200 in 86.6160 ms
+2026-04-06 21:52:45.056 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/ - 200 null text/html; charset=utf-8 130.2134ms
+2026-04-06 21:52:45.058 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/css/components.css?v=20260406-2042 - null null
+2026-04-06 21:52:45.058 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/css/layout.css?v=20260406-2042 - null null
+2026-04-06 21:52:45.064 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/css/global.css?v=20260406-2042 - null null
+2026-04-06 21:52:45.077 -03:00 [INF] Sending file. Request path: '/css/global.css'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\css\global.css'
+2026-04-06 21:52:45.077 -03:00 [INF] Sending file. Request path: '/css/layout.css'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\css\layout.css'
+2026-04-06 21:52:45.077 -03:00 [INF] Sending file. Request path: '/css/components.css'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\css\components.css'
+2026-04-06 21:52:45.079 -03:00 [INF] HTTP GET /css/global.css responded 200 in 5.3519 ms
+2026-04-06 21:52:45.079 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/assets/logo/logo-hidrorec.png?v=20260330-1505 - null null
+2026-04-06 21:52:45.082 -03:00 [INF] HTTP GET /css/layout.css responded 200 in 12.3062 ms
+2026-04-06 21:52:45.084 -03:00 [INF] HTTP GET /css/components.css responded 200 in 15.7891 ms
+2026-04-06 21:52:45.086 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/css/global.css?v=20260406-2042 - 200 3158 text/css 22.0325ms
+2026-04-06 21:52:45.090 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/css/layout.css?v=20260406-2042 - 200 4821 text/css 31.5845ms
+2026-04-06 21:52:45.090 -03:00 [INF] The file /assets/logo/logo-hidrorec.png was not modified
+2026-04-06 21:52:45.093 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/css/components.css?v=20260406-2042 - 200 7524 text/css 35.0091ms
+2026-04-06 21:52:45.098 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/js/dashboard.js?v=20260406-2042 - null null
+2026-04-06 21:52:45.102 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/css/dashboard.css?v=20260406-2042 - null null
+2026-04-06 21:52:45.102 -03:00 [INF] HTTP GET /assets/logo/logo-hidrorec.png responded 304 in 14.4889 ms
+2026-04-06 21:52:45.108 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/css/mapa.css?v=20260406-2042 - null null
+2026-04-06 21:52:45.115 -03:00 [INF] CORS policy execution successful.
+2026-04-06 21:52:45.117 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/assets/logo/logo-hidrorec.png?v=20260330-1505 - 304 null image/png 38.0503ms
+2026-04-06 21:52:45.118 -03:00 [INF] Sending file. Request path: '/css/dashboard.css'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\css\dashboard.css'
+2026-04-06 21:52:45.122 -03:00 [INF] Sending file. Request path: '/css/mapa.css'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\css\mapa.css'
+2026-04-06 21:52:45.123 -03:00 [INF] Sending file. Request path: '/js/dashboard.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\dashboard.js'
+2026-04-06 21:52:45.126 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/js/api.js - null null
+2026-04-06 21:52:45.127 -03:00 [INF] HTTP GET /css/dashboard.css responded 200 in 12.7251 ms
+2026-04-06 21:52:45.129 -03:00 [INF] HTTP GET /css/mapa.css responded 200 in 9.1609 ms
+2026-04-06 21:52:45.131 -03:00 [INF] HTTP GET /js/dashboard.js responded 200 in 19.8070 ms
+2026-04-06 21:52:45.136 -03:00 [INF] CORS policy execution successful.
+2026-04-06 21:52:45.138 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/css/dashboard.css?v=20260406-2042 - 200 3829 text/css 36.0155ms
+2026-04-06 21:52:45.139 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/css/mapa.css?v=20260406-2042 - 200 2088 text/css 31.9132ms
+2026-04-06 21:52:45.141 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/js/dashboard.js?v=20260406-2042 - 200 6976 text/javascript 42.8695ms
+2026-04-06 21:52:45.149 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/js/mapa.js - null null
+2026-04-06 21:52:45.152 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/js/app.js - null null
+2026-04-06 21:52:45.155 -03:00 [INF] CORS policy execution successful.
+2026-04-06 21:52:45.157 -03:00 [INF] CORS policy execution successful.
+2026-04-06 21:52:45.181 -03:00 [INF] Sending file. Request path: '/js/app.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\app.js'
+2026-04-06 21:52:45.184 -03:00 [INF] HTTP GET /js/app.js responded 200 in 26.5151 ms
+2026-04-06 21:52:45.187 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/js/app.js - 200 878 text/javascript 35.3543ms
+2026-04-06 21:52:45.189 -03:00 [INF] Sending file. Request path: '/js/mapa.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\mapa.js'
+2026-04-06 21:52:45.192 -03:00 [INF] Sending file. Request path: '/js/api.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\api.js'
+2026-04-06 21:52:45.194 -03:00 [INF] HTTP GET /js/mapa.js responded 200 in 39.2912 ms
+2026-04-06 21:52:45.196 -03:00 [INF] HTTP GET /js/api.js responded 200 in 60.7848 ms
+2026-04-06 21:52:45.199 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/js/mapa.js - 200 1155 text/javascript 49.7655ms
+2026-04-06 21:52:45.200 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/js/api.js - 200 6382 text/javascript 73.8278ms
+2026-04-06 21:52:45.210 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/js/utils.js - null null
+2026-04-06 21:52:45.213 -03:00 [INF] CORS policy execution successful.
+2026-04-06 21:52:45.249 -03:00 [INF] Sending file. Request path: '/js/utils.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\utils.js'
+2026-04-06 21:52:45.251 -03:00 [INF] HTTP GET /js/utils.js responded 200 in 38.4675 ms
+2026-04-06 21:52:45.254 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/js/utils.js - 200 4855 text/javascript 44.3486ms
+2026-04-06 21:52:45.257 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/api/dashboard/resumo - null null
+2026-04-06 21:52:45.265 -03:00 [INF] Executing endpoint 'HidroRec.Backend.Controllers.DashboardController.GetResumo (HidroRec.Backend)'
+2026-04-06 21:52:45.292 -03:00 [INF] Route matched with {action = "GetResumo", controller = "Dashboard"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[HidroRec.Backend.Application.DTOs.Dashboard.DashboardResumoDto]]] GetResumo(System.Threading.CancellationToken) on controller HidroRec.Backend.Controllers.DashboardController (HidroRec.Backend).
+2026-04-06 21:52:45.441 -03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-04-06 21:52:45.722 -03:00 [INF] Start processing HTTP request GET https://geoportal.apac.pe.gov.br/server/rest/services/met_volume_acumulado_chuva_municipio_24hs/MapServer/0/query?where=nm_mun%20%3D%20%27Recife%27&outFields=nm_mun,horas_24,ultima_leitura_data_hora&returnGeometry=false&f=json
+2026-04-06 21:52:45.728 -03:00 [INF] Sending HTTP request GET https://geoportal.apac.pe.gov.br/server/rest/services/met_volume_acumulado_chuva_municipio_24hs/MapServer/0/query?where=nm_mun%20%3D%20%27Recife%27&outFields=nm_mun,horas_24,ultima_leitura_data_hora&returnGeometry=false&f=json
+2026-04-06 21:52:45.876 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8080/favicon.ico - null null
+2026-04-06 21:52:45.883 -03:00 [INF] HTTP GET /favicon.ico responded 404 in 3.2438 ms
+2026-04-06 21:52:45.886 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/favicon.ico - 404 0 null 9.9732ms
+2026-04-06 21:52:45.891 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:8080/favicon.ico, Response status code: 404
+2026-04-06 21:52:45.891 -03:00 [INF] Received HTTP response headers after 155.4484ms - 200
+2026-04-06 21:52:45.898 -03:00 [INF] End processing HTTP request after 177.618ms - 200
+2026-04-06 21:52:45.956 -03:00 [INF] Start processing HTTP request GET https://api.open-meteo.com/v1/forecast?latitude=-8.0476&longitude=-34.8770&hourly=precipitation,precipitation_probability&forecast_hours=12&timezone=America%2FSao_Paulo
+2026-04-06 21:52:45.958 -03:00 [INF] Sending HTTP request GET https://api.open-meteo.com/v1/forecast?latitude=-8.0476&longitude=-34.8770&hourly=precipitation,precipitation_probability&forecast_hours=12&timezone=America%2FSao_Paulo
+2026-04-06 21:52:46.851 -03:00 [INF] Received HTTP response headers after 891.3039ms - 200
+2026-04-06 21:52:46.857 -03:00 [INF] End processing HTTP request after 900.8067ms - 200
+2026-04-06 21:52:46.943 -03:00 [INF] Executing OkObjectResult, writing value of type 'HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[[HidroRec.Backend.Application.DTOs.Dashboard.DashboardResumoDto, HidroRec.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 21:52:47.012 -03:00 [INF] Executed action HidroRec.Backend.Controllers.DashboardController.GetResumo (HidroRec.Backend) in 1712.6769ms
+2026-04-06 21:52:47.016 -03:00 [INF] Executed endpoint 'HidroRec.Backend.Controllers.DashboardController.GetResumo (HidroRec.Backend)'
+2026-04-06 21:52:47.018 -03:00 [INF] HTTP GET /api/dashboard/resumo responded 200 in 1755.2209 ms
+2026-04-06 21:52:47.023 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8080/api/dashboard/resumo - 200 null application/json; charset=utf-8 1766.2432ms
+2026-04-06 22:00:46.036 -03:00 [INF] User profile is available. Using 'C:\Users\ACPGROUP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-06 22:00:46.092 -03:00 [INF] Now listening on: http://localhost:8090
+2026-04-06 22:00:46.095 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-06 22:00:46.098 -03:00 [INF] Hosting environment: Development
+2026-04-06 22:00:46.100 -03:00 [INF] Content root path: C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend
+2026-04-06 22:01:05.902 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/api/previsoes - null null
+2026-04-06 22:01:05.902 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/api/dashboard/resumo - null null
+2026-04-06 22:01:05.920 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/previsoes.html - null null
+2026-04-06 22:01:05.971 -03:00 [INF] Sending file. Request path: '/previsoes.html'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\previsoes.html'
+2026-04-06 22:01:05.973 -03:00 [INF] HTTP GET /previsoes.html responded 200 in 30.2169 ms
+2026-04-06 22:01:05.976 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/previsoes.html - 200 3334 text/html 54.9184ms
+2026-04-06 22:01:05.985 -03:00 [INF] Executing endpoint 'HidroRec.Backend.Controllers.PrevisoesController.GetResumo (HidroRec.Backend)'
+2026-04-06 22:01:05.985 -03:00 [INF] Executing endpoint 'HidroRec.Backend.Controllers.DashboardController.GetResumo (HidroRec.Backend)'
+2026-04-06 22:01:06.004 -03:00 [INF] Route matched with {action = "GetResumo", controller = "Previsoes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[HidroRec.Backend.Application.DTOs.Previsoes.PrevisaoResumoDto]]] GetResumo(System.Threading.CancellationToken) on controller HidroRec.Backend.Controllers.PrevisoesController (HidroRec.Backend).
+2026-04-06 22:01:06.004 -03:00 [INF] Route matched with {action = "GetResumo", controller = "Dashboard"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[HidroRec.Backend.Application.DTOs.Dashboard.DashboardResumoDto]]] GetResumo(System.Threading.CancellationToken) on controller HidroRec.Backend.Controllers.DashboardController (HidroRec.Backend).
+2026-04-06 22:01:06.036 -03:00 [INF] Start processing HTTP request GET https://geoportal.apac.pe.gov.br/server/rest/services/met_volume_acumulado_chuva_municipio_24hs/MapServer/0/query?where=nm_mun%20%3D%20%27Recife%27&outFields=nm_mun,horas_24,ultima_leitura_data_hora&returnGeometry=false&f=json
+2026-04-06 22:01:06.038 -03:00 [INF] Sending HTTP request GET https://geoportal.apac.pe.gov.br/server/rest/services/met_volume_acumulado_chuva_municipio_24hs/MapServer/0/query?where=nm_mun%20%3D%20%27Recife%27&outFields=nm_mun,horas_24,ultima_leitura_data_hora&returnGeometry=false&f=json
+2026-04-06 22:01:06.103 -03:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2026-04-06 22:01:06.335 -03:00 [INF] Start processing HTTP request GET https://geoportal.apac.pe.gov.br/server/rest/services/met_volume_acumulado_chuva_municipio_24hs/MapServer/0/query?where=nm_mun%20%3D%20%27Recife%27&outFields=nm_mun,horas_24,ultima_leitura_data_hora&returnGeometry=false&f=json
+2026-04-06 22:01:06.336 -03:00 [INF] Sending HTTP request GET https://geoportal.apac.pe.gov.br/server/rest/services/met_volume_acumulado_chuva_municipio_24hs/MapServer/0/query?where=nm_mun%20%3D%20%27Recife%27&outFields=nm_mun,horas_24,ultima_leitura_data_hora&returnGeometry=false&f=json
+2026-04-06 22:01:06.372 -03:00 [INF] Received HTTP response headers after 330.6733ms - 200
+2026-04-06 22:01:06.373 -03:00 [INF] End processing HTTP request after 338.772ms - 200
+2026-04-06 22:01:06.412 -03:00 [INF] Start processing HTTP request GET https://api.open-meteo.com/v1/forecast?latitude=-8.0476&longitude=-34.8770&hourly=precipitation,precipitation_probability&forecast_hours=24&timezone=America%2FSao_Paulo
+2026-04-06 22:01:06.413 -03:00 [INF] Sending HTTP request GET https://api.open-meteo.com/v1/forecast?latitude=-8.0476&longitude=-34.8770&hourly=precipitation,precipitation_probability&forecast_hours=24&timezone=America%2FSao_Paulo
+2026-04-06 22:01:06.773 -03:00 [INF] Received HTTP response headers after 437.0922ms - 200
+2026-04-06 22:01:06.788 -03:00 [INF] End processing HTTP request after 453.5373ms - 200
+2026-04-06 22:01:06.789 -03:00 [INF] Start processing HTTP request GET https://api.open-meteo.com/v1/forecast?latitude=-8.0476&longitude=-34.8770&hourly=precipitation,precipitation_probability&forecast_hours=24&timezone=America%2FSao_Paulo
+2026-04-06 22:01:06.790 -03:00 [INF] Sending HTTP request GET https://api.open-meteo.com/v1/forecast?latitude=-8.0476&longitude=-34.8770&hourly=precipitation,precipitation_probability&forecast_hours=24&timezone=America%2FSao_Paulo
+2026-04-06 22:01:07.339 -03:00 [INF] Received HTTP response headers after 925.1932ms - 200
+2026-04-06 22:01:07.340 -03:00 [INF] End processing HTTP request after 927.6843ms - 200
+2026-04-06 22:01:07.384 -03:00 [INF] Executing OkObjectResult, writing value of type 'HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[[HidroRec.Backend.Application.DTOs.Previsoes.PrevisaoResumoDto, HidroRec.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 22:01:07.409 -03:00 [INF] Executed action HidroRec.Backend.Controllers.PrevisoesController.GetResumo (HidroRec.Backend) in 1401.2395ms
+2026-04-06 22:01:07.410 -03:00 [INF] Executed endpoint 'HidroRec.Backend.Controllers.PrevisoesController.GetResumo (HidroRec.Backend)'
+2026-04-06 22:01:07.411 -03:00 [INF] HTTP GET /api/previsoes responded 200 in 1469.7667 ms
+2026-04-06 22:01:07.412 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/api/previsoes - 200 null application/json; charset=utf-8 1511.1725ms
+2026-04-06 22:01:07.566 -03:00 [INF] Received HTTP response headers after 775.6238ms - 200
+2026-04-06 22:01:07.566 -03:00 [INF] End processing HTTP request after 776.9235ms - 200
+2026-04-06 22:01:07.605 -03:00 [INF] Executing OkObjectResult, writing value of type 'HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[[HidroRec.Backend.Application.DTOs.Dashboard.DashboardResumoDto, HidroRec.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 22:01:07.643 -03:00 [INF] Executed action HidroRec.Backend.Controllers.DashboardController.GetResumo (HidroRec.Backend) in 1637.7263ms
+2026-04-06 22:01:07.644 -03:00 [INF] Executed endpoint 'HidroRec.Backend.Controllers.DashboardController.GetResumo (HidroRec.Backend)'
+2026-04-06 22:01:07.645 -03:00 [INF] HTTP GET /api/dashboard/resumo responded 200 in 1703.0035 ms
+2026-04-06 22:01:07.649 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/api/dashboard/resumo - 200 null application/json; charset=utf-8 1747.7895ms
+2026-04-06 22:01:25.740 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:8090/api/auth/login - application/json 74
+2026-04-06 22:01:25.757 -03:00 [INF] Executing endpoint 'HidroRec.Backend.Controllers.AuthController.Login (HidroRec.Backend)'
+2026-04-06 22:01:25.765 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[HidroRec.Backend.Application.DTOs.Auth.AuthResponseDto]]] Login(HidroRec.Backend.Application.DTOs.Auth.LoginRequestDto, System.Threading.CancellationToken) on controller HidroRec.Backend.Controllers.AuthController (HidroRec.Backend).
+2026-04-06 22:01:25.777 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/index.html - null null
+2026-04-06 22:01:25.783 -03:00 [INF] Sending file. Request path: '/index.html'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\index.html'
+2026-04-06 22:01:25.784 -03:00 [INF] HTTP GET /index.html responded 200 in 6.2800 ms
+2026-04-06 22:01:25.785 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/index.html - 200 7602 text/html 7.2241ms
+2026-04-06 22:01:26.214 -03:00 [INF] Executing OkObjectResult, writing value of type 'HidroRec.Backend.Application.DTOs.Common.ApiResponse`1[[HidroRec.Backend.Application.DTOs.Auth.AuthResponseDto, HidroRec.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 22:01:26.217 -03:00 [INF] Executed action HidroRec.Backend.Controllers.AuthController.Login (HidroRec.Backend) in 450.8374ms
+2026-04-06 22:01:26.218 -03:00 [INF] Executed endpoint 'HidroRec.Backend.Controllers.AuthController.Login (HidroRec.Backend)'
+2026-04-06 22:01:26.219 -03:00 [INF] HTTP POST /api/auth/login responded 200 in 477.1202 ms
+2026-04-06 22:01:26.219 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:8090/api/auth/login - 200 null application/json; charset=utf-8 479.594ms
+2026-04-06 22:12:08.909 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/index.html - null null
+2026-04-06 22:12:08.914 -03:00 [INF] Sending file. Request path: '/index.html'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\index.html'
+2026-04-06 22:12:08.915 -03:00 [INF] HTTP GET /index.html responded 200 in 3.8087 ms
+2026-04-06 22:12:08.916 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/index.html - 200 7620 text/html 6.3836ms
+2026-04-06 22:12:08.955 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/previsoes.html - null null
+2026-04-06 22:12:08.958 -03:00 [INF] Sending file. Request path: '/previsoes.html'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\previsoes.html'
+2026-04-06 22:12:08.958 -03:00 [INF] HTTP GET /previsoes.html responded 200 in 2.2159 ms
+2026-04-06 22:12:08.959 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/previsoes.html - 200 3334 text/html 3.5858ms
+2026-04-06 22:12:08.981 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/css/components.css?v=20260406-2042 - null null
+2026-04-06 22:12:08.983 -03:00 [INF] Sending file. Request path: '/css/components.css'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\css\components.css'
+2026-04-06 22:12:08.983 -03:00 [INF] HTTP GET /css/components.css responded 200 in 1.0552 ms
+2026-04-06 22:12:08.987 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/css/components.css?v=20260406-2042 - 200 8522 text/css 5.1927ms
+2026-04-06 22:12:09.028 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/js/previsoes.js?v=20260406-2042 - null null
+2026-04-06 22:12:09.029 -03:00 [INF] Sending file. Request path: '/js/previsoes.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\previsoes.js'
+2026-04-06 22:12:09.029 -03:00 [INF] HTTP GET /js/previsoes.js responded 200 in 1.0540 ms
+2026-04-06 22:12:09.030 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/js/previsoes.js?v=20260406-2042 - 200 2229 text/javascript 2.0777ms
+2026-04-06 22:15:25.668 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/index.html - null null
+2026-04-06 22:15:25.707 -03:00 [INF] Sending file. Request path: '/index.html'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\index.html'
+2026-04-06 22:15:25.710 -03:00 [INF] HTTP GET /index.html responded 200 in 5.4006 ms
+2026-04-06 22:15:25.712 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/index.html - 200 7638 text/html 43.4552ms
+2026-04-06 22:15:25.750 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/previsoes.html - null null
+2026-04-06 22:15:25.751 -03:00 [INF] Sending file. Request path: '/previsoes.html'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\previsoes.html'
+2026-04-06 22:15:25.752 -03:00 [INF] HTTP GET /previsoes.html responded 200 in 1.0472 ms
+2026-04-06 22:15:25.752 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/previsoes.html - 200 3334 text/html 1.8446ms
+2026-04-06 22:15:25.776 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/alertas.html - null null
+2026-04-06 22:15:25.777 -03:00 [INF] Sending file. Request path: '/alertas.html'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\alertas.html'
+2026-04-06 22:15:25.777 -03:00 [INF] HTTP GET /alertas.html responded 200 in 1.1709 ms
+2026-04-06 22:15:25.778 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/alertas.html - 200 2833 text/html 2.0422ms
+2026-04-06 22:15:25.793 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/css/components.css?v=20260406-2112 - null null
+2026-04-06 22:15:25.795 -03:00 [INF] Sending file. Request path: '/css/components.css'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\css\components.css'
+2026-04-06 22:15:25.797 -03:00 [INF] HTTP GET /css/components.css responded 200 in 3.5217 ms
+2026-04-06 22:15:25.798 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/css/components.css?v=20260406-2112 - 200 10778 text/css 4.6761ms
+2026-04-06 22:15:25.819 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/js/previsoes.js?v=20260406-2112 - null null
+2026-04-06 22:15:25.822 -03:00 [INF] Sending file. Request path: '/js/previsoes.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\previsoes.js'
+2026-04-06 22:15:25.822 -03:00 [INF] HTTP GET /js/previsoes.js responded 200 in 1.8256 ms
+2026-04-06 22:15:25.823 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/js/previsoes.js?v=20260406-2112 - 200 2303 text/javascript 3.0528ms
+2026-04-06 22:15:25.841 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/js/alertas.js?v=20260406-2112 - null null
+2026-04-06 22:15:25.842 -03:00 [INF] Sending file. Request path: '/js/alertas.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\alertas.js'
+2026-04-06 22:15:25.842 -03:00 [INF] HTTP GET /js/alertas.js responded 200 in 0.9636 ms
+2026-04-06 22:15:25.843 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/js/alertas.js?v=20260406-2112 - 200 1577 text/javascript 1.8296ms
+2026-04-06 22:15:25.857 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:8090/js/dashboard.js?v=20260406-2112 - null null
+2026-04-06 22:15:25.859 -03:00 [INF] Sending file. Request path: '/js/dashboard.js'. Physical path: 'C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\frontend\js\dashboard.js'
+2026-04-06 22:15:25.859 -03:00 [INF] HTTP GET /js/dashboard.js responded 200 in 1.4345 ms
+2026-04-06 22:15:25.859 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:8090/js/dashboard.js?v=20260406-2112 - 200 7035 text/javascript 2.2344ms

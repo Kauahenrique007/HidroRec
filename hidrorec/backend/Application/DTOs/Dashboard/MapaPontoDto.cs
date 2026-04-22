@@ -15,4 +15,8 @@ public sealed class MapaPontoDto
     public decimal Latitude { get; set; }
 
     public decimal Longitude { get; set; }
+
+    public int ScoreRisco { get; set; }
+
+    public string Categoria { get; set; } = string.Empty;
 }

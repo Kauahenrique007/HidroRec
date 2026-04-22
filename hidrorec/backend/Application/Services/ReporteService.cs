@@ -23,6 +23,13 @@ public sealed class ReporteService(
     {
         var bairro = await context.Bairros.FirstOrDefaultAsync(x => x.Nome == request.Bairro, cancellationToken);
         var regiao = await context.Regioes.FirstOrDefaultAsync(x => x.Nome == request.Regiao, cancellationToken);
+        var areaMonitoradaId = await ResolveAreaMonitoradaIdAsync(
+            bairro?.Id,
+            regiao?.Id,
+            request.Bairro,
+            request.Latitude,
+            request.Longitude,
+            cancellationToken);
 
         var reporte = new Reporte
         {
@@ -39,6 +46,7 @@ public sealed class ReporteService(
             Bairro = bairro,
             RegiaoId = regiao?.Id,
             Regiao = regiao,
+            AreaMonitoradaId = areaMonitoradaId,
             BairroNome = request.Bairro,
             RegiaoNome = request.Regiao,
             UsuarioId = usuarioId,
@@ -114,7 +122,12 @@ public sealed class ReporteService(
 
     public async Task<ReporteDto> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var reporte = await reporteRepository.Query()
+        var reporte = await context.Reportes
+            .AsNoTracking()
+            .Include(x => x.Bairro)
+            .Include(x => x.Regiao)
+            .Include(x => x.Historicos)
+            .ThenInclude(x => x.AlteradoPorUsuario)
             .FirstOrDefaultAsync(x => x.Id == id && !x.Excluido, cancellationToken);
 
         return reporte is null
@@ -137,6 +150,13 @@ public sealed class ReporteService(
         reporte.EnderecoReferencia = request.EnderecoReferencia;
         reporte.Observacoes = request.Observacoes;
         reporte.DataAtualizacao = DateTime.UtcNow;
+        reporte.AreaMonitoradaId = await ResolveAreaMonitoradaIdAsync(
+            reporte.BairroId,
+            reporte.RegiaoId,
+            reporte.BairroNome,
+            reporte.Latitude,
+            reporte.Longitude,
+            cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
         return mapper.Map<ReporteDto>(reporte);
@@ -273,4 +293,119 @@ public sealed class ReporteService(
             NivelAgua.Peito => SeveridadeReporte.AlagamentoCritico,
             _ => SeveridadeReporte.Atencao
         };
+
+    private async Task<int?> ResolveAreaMonitoradaIdAsync(
+        int? bairroId,
+        int? regiaoId,
+        string? bairroNome,
+        decimal latitude,
+        decimal longitude,
+        CancellationToken cancellationToken)
+    {
+        var query = context.AreasMonitoradas
+            .AsNoTracking()
+            .Include(x => x.Bairro)
+            .Where(x => x.Ativa && !x.Excluido);
+
+        if (bairroId.HasValue)
+        {
+            var sameNeighborhoodAreas = await query
+                .Where(x => x.BairroId == bairroId)
+                .ToListAsync(cancellationToken);
+
+            var area = PickNearestArea(sameNeighborhoodAreas, latitude, longitude);
+            if (area is not null)
+            {
+                return area.Id;
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(bairroNome))
+        {
+            var normalizedNeighborhood = bairroNome.Trim();
+            var sameNeighborhoodByName = await query
+                .Where(x => x.Bairro != null && x.Bairro.Nome == normalizedNeighborhood)
+                .ToListAsync(cancellationToken);
+
+            var area = PickNearestArea(sameNeighborhoodByName, latitude, longitude);
+            if (area is not null)
+            {
+                return area.Id;
+            }
+        }
+
+        if (regiaoId.HasValue)
+        {
+            var sameRegionAreas = await query
+                .Where(x => x.RegiaoId == regiaoId)
+                .ToListAsync(cancellationToken);
+
+            var nearbyArea = PickNearestArea(sameRegionAreas, latitude, longitude, maxDistanceKm: 3.5d);
+            if (nearbyArea is not null)
+            {
+                return nearbyArea.Id;
+            }
+        }
+
+        return null;
+    }
+
+    private static AreaMonitorada? PickNearestArea(
+        IReadOnlyCollection<AreaMonitorada> areas,
+        decimal latitude,
+        decimal longitude,
+        double? maxDistanceKm = null)
+    {
+        if (areas.Count == 0)
+        {
+            return null;
+        }
+
+        var rankedAreas = areas
+            .Select(area => new
+            {
+                Area = area,
+                DistanceKm = CalculateDistanceKm(latitude, longitude, area.Latitude, area.Longitude)
+            })
+            .OrderBy(x => x.DistanceKm)
+            .ThenByDescending(x => x.Area.CriticidadeOperacional)
+            .ToArray();
+
+        var nearest = rankedAreas.FirstOrDefault();
+        if (nearest is null)
+        {
+            return null;
+        }
+
+        if (maxDistanceKm.HasValue && nearest.DistanceKm > maxDistanceKm.Value)
+        {
+            return null;
+        }
+
+        return nearest.Area;
+    }
+
+    private static double CalculateDistanceKm(decimal latitudeA, decimal longitudeA, decimal latitudeB, decimal longitudeB)
+    {
+        const double earthRadiusKm = 6371d;
+        var lat1 = DegreesToRadians((double)latitudeA);
+        var lon1 = DegreesToRadians((double)longitudeA);
+        var lat2 = DegreesToRadians((double)latitudeB);
+        var lon2 = DegreesToRadians((double)longitudeB);
+
+        var deltaLat = lat2 - lat1;
+        var deltaLon = lon2 - lon1;
+
+        var sinLat = Math.Sin(deltaLat / 2d);
+        var sinLon = Math.Sin(deltaLon / 2d);
+
+        var a = (sinLat * sinLat) +
+                Math.Cos(lat1) * Math.Cos(lat2) *
+                (sinLon * sinLon);
+
+        var c = 2d * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1d - a));
+        return earthRadiusKm * c;
+    }
+
+    private static double DegreesToRadians(double degrees) => degrees * (Math.PI / 180d);
 }

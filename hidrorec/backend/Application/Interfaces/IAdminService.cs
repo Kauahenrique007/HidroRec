@@ -12,5 +12,5 @@ public interface IAdminService
 
     Task<IReadOnlyCollection<AuditoriaDto>> GetAuditoriaAsync(CancellationToken cancellationToken);
 
-    Task<IReadOnlyCollection<LogSistemaDto>> GetLogsAsync(CancellationToken cancellationToken);
+    Task<IReadOnlyCollection<LogSistemaDto>> GetLogsAsync(string? contexto, string? evento, CancellationToken cancellationToken);
 }

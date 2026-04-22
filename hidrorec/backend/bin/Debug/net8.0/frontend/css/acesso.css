@@ -12,6 +12,11 @@
   border: 1px solid rgba(10, 61, 98, 0.08);
 }
 
+.acesso-hero-card strong {
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
 .acesso-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
@@ -59,6 +64,24 @@
   background: linear-gradient(180deg, #ffffff, #f8fbff);
 }
 
+.acesso-trust-card {
+  background: linear-gradient(180deg, #ffffff, #f6fbff);
+}
+
+.acesso-trust-list {
+  display: grid;
+  gap: 16px;
+}
+
+.acesso-trust-list div {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(10, 61, 98, 0.03);
+  border: 1px solid rgba(10, 61, 98, 0.06);
+}
+
 @media (max-width: 980px) {
   .acesso-header,
   .acesso-layout {
@@ -75,12 +98,22 @@
     padding: 0 12px;
   }
 
+  .acesso-hero-card,
+  .acesso-trust-list div {
+    padding: 16px;
+  }
+
   .acesso-panel .button--primary {
     width: 100%;
   }
 }
 
 @media (max-width: 420px) {
+  .acesso-layout,
+  .acesso-side {
+    gap: 14px;
+  }
+
   .tab-strip {
     grid-template-columns: 1fr;
     border-radius: var(--radius-md);
