@@ -43,30 +43,30 @@ function renderWaterOptions() {
 
 function loadGeolocation() {
   if (!navigator.geolocation) {
-    geoStatus.textContent = 'GPS indisponível neste navegador.';
+    geoStatus.textContent = 'GPS indisponivel.';
     return;
   }
 
   navigator.geolocation.getCurrentPosition((position) => {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    geoStatus.textContent = 'GPS detectado automaticamente.';
+    geoStatus.textContent = 'GPS detectado.';
     geoCoordinates.textContent = `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
   }, () => {
-    geoStatus.textContent = 'Permissão de GPS não concedida.';
-    geoCoordinates.textContent = 'Usando coordenadas centrais do Recife como referência.';
+    geoStatus.textContent = 'GPS nao permitido.';
+    geoCoordinates.textContent = 'Usando Recife.';
   });
 }
 
 imageInput.addEventListener('change', async () => {
   const [file] = imageInput.files;
   if (!file) {
-    imagePreview.innerHTML = '<span class="muted">Nenhuma imagem selecionada.</span>';
+    imagePreview.innerHTML = '<span class="muted">Nenhuma imagem.</span>';
     return;
   }
 
   const url = URL.createObjectURL(file);
-  imagePreview.innerHTML = `<img src="${url}" alt="Pré-visualização da imagem enviada">`;
+  imagePreview.innerHTML = `<img src="${url}" alt="Previa da imagem">`;
 });
 
 form.addEventListener('submit', async (event) => {
@@ -101,16 +101,16 @@ form.addEventListener('submit', async (event) => {
     };
 
     await reportApi.create(payload);
-    showToast('Reporte enviado com sucesso.', 'normal');
+    showToast('Reporte enviado.', 'normal');
     form.reset();
-    imagePreview.innerHTML = '<span class="muted">Nenhuma imagem selecionada.</span>';
+    imagePreview.innerHTML = '<span class="muted">Nenhuma imagem.</span>';
     selectedWaterLevel = WATER_LEVELS[0].value;
     renderWaterOptions();
   } catch (error) {
     showToast(error.message, 'alagamento');
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = 'Enviar Reporte';
+    submitButton.textContent = 'Enviar';
   }
 });
 

@@ -2,9 +2,24 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.forecast-brief {
+  margin-bottom: 20px;
+}
+
+.forecast-brief--secondary {
+  background: linear-gradient(180deg, #f9fcff, #eef6ff);
+}
+
 .cards-grid--forecast .metric-card {
   min-height: 180px;
   background: linear-gradient(180deg, #ffffff, #f7fbff);
+}
+
+.forecast-card__description {
+  margin: 10px 0 0;
+  color: var(--color-muted);
+  line-height: 1.45;
+  font-size: 0.92rem;
 }
 
 .forecast-window-list .list-item {
@@ -26,5 +41,11 @@
 
   .forecast-window-list .status-badge {
     white-space: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .cards-grid--forecast {
+    gap: 12px;
   }
 }

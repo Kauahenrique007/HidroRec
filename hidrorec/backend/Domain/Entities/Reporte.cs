@@ -6,6 +6,8 @@ public sealed class Reporte : BaseEntity
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 
+    public byte[] RowVersion { get; set; } = Array.Empty<byte>();
+
     public string Titulo { get; set; } = string.Empty;
 
     public string Descricao { get; set; } = string.Empty;
@@ -31,6 +33,10 @@ public sealed class Reporte : BaseEntity
     public int? RegiaoId { get; set; }
 
     public Regiao? Regiao { get; set; }
+
+    public int? AreaMonitoradaId { get; set; }
+
+    public AreaMonitorada? AreaMonitorada { get; set; }
 
     public string BairroNome { get; set; } = string.Empty;
 

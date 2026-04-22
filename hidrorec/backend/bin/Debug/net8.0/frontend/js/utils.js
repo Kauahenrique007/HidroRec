@@ -96,6 +96,7 @@ export function isOperationalProfile(profile) {
 export function updateSessionChip() {
   const chip = document.getElementById('session-chip') || document.getElementById('admin-auth-status');
   const accessLink = document.getElementById('session-access-link');
+  const accountNavLink = document.getElementById('account-nav-link');
   const logoutButton = document.getElementById('session-logout-button');
   const summary = document.getElementById('session-user-label');
   const profileBadge = document.getElementById('session-profile-badge');
@@ -110,8 +111,10 @@ export function updateSessionChip() {
     chip.textContent = `Sessao ativa`;
     summary && (summary.textContent = `${user.nome} | ${user.email}`);
     profileBadge && (profileBadge.textContent = user.perfil || 'Perfil');
-    accessLink && (accessLink.textContent = isOperationalProfile(user.perfil) ? 'Trocar conta' : 'Minha conta');
+    accessLink && (accessLink.textContent = 'Minha conta');
+    accessLink && (accessLink.href = './conta.html');
     logoutButton && logoutButton.classList.remove('hidden');
+    accountNavLink && accountNavLink.classList.remove('hidden');
 
     if (adminShortcut) {
       adminShortcut.classList.toggle('hidden', !isOperationalProfile(user.perfil));
@@ -127,6 +130,8 @@ export function updateSessionChip() {
   summary && (summary.textContent = 'Entre para acompanhar seus reportes e acessar o painel operacional.');
   profileBadge && (profileBadge.textContent = 'Visitante');
   accessLink && (accessLink.textContent = 'Entrar');
+  accessLink && (accessLink.href = './acesso.html');
   logoutButton && logoutButton.classList.add('hidden');
   adminShortcut && adminShortcut.classList.add('hidden');
+  accountNavLink && accountNavLink.classList.add('hidden');
 }

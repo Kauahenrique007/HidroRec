@@ -8,11 +8,9 @@ public sealed class ReporteRepository(HidroRec.Backend.Infrastructure.Data.Hidro
 {
     public IQueryable<Reporte> Query() =>
         context.Reportes
+            .AsNoTracking()
             .Include(x => x.Bairro)
-            .Include(x => x.Regiao)
-            .Include(x => x.Historicos)
-            .ThenInclude(x => x.AlteradoPorUsuario)
-            .Include(x => x.AlertaReportes);
+            .Include(x => x.Regiao);
 
     public async Task AddAsync(Reporte reporte, CancellationToken cancellationToken)
     {

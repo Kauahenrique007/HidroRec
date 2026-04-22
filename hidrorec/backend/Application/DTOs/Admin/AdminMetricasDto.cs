@@ -11,4 +11,14 @@ public sealed class AdminMetricasDto
     public int AlertasAtivos { get; set; }
 
     public int UsuariosAtivos { get; set; }
+
+    public int OrganizacoesAtivas { get; set; }
+
+    public int AreasMonitoradas { get; set; }
+
+    public int AtivosMonitorados { get; set; }
+
+    public int LeiturasFusionCriticas24h { get; set; }
+
+    public int FontesDegradadas24h { get; set; }
 }

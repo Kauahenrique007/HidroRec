@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HidroRec | Reporte colaborativo</title>
-  <link rel="stylesheet" href="./css/global.css">
-  <link rel="stylesheet" href="./css/layout.css">
-  <link rel="stylesheet" href="./css/components.css">
-  <link rel="stylesheet" href="./css/reporte.css">
+  <title>HidroRec | Reporte</title>
+  <link rel="stylesheet" href="./css/global.css?v=20260406-2042">
+  <link rel="stylesheet" href="./css/layout.css?v=20260406-2042">
+  <link rel="stylesheet" href="./css/components.css?v=20260406-2042">
+  <link rel="stylesheet" href="./css/reporte.css?v=20260406-2042">
 </head>
 <body>
   <header class="topbar">
@@ -19,7 +19,7 @@
           <span>Monitoramento Urbano Inteligente</span>
         </div>
       </a>
-      <div class="system-pill">Reporte Colaborativo</div>
+      <div class="system-pill">Reporte</div>
     </div>
   </header>
 
@@ -29,10 +29,11 @@
         <a class="nav-link" href="./index.html">Inicio</a>
         <a class="nav-link" href="./previsoes.html">Previsoes</a>
         <a class="nav-link" href="./alertas.html">Alertas</a>
+        <a class="nav-link hidden" id="account-nav-link" href="./conta.html">Conta</a>
         <a class="nav-link" href="./admin.html">Admin</a>
       </nav>
       <div class="nav-actions">
-        <a class="button button--secondary" href="./index.html">Voltar ao painel</a>
+        <a class="button button--secondary" href="./index.html">Painel</a>
       </div>
     </div>
   </div>
@@ -40,47 +41,46 @@
   <main class="page">
     <div class="container">
       <section class="page-header">
-        <span class="eyebrow">Reporte colaborativo</span>
-        <h1 class="page-title">Registre microalagamentos e alagamentos no Recife</h1>
-        <p class="page-subtitle">Compartilhe localização, nível da água, imagem opcional e observações de campo para alimentar o painel de monitoramento urbano inteligente.</p>
+        <span class="eyebrow">Reporte</span>
+        <h1 class="page-title">Novo reporte</h1>
       </section>
 
       <section class="report-layout">
         <section class="card section-card">
           <form id="report-form" class="report-form">
             <article class="card card--soft location-card">
-              <span class="eyebrow">Localização atual</span>
-              <strong id="geo-status">Detectando GPS automaticamente...</strong>
-              <small id="geo-coordinates" class="muted">Aguardando permissão de geolocalização.</small>
+              <span class="eyebrow">Localizacao</span>
+              <strong id="geo-status">Detectando GPS...</strong>
+              <small id="geo-coordinates" class="muted">Aguardando permissao.</small>
             </article>
 
             <div class="field-grid">
               <div class="field">
-                <label for="titulo">Título</label>
-                <input id="titulo" name="titulo" type="text" placeholder="Ex.: Alagamento na Rua da Aurora" maxlength="120" required>
+                <label for="titulo">Titulo</label>
+                <input id="titulo" name="titulo" type="text" placeholder="Alagamento na via" maxlength="120" required>
               </div>
               <div class="field">
-                <label for="tipoOcorrencia">Tipo de ocorrência</label>
+                <label for="tipoOcorrencia">Tipo</label>
                 <select id="tipoOcorrencia" name="tipoOcorrencia">
                   <option value="Microalagamento">Microalagamento</option>
                   <option value="Alagamento">Alagamento</option>
-                  <option value="PontoAtencao">Ponto de atenção</option>
-                  <option value="ObstrucaoDrenagem">Obstrução de drenagem</option>
-                  <option value="TrafegoComprometido">Tráfego comprometido</option>
+                  <option value="PontoAtencao">Ponto de atencao</option>
+                  <option value="ObstrucaoDrenagem">Drenagem</option>
+                  <option value="TrafegoComprometido">Trafego</option>
                 </select>
               </div>
               <div class="field">
                 <label for="bairro">Bairro</label>
-                <input id="bairro" name="bairro" type="text" placeholder="Ex.: Boa Viagem" maxlength="100" required>
+                <input id="bairro" name="bairro" type="text" placeholder="Boa Viagem" maxlength="100" required>
               </div>
               <div class="field">
-                <label for="regiao">Região</label>
-                <input id="regiao" name="regiao" type="text" placeholder="Ex.: Sul" maxlength="100" required>
+                <label for="regiao">Regiao</label>
+                <input id="regiao" name="regiao" type="text" placeholder="Sul" maxlength="100" required>
               </div>
             </div>
 
             <div class="field">
-              <label>Nível da água</label>
+              <label>Nivel da agua</label>
               <div class="water-grid" id="water-level-grid"></div>
               <div class="water-intensity">
                 <div class="water-intensity__fill" id="water-intensity-fill"></div>
@@ -89,8 +89,8 @@
 
             <div class="field-grid">
               <div class="field">
-                <label for="enderecoReferencia">Endereço de referência</label>
-                <input id="enderecoReferencia" name="enderecoReferencia" type="text" placeholder="Ex.: Próximo ao Hospital Português" maxlength="180" required>
+                <label for="enderecoReferencia">Referencia</label>
+                <input id="enderecoReferencia" name="enderecoReferencia" type="text" placeholder="Ponto de referencia" maxlength="180" required>
               </div>
               <div class="field">
                 <label for="contatoUsuario">Contato</label>
@@ -104,43 +104,31 @@
                 <input id="nomeUsuario" name="nomeUsuario" type="text" placeholder="Seu nome" maxlength="120" required>
               </div>
               <div class="field">
-                <label for="foto">Foto opcional</label>
+                <label for="foto">Foto</label>
                 <input id="foto" name="foto" type="file" accept="image/png,image/jpeg,image/webp">
               </div>
             </div>
 
             <div class="field">
-              <label for="descricao">Descrição</label>
-              <textarea id="descricao" name="descricao" placeholder="Descreva o que está acontecendo, impacto na via e qualquer risco observado." minlength="10" maxlength="600" required></textarea>
+              <label for="descricao">Descricao</label>
+              <textarea id="descricao" name="descricao" placeholder="Descreva o local" minlength="10" maxlength="600" required></textarea>
             </div>
 
             <div class="field">
-              <label for="observacoes">Comentário adicional</label>
-              <textarea id="observacoes" name="observacoes" placeholder="Informações extras, rota alternativa, velocidade da água, obstáculos, etc." maxlength="600"></textarea>
+              <label for="observacoes">Observacoes</label>
+              <textarea id="observacoes" name="observacoes" placeholder="Opcional" maxlength="600"></textarea>
             </div>
 
-            <button id="submit-report" class="button button--primary" type="submit">Enviar Reporte</button>
+            <button id="submit-report" class="button button--primary" type="submit">Enviar</button>
           </form>
         </section>
 
         <aside class="grid">
-          <article class="card contributor-card">
-            <span class="eyebrow">Colaborador urbano</span>
-            <h2 class="section-card__title">Status do seu reporte</h2>
-            <p class="page-subtitle">Seu envio entra como <strong>Pendente</strong>, pode virar alerta visual e passa a compor o histórico urbano da cidade.</p>
-          </article>
-
-          <article class="card safety-card">
-            <span class="eyebrow">Dica de segurança</span>
-            <h2 class="section-card__title">Evite transitar por áreas com correnteza</h2>
-            <p class="page-subtitle">Se a água estiver acima do joelho, priorize um ponto elevado, não force travessias e mantenha distância de bueiros e postes.</p>
-          </article>
-
           <article class="card section-card">
             <span class="eyebrow">Imagem</span>
-            <h2 class="section-card__title">Pré-visualização</h2>
+            <h2 class="section-card__title">Previa</h2>
             <div class="image-preview" id="image-preview">
-              <span class="muted">Nenhuma imagem selecionada.</span>
+              <span class="muted">Nenhuma imagem.</span>
             </div>
           </article>
         </aside>
@@ -150,11 +138,11 @@
 
   <footer class="page-footer">
     <div class="container page-footer__inner">
-      <span>Reporte cidadão integrado ao painel operacional.</span>
       <span>HidroRec</span>
+      <span>Reporte</span>
     </div>
   </footer>
 
-  <script type="module" src="./js/reporte.js"></script>
+  <script type="module" src="./js/reporte.js?v=20260406-2042"></script>
 </body>
 </html>

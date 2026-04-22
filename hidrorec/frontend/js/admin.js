@@ -10,6 +10,7 @@ const metricsTarget = document.getElementById('admin-metrics');
 const reportesTarget = document.getElementById('admin-reportes-table');
 const auditoriaTarget = document.getElementById('admin-auditoria');
 const logsTarget = document.getElementById('admin-logs');
+const dataTracesTarget = document.getElementById('admin-data-traces');
 const refreshButton = document.getElementById('admin-refresh-button');
 const bairroFilter = document.getElementById('admin-bairro-filter');
 const sessionChip = document.getElementById('admin-session-chip');
@@ -22,51 +23,57 @@ function renderAdminSession() {
   if (!user) {
     sessionChip.textContent = 'Nao autenticado';
     sessionRole.textContent = 'Visitante';
-    sessionCopy.textContent = 'Use uma conta de Gestor ou Administrador para liberar o painel.';
+    sessionCopy.textContent = 'Use conta operacional.';
     return false;
   }
 
   sessionChip.textContent = 'Sessao operacional';
   sessionRole.textContent = `${user.nome} | ${user.perfil}`;
-  sessionCopy.textContent = isOperationalProfile(user.perfil)
-    ? 'Seu perfil possui permissao para revisar reportes, atualizar status e consultar trilhas operacionais.'
-    : 'Sua conta esta autenticada, mas o painel administrativo exige perfil Gestor ou Administrador.';
+  sessionCopy.textContent = isOperationalProfile(user.perfil) ? 'Acesso liberado.' : 'Sem permissao.';
 
   return isOperationalProfile(user.perfil);
 }
 
 async function loadAdminPanel() {
   if (!authApi.getToken()) {
-    metricsTarget.innerHTML = '<div class="empty-state">Faca login para carregar as metricas.</div>';
-    reportesTarget.innerHTML = '<tr><td colspan="5">Faca login para consultar os reportes.</td></tr>';
-    auditoriaTarget.innerHTML = '<div class="empty-state">Aguardando autenticacao.</div>';
-    logsTarget.innerHTML = '<div class="empty-state">Aguardando autenticacao.</div>';
+    metricsTarget.innerHTML = '<div class="empty-state">Sem sessao.</div>';
+    reportesTarget.innerHTML = '<tr><td colspan="5">Sem sessao.</td></tr>';
+    auditoriaTarget.innerHTML = '<div class="empty-state">Sem sessao.</div>';
+    logsTarget.innerHTML = '<div class="empty-state">Sem sessao.</div>';
+    dataTracesTarget.innerHTML = '<div class="empty-state">Sem sessao.</div>';
     return;
   }
 
   if (!renderAdminSession()) {
-    metricsTarget.innerHTML = '<div class="empty-state">O painel administrativo exige perfil Gestor ou Administrador.</div>';
-    reportesTarget.innerHTML = '<tr><td colspan="5">Acesso operacional insuficiente.</td></tr>';
-    auditoriaTarget.innerHTML = '<div class="empty-state">Sem permissao operacional para auditoria.</div>';
-    logsTarget.innerHTML = '<div class="empty-state">Sem permissao operacional para logs.</div>';
+    metricsTarget.innerHTML = '<div class="empty-state">Sem permissao.</div>';
+    reportesTarget.innerHTML = '<tr><td colspan="5">Sem permissao.</td></tr>';
+    auditoriaTarget.innerHTML = '<div class="empty-state">Sem permissao.</div>';
+    logsTarget.innerHTML = '<div class="empty-state">Sem permissao.</div>';
+    dataTracesTarget.innerHTML = '<div class="empty-state">Sem permissao.</div>';
     return;
   }
 
   renderLoading(metricsTarget);
 
   try {
-    const [metricas, reportes, auditoria, logs] = await Promise.all([
+    const [metricas, reportes, auditoria, logs, dataTraces] = await Promise.all([
       adminApi.getMetricas(),
       adminApi.getReportes(bairroFilter.value ? `bairro=${encodeURIComponent(bairroFilter.value)}` : ''),
       adminApi.getAuditoria(),
-      adminApi.getLogs()
+      adminApi.getLogs(),
+      adminApi.getLogs('contexto=data-fusion')
     ]);
 
     metricsTarget.innerHTML = `
-      <article class="card metric-card"><span class="eyebrow">Reportes</span><strong>${metricas.totalReportes}</strong><small>Total registrado</small></article>
-      <article class="card metric-card"><span class="eyebrow">Pendentes</span><strong>${metricas.pendentes}</strong><small>Em triagem</small></article>
-      <article class="card metric-card"><span class="eyebrow">Confirmados</span><strong>${metricas.confirmados}</strong><small>Eventos validados</small></article>
-      <article class="card metric-card"><span class="eyebrow">Alertas ativos</span><strong>${metricas.alertasAtivos}</strong><small>Painel critico</small></article>
+      <article class="card metric-card"><span class="eyebrow">Reportes</span><strong>${metricas.totalReportes}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Pendentes</span><strong>${metricas.pendentes}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Confirmados</span><strong>${metricas.confirmados}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Alertas</span><strong>${metricas.alertasAtivos}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Orgs</span><strong>${metricas.organizacoesAtivas}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Areas</span><strong>${metricas.areasMonitoradas}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Ativos</span><strong>${metricas.ativosMonitorados}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Fusion 24h</span><strong>${metricas.leiturasFusionCriticas24h}</strong></article>
+      <article class="card metric-card"><span class="eyebrow">Fontes degr.</span><strong>${metricas.fontesDegradadas24h}</strong></article>
     `;
 
     reportesTarget.innerHTML = reportes.items.map((item) => `
@@ -95,16 +102,31 @@ async function loadAdminPanel() {
     auditoriaTarget.innerHTML = auditoria.map((item) => `
       <article class="list-item">
         <strong>${item.acao}</strong>
-        <small class="muted">${item.entidade} | ${item.usuario} | ${formatDateTime(item.dataCriacao)}</small>
+        <small class="muted">${formatDateTime(item.dataCriacao)}</small>
       </article>
     `).join('');
 
     logsTarget.innerHTML = logs.map((item) => `
       <article class="list-item">
         <strong>${item.evento}</strong>
-        <small class="muted">${item.nivel} | ${formatDateTime(item.dataCriacao)}</small>
+        <small class="muted">${item.nivel}</small>
       </article>
     `).join('');
+
+    if (!dataTraces.length) {
+      dataTracesTarget.innerHTML = '<div class="empty-state">Sem rastros recentes.</div>';
+    } else {
+      dataTracesTarget.innerHTML = dataTraces.map((item) => `
+        <article class="list-item">
+          <div class="list-item__row">
+            <strong>${item.evento}</strong>
+            ${createBadge(item.nivel)}
+          </div>
+          <span>${item.mensagem}</span>
+          <small class="muted">${formatDateTime(item.dataCriacao)}</small>
+        </article>
+      `).join('');
+    }
 
     bindStatusUpdates();
   } catch (error) {
@@ -112,6 +134,7 @@ async function loadAdminPanel() {
     reportesTarget.innerHTML = `<tr><td colspan="5">${error.message}</td></tr>`;
     renderError(auditoriaTarget, error.message);
     renderError(logsTarget, error.message);
+    renderError(dataTracesTarget, error.message);
   }
 }
 
@@ -121,7 +144,7 @@ function bindStatusUpdates() {
       try {
         await reportApi.updateStatus(select.dataset.statusId, {
           status: select.value,
-          observacao: 'Atualizacao realizada pelo painel administrativo.'
+          observacao: 'Atualizacao pelo admin.'
         });
         showToast('Status atualizado.', 'normal');
       } catch (error) {
@@ -138,7 +161,7 @@ loginForm.addEventListener('submit', async (event) => {
   }
 
   loginButton.disabled = true;
-  loginButton.textContent = 'Autenticando...';
+  loginButton.textContent = 'Entrando...';
 
   try {
     const response = await authApi.login({
@@ -150,17 +173,17 @@ loginForm.addEventListener('submit', async (event) => {
     renderAdminSession();
 
     if (!isOperationalProfile(response.usuario.perfil)) {
-      showToast('Sua conta nao possui perfil operacional para o admin.', 'atencao');
+      showToast('Sem permissao.', 'atencao');
       return;
     }
 
-    showToast('Sessao administrativa iniciada.', 'normal');
+    showToast('Sessao iniciada.', 'normal');
     await loadAdminPanel();
   } catch (error) {
     showToast(error.message, 'alagamento');
   } finally {
     loginButton.disabled = false;
-    loginButton.textContent = 'Acessar painel';
+    loginButton.textContent = 'Entrar';
   }
 });
 

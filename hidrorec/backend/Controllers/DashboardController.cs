@@ -1,4 +1,5 @@
 using HidroRec.Backend.Application.DTOs.Common;
+using HidroRec.Backend.Application.DTOs.DataFusion;
 using HidroRec.Backend.Application.DTOs.Dashboard;
 using HidroRec.Backend.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ namespace HidroRec.Backend.Controllers;
 
 [ApiController]
 [Route("api/dashboard")]
-public sealed class DashboardController(IDashboardService dashboardService) : ControllerBase
+public sealed class DashboardController(IDashboardService dashboardService, IDataFusionService dataFusionService) : ControllerBase
 {
     [HttpGet("resumo")]
     public async Task<ActionResult<ApiResponse<DashboardResumoDto>>> GetResumo(CancellationToken cancellationToken)
@@ -42,5 +43,16 @@ public sealed class DashboardController(IDashboardService dashboardService) : Co
     {
         var result = await dashboardService.GetPontosAtencaoAsync(cancellationToken);
         return Ok(ApiResponse<IReadOnlyCollection<PontoAtencaoDto>>.Ok(result));
+    }
+
+    [HttpGet("operational-snapshot")]
+    public async Task<ActionResult<ApiResponse<OperationalDataFusionSnapshotDto>>> GetOperationalSnapshot(
+        [FromQuery] decimal? latitude,
+        [FromQuery] decimal? longitude,
+        [FromQuery] string? bairro,
+        CancellationToken cancellationToken)
+    {
+        var result = await dataFusionService.GetSnapshotAsync(latitude, longitude, bairro, cancellationToken);
+        return Ok(ApiResponse<OperationalDataFusionSnapshotDto>.Ok(result));
     }
 }

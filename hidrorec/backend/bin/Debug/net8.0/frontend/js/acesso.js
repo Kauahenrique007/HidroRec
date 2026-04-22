@@ -16,14 +16,12 @@ function renderSessionBox() {
 
   if (!user) {
     sessionTitle.textContent = 'Nao autenticado';
-    sessionDescription.textContent = 'Ao entrar, seu perfil passa a ser exibido no topo das paginas e o painel administrativo e liberado apenas para perfis operacionais.';
+    sessionDescription.textContent = 'Sem sessao ativa.';
     return;
   }
 
   sessionTitle.textContent = `${user.nome} | ${user.perfil}`;
-  sessionDescription.textContent = isOperationalProfile(user.perfil)
-    ? 'Seu perfil operacional ja pode acessar triagem, auditoria e atualizacao de status no painel administrativo.'
-    : 'Sua conta colaborativa esta ativa. Voce ja pode registrar ocorrencias e acompanhar o status pelo dashboard.';
+  sessionDescription.textContent = isOperationalProfile(user.perfil) ? 'Acesso liberado.' : 'Conta ativa.';
 }
 
 function bindTabs() {
@@ -52,7 +50,7 @@ loginForm.addEventListener('submit', async (event) => {
       senha: document.getElementById('login-password').value
     });
 
-    showToast('Sessao iniciada com sucesso.', 'normal');
+    showToast('Sessao iniciada.', 'normal');
     renderSessionBox();
 
     window.setTimeout(() => {
@@ -62,7 +60,7 @@ loginForm.addEventListener('submit', async (event) => {
     showToast(error.message, 'alagamento');
   } finally {
     loginButton.disabled = false;
-    loginButton.textContent = 'Entrar no HidroRec';
+    loginButton.textContent = 'Entrar';
   }
 });
 
@@ -73,7 +71,7 @@ registerForm.addEventListener('submit', async (event) => {
   }
 
   registerButton.disabled = true;
-  registerButton.textContent = 'Criando conta...';
+  registerButton.textContent = 'Criando...';
 
   try {
     await authApi.register({
@@ -83,7 +81,7 @@ registerForm.addEventListener('submit', async (event) => {
       telefone: document.getElementById('register-phone').value.trim()
     });
 
-    showToast('Conta criada com sucesso.', 'normal');
+    showToast('Conta criada.', 'normal');
     renderSessionBox();
     window.setTimeout(() => {
       window.location.href = './index.html';
@@ -92,7 +90,7 @@ registerForm.addEventListener('submit', async (event) => {
     showToast(error.message, 'alagamento');
   } finally {
     registerButton.disabled = false;
-    registerButton.textContent = 'Criar conta colaborativa';
+    registerButton.textContent = 'Criar conta';
   }
 });
 

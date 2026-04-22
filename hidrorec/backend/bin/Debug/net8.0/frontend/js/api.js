@@ -20,10 +20,6 @@ function resolveApiOrigins() {
     return localApiOrigins;
   }
 
-  if (port && port !== '8080') {
-    return unique([...localApiOrigins, origin]);
-  }
-
   return unique([origin, ...localApiOrigins]);
 }
 
@@ -178,6 +174,9 @@ export const authApi = {
     getStorage().setItem(USER_KEY, JSON.stringify(data));
     return data;
   },
+  setStoredUser(user) {
+    getStorage().setItem(USER_KEY, JSON.stringify(user));
+  },
   logout() {
     const storage = getStorage();
     storage.removeItem(TOKEN_KEY);
@@ -230,5 +229,10 @@ export const adminApi = {
   getMetricas: () => request('/admin/metricas'),
   getReportes: (params = '') => request(`/admin/reportes${params ? `?${params}` : ''}`),
   getAuditoria: () => request('/admin/auditoria'),
-  getLogs: () => request('/admin/logs')
+  getLogs: (params = '') => request(`/admin/logs${params ? `?${params}` : ''}`)
+};
+
+export const usersApi = {
+  updateMe: (body) => request('/usuarios/me', { method: 'PUT', body: JSON.stringify(body) }),
+  getMyReportes: (params = '') => request(`/usuarios/me/reportes${params ? `?${params}` : ''}`)
 };

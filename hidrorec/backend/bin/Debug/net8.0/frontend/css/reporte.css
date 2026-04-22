@@ -140,11 +140,19 @@
 }
 
 @media (max-width: 420px) {
+  .report-layout {
+    gap: 14px;
+  }
+
   .water-grid {
     grid-template-columns: 1fr;
   }
 
   .water-option {
     min-height: 0;
+  }
+
+  .location-card {
+    padding: 16px;
   }
 }

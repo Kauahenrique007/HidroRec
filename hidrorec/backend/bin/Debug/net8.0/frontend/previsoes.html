@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HidroRec | Previsões</title>
-  <link rel="stylesheet" href="./css/global.css">
-  <link rel="stylesheet" href="./css/layout.css">
-  <link rel="stylesheet" href="./css/components.css">
-  <link rel="stylesheet" href="./css/previsoes.css">
+  <title>HidroRec | Previsoes</title>
+  <link rel="stylesheet" href="./css/global.css?v=20260406-2112">
+  <link rel="stylesheet" href="./css/layout.css?v=20260406-2112">
+  <link rel="stylesheet" href="./css/components.css?v=20260406-2112">
+  <link rel="stylesheet" href="./css/previsoes.css?v=20260406-2112">
 </head>
 <body>
   <header class="topbar">
@@ -19,7 +19,7 @@
           <span>Monitoramento Urbano Inteligente</span>
         </div>
       </a>
-      <div class="system-pill">Sistema Operacional</div>
+      <div class="system-pill">Previsoes</div>
     </div>
   </header>
 
@@ -29,10 +29,11 @@
         <a class="nav-link" href="./index.html">Inicio</a>
         <a class="nav-link is-active" href="./previsoes.html">Previsoes</a>
         <a class="nav-link" href="./alertas.html">Alertas</a>
+        <a class="nav-link hidden" id="account-nav-link" href="./conta.html">Conta</a>
         <a class="nav-link" href="./admin.html">Admin</a>
       </nav>
       <div class="nav-actions">
-        <a class="button button--secondary" href="./reporte.html">Novo reporte</a>
+        <a class="button button--secondary" href="./reporte.html">Reportar</a>
       </div>
     </div>
   </div>
@@ -40,9 +41,30 @@
   <main class="page">
     <div class="container">
       <section class="page-header">
-        <span class="eyebrow">Previsão operacional</span>
-        <h1 class="page-title">Chuva, maré e próximos períodos críticos</h1>
-        <p class="page-subtitle">Painel sintético para leitura rápida das condições atmosféricas e hidrológicas que influenciam a severidade urbana nas próximas horas.</p>
+        <span class="eyebrow">Previsoes</span>
+        <h1 class="page-title">Chuva e mare</h1>
+      </section>
+
+      <section class="card section-card forecast-brief">
+        <div class="section-card__header">
+          <div>
+            <span class="eyebrow">Agora em Recife</span>
+            <h2 class="section-card__title" id="forecast-current-title">Carregando...</h2>
+          </div>
+          <span class="muted" id="forecast-updated-at">--</span>
+        </div>
+        <p class="page-subtitle" id="forecast-current-reading">--</p>
+        <small class="muted" id="forecast-current-recommendation">--</small>
+      </section>
+
+      <section class="card section-card forecast-brief forecast-brief--secondary">
+        <div class="section-card__header">
+          <div>
+            <span class="eyebrow">Proximas 24h</span>
+            <h2 class="section-card__title">Janela de acompanhamento</h2>
+          </div>
+        </div>
+        <p class="page-subtitle" id="forecast-next-day">--</p>
       </section>
 
       <section class="cards-grid cards-grid--forecast" id="forecast-cards"></section>
@@ -50,8 +72,8 @@
       <section class="card section-card" style="margin-top: 20px;">
         <div class="section-card__header">
           <div>
-            <span class="eyebrow">Períodos críticos</span>
-            <h2 class="section-card__title">Janelas de atenção</h2>
+            <span class="eyebrow">Janelas</span>
+            <h2 class="section-card__title">Periodos criticos</h2>
           </div>
         </div>
         <div id="critical-windows" class="list-stack forecast-window-list"></div>
@@ -61,11 +83,11 @@
 
   <footer class="page-footer">
     <div class="container page-footer__inner">
-      <span>Leitura preditiva pronta para integração com serviços externos.</span>
+      <span>HidroRec</span>
       <span>Recife, PE</span>
     </div>
   </footer>
 
-  <script type="module" src="./js/previsoes.js"></script>
+  <script type="module" src="./js/previsoes.js?v=20260406-2112"></script>
 </body>
 </html>

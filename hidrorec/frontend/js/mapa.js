@@ -28,7 +28,7 @@ export function renderMap(container, points) {
       <div class="map-marker__pin map-marker__pin--${variant}"></div>
       <div class="map-marker__label">
         <strong>${point.titulo}</strong><br>
-        <small>${point.bairro}</small>
+        <small>${point.bairro} | ${point.scoreRisco}</small>
       </div>
     `;
 

@@ -14,12 +14,12 @@ async function loadAlerts(criticidade = '') {
     const alerts = await alertsApi.getAll(criticidade);
 
     if (!alerts.length) {
-      alertsList.innerHTML = '<div class="empty-state">Nenhum alerta ativo para esse filtro.</div>';
+      alertsList.innerHTML = '<div class="empty-state">Sem alertas.</div>';
       return;
     }
 
     alertsList.innerHTML = alerts.map((alerta) => `
-      <article class="list-item list-item--${String(alerta.criticidade || '').toLowerCase()}">
+      <article class="list-item list-item--${String(alerta.criticidade || '').toLowerCase()} ${resolveAlertSurfaceClass(alerta.criticidade)}">
         <div class="list-item__row">
           <div>
             <strong>${alerta.titulo}</strong>
@@ -27,13 +27,22 @@ async function loadAlerts(criticidade = '') {
           </div>
           ${createBadge(alerta.criticidade)}
         </div>
-        <p class="alert-description">${alerta.descricao}</p>
-        <small class="muted">${alerta.orientacaoResumida} | ${formatDateTime(alerta.dataCriacao)}</small>
+        <small class="muted">${formatDateTime(alerta.dataCriacao)}</small>
       </article>
     `).join('');
   } catch (error) {
     renderError(alertsList, error.message);
   }
+}
+
+function resolveAlertSurfaceClass(criticidade) {
+  const normalized = String(criticidade || '').toLowerCase();
+
+  if (normalized.includes('critico') || normalized.includes('alagamento')) {
+    return 'surface--critical';
+  }
+
+  return '';
 }
 
 filterButtons.forEach((button) => {

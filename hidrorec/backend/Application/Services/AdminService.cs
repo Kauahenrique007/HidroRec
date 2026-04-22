@@ -48,13 +48,27 @@ public sealed class AdminService(HidroRecDbContext context, IMapper mapper) : IA
 
     public async Task<AdminMetricasDto> GetMetricasAsync(CancellationToken cancellationToken)
     {
+        var since24h = DateTime.UtcNow.AddHours(-24);
         return new AdminMetricasDto
         {
             TotalReportes = await context.Reportes.CountAsync(x => !x.Excluido, cancellationToken),
             Pendentes = await context.Reportes.CountAsync(x => x.Status == StatusReporte.Pendente && !x.Excluido, cancellationToken),
             Confirmados = await context.Reportes.CountAsync(x => x.Status == StatusReporte.Confirmado && !x.Excluido, cancellationToken),
             AlertasAtivos = await context.Alertas.CountAsync(x => x.Ativo && !x.Excluido, cancellationToken),
-            UsuariosAtivos = await context.Usuarios.CountAsync(x => x.Ativo && !x.Excluido, cancellationToken)
+            UsuariosAtivos = await context.Usuarios.CountAsync(x => x.Ativo && !x.Excluido, cancellationToken),
+            OrganizacoesAtivas = await context.Organizacoes.CountAsync(x => x.Ativa && !x.Excluido, cancellationToken),
+            AreasMonitoradas = await context.AreasMonitoradas.CountAsync(x => x.Ativa && !x.Excluido, cancellationToken),
+            AtivosMonitorados = await context.AtivosMonitorados.CountAsync(x => x.Ativo && !x.Excluido, cancellationToken),
+            LeiturasFusionCriticas24h = await context.LogsSistema.CountAsync(
+                x => x.DataCriacao >= since24h &&
+                     EF.Functions.Like(x.Contexto, "data-fusion%") &&
+                     (x.Evento == "data-fusion-alert" || x.Evento == "data-fusion-risk"),
+                cancellationToken),
+            FontesDegradadas24h = await context.LogsSistema.CountAsync(
+                x => x.DataCriacao >= since24h &&
+                     EF.Functions.Like(x.Contexto, "data-fusion%") &&
+                     (x.Contexto.Contains("Fallback") || x.Contexto.Contains("Desatualizado")),
+                cancellationToken)
         };
     }
 
@@ -70,10 +84,23 @@ public sealed class AdminService(HidroRecDbContext context, IMapper mapper) : IA
         return mapper.Map<IReadOnlyCollection<AuditoriaDto>>(items);
     }
 
-    public async Task<IReadOnlyCollection<LogSistemaDto>> GetLogsAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<LogSistemaDto>> GetLogsAsync(string? contexto, string? evento, CancellationToken cancellationToken)
     {
-        var items = await context.LogsSistema
+        var query = context.LogsSistema
             .AsNoTracking()
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(contexto))
+        {
+            query = query.Where(x => x.Contexto.Contains(contexto));
+        }
+
+        if (!string.IsNullOrWhiteSpace(evento))
+        {
+            query = query.Where(x => x.Evento == evento);
+        }
+
+        var items = await query
             .OrderByDescending(x => x.DataCriacao)
             .Take(50)
             .ToListAsync(cancellationToken);

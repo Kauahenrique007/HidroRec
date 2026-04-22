@@ -12,7 +12,7 @@ function bindLogout() {
     authApi.logout();
     updateSessionChip();
     showToast('Sessao encerrada.', 'normal');
-    if (window.location.pathname.endsWith('/admin.html')) {
+    if (window.location.pathname.endsWith('/admin.html') || window.location.pathname.endsWith('/conta.html')) {
       window.location.href = './acesso.html';
     }
   });

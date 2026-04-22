@@ -191,3 +191,6 @@ C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend\bin\Debug\net8.0\frontend\a
 C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend\bin\Debug\net8.0\frontend\css\acesso.css
 C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend\bin\Debug\net8.0\frontend\js\acesso.js
 C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend\bin\Debug\net8.0\frontend\assets\images\logo2.png
+C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend\bin\Debug\net8.0\frontend\conta.html
+C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend\bin\Debug\net8.0\frontend\css\conta.css
+C:\Users\ACPGROUP\Desktop\HTML PURO\hidrorec\backend\bin\Debug\net8.0\frontend\js\conta.js

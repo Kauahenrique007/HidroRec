@@ -1,6 +1,9 @@
 :root {
   --color-primary: #0a3d62;
   --color-primary-strong: #072f4c;
+  --color-ink: #071728;
+  --color-ocean-deep: #06253c;
+  --color-signal: #89c8ff;
   --color-secondary: #3c91e6;
   --color-secondary-soft: #ddeeff;
   --color-success: #1dd1a1;
@@ -33,7 +36,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top right, rgba(60, 145, 230, 0.14), transparent 28%),
+    radial-gradient(circle at top right, rgba(60, 145, 230, 0.16), transparent 28%),
+    radial-gradient(circle at left center, rgba(10, 61, 98, 0.08), transparent 26%),
     linear-gradient(180deg, #f8fbff 0%, var(--color-bg) 100%);
   color: var(--color-text);
   font-family: var(--font-family);
@@ -96,6 +100,27 @@ img {
   font-size: 1rem;
   max-width: 760px;
   line-height: 1.6;
+}
+
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hero-proof__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(10, 61, 98, 0.08);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.84rem;
 }
 
 .grid {
