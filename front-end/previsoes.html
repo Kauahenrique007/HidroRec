@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Previsoes operacionais do HidroRec com probabilidade de alagamento, chuva e mare.">
+  <title>HidroRec | Previsoes</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Inteligencia preditiva</span>
+          <strong>HidroRec</strong>
+          <span>Chuva, mare e probabilidade de alagamento</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell app-main">
+    <section class="forecast-hero">
+      <div>
+        <span class="section-kicker section-kicker--light">Proximas 3 horas</span>
+        <strong id="forecast-probability">--</strong>
+        <p>Probabilidade de alagamento</p>
+      </div>
+      <div class="forecast-hero__stats">
+        <article class="forecast-hero__stat">
+          <span>Chuva prevista</span>
+          <strong id="forecast-rain-total">--</strong>
+        </article>
+        <article class="forecast-hero__stat">
+          <span>Pico de mare</span>
+          <strong id="forecast-tide-peak">--</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Tendencia</span>
+          <h2>Probabilidade de alagamento</h2>
+        </div>
+      </div>
+      <div class="chart-card chart-card--large" id="probability-chart"></div>
+    </section>
+
+    <section class="two-column-grid">
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Chuva</span>
+            <h2>Volume previsto</h2>
+          </div>
+        </div>
+        <div class="chart-card" id="rain-bars-chart"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Mare</span>
+            <h2>Altura registrada</h2>
+          </div>
+        </div>
+        <div class="chart-card" id="tide-line-chart"></div>
+      </section>
+    </section>
+
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Historico</span>
+          <h2>Ocorrencias da ultima semana</h2>
+        </div>
+      </div>
+      <div class="chart-card" id="weekly-history-chart"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Previsoes calculadas a partir da camada de monitoramento existente.</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/previsoes/previsoes.js"></script>
+</body>
+</html>

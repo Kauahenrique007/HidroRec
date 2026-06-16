@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HidroRec: painel de prevencao a alagamentos no Recife com mapa de risco, alertas e rotas seguras.">
+  <title>HidroRec | Painel</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Prevencao e mobilidade</span>
+          <strong>HidroRec</strong>
+          <span>Mapa de risco, alertas e rotas seguras no Recife</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell app-main">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Situacao hidrometeorologica</span>
+        <h1 id="scenario-status">Carregando risco atual...</h1>
+        <p id="dashboard-toast">Consolidando chuva, mare, alertas e ocorrencias recentes.</p>
+      </article>
+      <aside class="hero__status">
+        <span class="brand__eyebrow">Alerta operacional</span>
+        <strong id="dashboard-alert-strip">Aguardando leitura dos alertas ativos.</strong>
+        <p>Use o mapa para consultar pontos de risco e calcular uma rota segura.</p>
+      </aside>
+    </section>
+
+    <section class="stats-grid" id="dashboard-kpis" aria-label="Indicadores do painel"></section>
+
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Mapa operacional</span>
+          <h2>Areas de risco e rota segura</h2>
+        </div>
+      </div>
+      <div id="territory-map"></div>
+    </section>
+
+    <section class="two-column-grid">
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Resumo da cidade</span>
+            <h2>Distribuicao de risco</h2>
+          </div>
+        </div>
+        <div class="status-counter-grid" id="city-status-counts"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Historico recente</span>
+            <h2>Pontos de atencao</h2>
+          </div>
+        </div>
+        <div class="attention-list" id="attention-points"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>HidroRec monitora risco, chuva, alertas e ocorrencias urbanas.</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/dashboard/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Canal colaborativo do HidroRec para reporte de alagamentos e sinais de risco em Recife.">
+  <title>HidroRec | Reporte</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
+        <div>
+          <span class="brand__eyebrow">Canal colaborativo</span>
+          <strong>HidroRec</strong>
+          <span>Entrada publica com validacao e triagem</span>
+        </div>
+      </a>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="shell app-main">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Colaboracao urbana</span>
+        <h1>Informe um novo ponto de alagamento.</h1>
+        <p>O registro entra na fila de triagem com localizacao, nivel da agua, descricao, data e horario informados.</p>
+      </article>
+      <aside class="hero__status">
+        <div>
+          <span class="brand__eyebrow">Contexto atual</span>
+          <strong>Leitura hidrometeorologica em uso</strong>
+        </div>
+        <ul id="public-context" class="stack">
+          <li>Carregando leitura de apoio...</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="page-grid">
+      <section class="form-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Envio publico</span>
+            <h2>Registrar reporte colaborativo</h2>
+          </div>
+        </div>
+        <form class="form-grid" id="public-report-form">
+          <div class="field">
+            <label for="reporterName">Seu nome</label>
+            <input id="reporterName" name="reporterName" type="text" placeholder="Nome ou identificacao" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="neighborhoodName">Bairro</label>
+            <input id="neighborhoodName" name="neighborhoodName" type="text" placeholder="Boa Viagem" autocomplete="address-level2">
+          </div>
+          <div class="field field--full">
+            <label for="address">Endereco de referencia</label>
+            <div class="input-action">
+              <input id="address" name="address" type="text" placeholder="Rua, avenida, ponte, canal..." autocomplete="street-address">
+              <button class="button button--ghost" type="button" id="use-current-location">Usar local atual</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="type">Tipo observado</label>
+            <select id="type" name="type">
+              <option value="alagamento">Alagamento</option>
+              <option value="microalagamento">Microalagamento</option>
+              <option value="drenagem">Falha de drenagem</option>
+              <option value="deslizamento">Movimento de massa</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="waterLevel">Nivel da agua</label>
+            <select id="waterLevel" name="waterLevel">
+              <option value="tornozelo">Tornozelo</option>
+              <option value="medio">Joelho / medio</option>
+              <option value="alto">Cintura / alto</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="occurrenceDate">Data</label>
+            <input id="occurrenceDate" name="occurrenceDate" type="date">
+          </div>
+          <div class="field">
+            <label for="occurrenceTime">Horario</label>
+            <input id="occurrenceTime" name="occurrenceTime" type="time">
+          </div>
+          <div class="field field--full">
+            <label for="description">Descricao</label>
+            <textarea id="description" name="description" placeholder="Explique o que esta acontecendo, se a agua esta subindo e como a via esta sendo impactada."></textarea>
+          </div>
+          <div class="actions field--full">
+            <button class="button" type="submit">Enviar reporte</button>
+          </div>
+        </form>
+        <div class="feedback" id="form-feedback" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="info-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Seguranca</span>
+            <h2>Antes de reportar</h2>
+          </div>
+        </div>
+        <div class="stack">
+          <p>Nao se aproxime de pontos com correnteza ou energia exposta.</p>
+          <p>Se houver risco imediato a pessoas, acione os canais oficiais antes de enviar o formulario.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Canal colaborativo com validacao posterior pela operacao.</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/modules/reportar/reportar.js"></script>
+</body>
+</html>
