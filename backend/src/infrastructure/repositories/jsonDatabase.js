@@ -2,6 +2,8 @@ const fs = require('fs').promises;
 const crypto = require('crypto');
 const env = require('../../config/env');
 
+let writeQueue = Promise.resolve();
+
 function hashPassword(password, salt) {
   return crypto.createHash('sha256').update(`${password}:${salt}`).digest('hex');
 }
@@ -159,6 +161,7 @@ function normalizeDatabase(raw = {}) {
       reporterChannel: item.reporterChannel || (item.origem === 'institucional' ? 'institucional' : 'colaborativo'),
       latitude: item.latitude || null,
       longitude: item.longitude || null,
+      occurredAt: item.occurredAt || item.dataHora || item.createdAt || new Date().toISOString(),
       createdAt: item.createdAt || item.dataHora || new Date().toISOString(),
       updatedAt: item.updatedAt || item.dataHora || new Date().toISOString()
     })),
@@ -215,14 +218,21 @@ async function readDatabase() {
 }
 
 async function writeDatabase(data) {
-  await fs.writeFile(env.dbPath, JSON.stringify(data, null, 2), 'utf8');
+  const tempPath = `${env.dbPath}.${process.pid}.tmp`;
+  await fs.writeFile(tempPath, JSON.stringify(data, null, 2), 'utf8');
+  await fs.rename(tempPath, env.dbPath);
   return data;
 }
 
 async function updateDatabase(mutator) {
-  const current = await readDatabase();
-  const next = await Promise.resolve(mutator(JSON.parse(JSON.stringify(current))));
-  return writeDatabase(next);
+  const operation = writeQueue.then(async () => {
+    const current = await readDatabase();
+    const next = await Promise.resolve(mutator(JSON.parse(JSON.stringify(current))));
+    return writeDatabase(next);
+  });
+
+  writeQueue = operation.catch(() => {});
+  return operation;
 }
 
 async function appendAuditLog(entry) {

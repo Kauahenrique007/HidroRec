@@ -39,6 +39,20 @@ function captureLocation(form, feedback) {
   );
 }
 
+function setDefaultOccurrenceDateTime(form) {
+  const now = new Date();
+  const dateField = form.elements.occurrenceDate;
+  const timeField = form.elements.occurrenceTime;
+
+  if (dateField && !dateField.value) {
+    dateField.value = now.toISOString().slice(0, 10);
+  }
+
+  if (timeField && !timeField.value) {
+    timeField.value = now.toTimeString().slice(0, 5);
+  }
+}
+
 async function initReportPage() {
   await initializeShell('reportar');
 
@@ -46,6 +60,7 @@ async function initReportPage() {
   const feedback = document.getElementById('form-feedback');
   const climateTarget = document.getElementById('public-context');
   const submitButton = form.querySelector('button[type="submit"]');
+  const locationButton = document.getElementById('use-current-location');
 
   try {
     const [climate, tide] = await Promise.all([
@@ -62,7 +77,9 @@ async function initReportPage() {
     climateTarget.innerHTML = '<li>Contexto hidrometeorologico indisponivel no momento.</li>';
   }
 
+  setDefaultOccurrenceDateTime(form);
   captureLocation(form, feedback);
+  locationButton?.addEventListener('click', () => captureLocation(form, feedback));
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -86,6 +103,7 @@ async function initReportPage() {
       });
       await reportsService.createPublicReport(payload);
       form.reset();
+      setDefaultOccurrenceDateTime(form);
       captureLocation(form, feedback);
       setFeedback(feedback, {
         type: 'success',

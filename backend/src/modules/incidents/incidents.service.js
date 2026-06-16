@@ -14,6 +14,35 @@ function severityFromWaterLevel(value) {
   return 'observacao';
 }
 
+function getPeriodStart(period) {
+  const now = Date.now();
+  const windows = {
+    '24h': 24 * 60 * 60 * 1000,
+    '7d': 7 * 24 * 60 * 60 * 1000,
+    '30d': 30 * 24 * 60 * 60 * 1000
+  };
+
+  return windows[period] ? new Date(now - windows[period]) : null;
+}
+
+function filterByPeriod(items, query = {}) {
+  const periodStart = getPeriodStart(query.period);
+  const fromDate = query.from ? new Date(query.from) : periodStart;
+  const toDate = query.to ? new Date(query.to) : null;
+
+  if ((!fromDate || Number.isNaN(fromDate.getTime())) && (!toDate || Number.isNaN(toDate.getTime()))) {
+    return items;
+  }
+
+  return items.filter((item) => {
+    const itemDate = new Date(item.occurredAt || item.createdAt || item.updatedAt);
+    if (Number.isNaN(itemDate.getTime())) return false;
+    if (fromDate && !Number.isNaN(fromDate.getTime()) && itemDate < fromDate) return false;
+    if (toDate && !Number.isNaN(toDate.getTime()) && itemDate > toDate) return false;
+    return true;
+  });
+}
+
 function filterIncidents(incidents, query = {}) {
   let filtered = [...incidents];
 
@@ -28,6 +57,8 @@ function filterIncidents(incidents, query = {}) {
   if (query.severity) {
     filtered = filtered.filter((item) => item.severity === query.severity);
   }
+
+  filtered = filterByPeriod(filtered, query);
 
   if (query.neighborhoodName) {
     const neighborhood = String(query.neighborhoodName).toLowerCase();
@@ -102,6 +133,7 @@ async function createIncident(payload, actor) {
     source: payload.source || 'colaborativa',
     reporterName: payload.reporterName,
     reporterChannel: actor?.role ? 'operacional' : 'colaborativo',
+    occurredAt: payload.occurredAt || new Date().toISOString(),
     latitude: Number.isFinite(payload.latitude) ? payload.latitude : null,
     longitude: Number.isFinite(payload.longitude) ? payload.longitude : null,
     createdAt: new Date().toISOString(),

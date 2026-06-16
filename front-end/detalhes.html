@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
   <header class="app-header">
     <div class="shell app-header__inner">
       <a class="brand" href="./index.html">
@@ -21,6 +23,7 @@
       <nav class="app-nav" aria-label="Navegacao principal">
         <a href="./index.html" data-nav="dashboard">Painel</a>
         <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
         <a href="./alertas.html" data-nav="alertas">Alertas</a>
         <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
         <a href="./reporte.html" data-nav="reportar">Reporte</a>
@@ -30,7 +33,7 @@
     </div>
   </header>
 
-  <main class="shell">
+  <main id="main-content" class="shell app-main">
     <section class="hero">
       <article class="hero__panel">
         <span class="hero__eyebrow">Territorio monitorado</span>
@@ -94,7 +97,7 @@
   <footer class="app-footer">
     <div class="shell app-footer__inner">
       <span>Territorio com score de risco explicavel e rastreabilidade de eventos.</span>
-      <span>&copy; <span data-current-year></span> HidroRec</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
     </div>
   </footer>
 

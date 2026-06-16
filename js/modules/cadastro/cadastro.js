@@ -49,6 +49,20 @@ async function attachGeolocation(form) {
   );
 }
 
+function setDefaultOccurrenceDateTime(form) {
+  const now = new Date();
+  const dateField = form.elements.occurrenceDate;
+  const timeField = form.elements.occurrenceTime;
+
+  if (dateField && !dateField.value) {
+    dateField.value = now.toISOString().slice(0, 10);
+  }
+
+  if (timeField && !timeField.value) {
+    timeField.value = now.toTimeString().slice(0, 5);
+  }
+}
+
 function ensureOpsContextSection() {
   let card = document.getElementById('operations-context-card');
   if (card) return card.querySelector('[data-ops-context]');
@@ -86,6 +100,7 @@ async function initCadastroPage() {
   const opsContextTarget = ensureOpsContextSection();
 
   opsContextTarget.innerHTML = '<p>Carregando contexto hidroclimatico para apoiar a decisao operacional...</p>';
+  setDefaultOccurrenceDateTime(operationsForm);
 
   try {
     const [climate, tide] = await Promise.all([
@@ -168,6 +183,7 @@ async function initCadastroPage() {
       });
       await reportsService.createOperationalReport(payload);
       operationsForm.reset();
+      setDefaultOccurrenceDateTime(operationsForm);
       if (currentUser) {
         const reporterField = document.getElementById('reporterName');
         if (reporterField) reporterField.value = currentUser.name;

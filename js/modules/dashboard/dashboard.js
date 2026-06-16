@@ -1,26 +1,65 @@
 import { initializeShell } from '../../app.js';
+import { renderLoadingBlock } from '../../components/LoadingSpinner.js';
+import { renderStatCard } from '../../components/StatCard.js';
 import { dashboardService } from '../../services/dashboardService.js';
-import { formatDateTime, formatNumber, formatRisk } from '../../utils/formatters.js';
-import { renderErrorState } from '../../utils/helpers.js';
+import { formatDateTime, formatNumber } from '../../utils/formatters.js';
+import { renderEmptyState, renderErrorState } from '../../utils/helpers.js';
 import { renderTerritoryMapPanel } from '../mapa/mapa.js';
 
+function renderDashboardKpis(target, data) {
+  const floodedAreas = data.metrics.floodedAreas ?? data.latestIncidents.filter((incident) => incident.status !== 'resolvido').length;
+  const monitoredTerritories = data.metrics.monitoredTerritories ?? data.topTerritories.length;
+
+  target.innerHTML = [
+    renderStatCard({
+      label: 'Chuva atual',
+      value: `${formatNumber(data.monitoring.climate.observedRainMm, 0)} mm`,
+      hint: `${formatNumber(data.monitoring.climate.accumulatedRain24h, 0)} mm nas ultimas 24h`,
+      tone: 'info'
+    }),
+    renderStatCard({
+      label: 'Alertas ativos',
+      value: String(data.metrics.activeAlerts),
+      hint: `${data.metrics.monitoringAlerts} em monitoramento`,
+      tone: 'critical'
+    }),
+    renderStatCard({
+      label: 'Areas alagadas',
+      value: String(floodedAreas),
+      hint: 'Ocorrencias abertas no historico',
+      tone: 'danger'
+    }),
+    renderStatCard({
+      label: 'Pontos monitorados',
+      value: String(monitoredTerritories),
+      hint: `${data.metrics.criticalTerritories} em criticidade maxima`,
+      tone: 'safe'
+    })
+  ].join('');
+}
+
 function renderStatusCounts(target, data) {
+  const riskCount = (level) => data.riskBreakdown.find((item) => item.level === level)?.count || 0;
   const counts = [
     {
-      label: 'Normal',
-      value: data.riskBreakdown.find((item) => item.level === 'baixo')?.count || 0,
+      label: 'Baixo',
+      value: riskCount('baixo'),
       tone: 'normal'
     },
     {
-      label: 'Atencao',
-      value: (data.riskBreakdown.find((item) => item.level === 'moderado')?.count || 0)
-        + (data.riskBreakdown.find((item) => item.level === 'alto')?.count || 0),
+      label: 'Medio',
+      value: riskCount('moderado'),
       tone: 'attention'
     },
     {
-      label: 'Alagamento',
-      value: data.metrics.activeAlerts,
+      label: 'Alto',
+      value: riskCount('alto'),
       tone: 'flood'
+    },
+    {
+      label: 'Critico',
+      value: riskCount('critico'),
+      tone: 'critical'
     }
   ];
 
@@ -33,41 +72,50 @@ function renderStatusCounts(target, data) {
 }
 
 function renderAttentionList(target, data) {
-  target.innerHTML = data.latestIncidents.slice(0, 3).map((incident) => `
+  target.innerHTML = data.latestIncidents.length ? data.latestIncidents.slice(0, 5).map((incident) => `
     <article class="attention-item">
       <div>
         <strong>${incident.address}</strong>
-        <span>Nivel: ${incident.waterLevel} • ${formatDateTime(incident.updatedAt)}</span>
+        <span>${incident.neighborhoodName} - Nivel: ${incident.waterLevel} - ${formatDateTime(incident.updatedAt)}</span>
       </div>
       <span class="pill-tag pill-tag--${incident.severity === 'severo' ? 'danger' : 'warning'}">
         ${incident.severity === 'severo' ? 'Alagamento' : 'Atencao'}
       </span>
     </article>
-  `).join('');
+  `).join('') : renderEmptyState('Sem ocorrencias recentes', 'Nenhum ponto de atencao foi retornado pela API.');
 }
 
 function renderDashboard(data) {
   document.getElementById('scenario-status').textContent = data.operationalStatus;
-  document.getElementById('dashboard-toast').textContent = data.monitoring.warning?.summary || 'Chuva moderada detectada. Monitorando pontos criticos.';
-  document.getElementById('dashboard-alert-strip').textContent = `${data.metrics.activeAlerts} alagamentos ativos detectados. Evite as areas afetadas.`;
-  document.getElementById('dashboard-tide-level').textContent = data.monitoring.tide.influence === 'alta' ? 'Alta' : formatRisk(data.monitoring.tide.influence);
-  document.getElementById('dashboard-tide-meta').textContent = `${formatNumber(data.monitoring.tide.levelMeters, 1)}m • Atualizado ${formatDateTime(data.updatedAt)}`;
-  document.getElementById('dashboard-rain-level').textContent = `${formatNumber(data.monitoring.climate.observedRainMm, 0)}mm/h`;
-  document.getElementById('dashboard-rain-meta').textContent = `${data.monitoring.climate.conditionText || 'Monitoramento ativo'} • Fonte ${((data.monitoring.climate.sourceDetails || []).join(' + ')) || data.monitoring.climate.source}`;
+  document.getElementById('dashboard-toast').textContent = data.monitoring.warning?.summary
+    || data.scenario?.summary
+    || 'Monitoramento ativo com consolidacao de chuva, mare e ocorrencias.';
+  document.getElementById('dashboard-alert-strip').textContent = `${data.metrics.activeAlerts} alertas ativos e ${data.metrics.pendingIncidents} ocorrencias pendentes.`;
 
+  renderDashboardKpis(document.getElementById('dashboard-kpis'), data);
   renderStatusCounts(document.getElementById('city-status-counts'), data);
-  renderTerritoryMapPanel(document.getElementById('territory-map'), data.topTerritories);
+  renderTerritoryMapPanel(document.getElementById('territory-map'), data.topTerritories, {
+    incidents: data.latestIncidents,
+    alerts: data.latestAlerts
+  });
   renderAttentionList(document.getElementById('attention-points'), data);
 }
 
 async function initDashboard() {
   await initializeShell('dashboard');
 
+  const loading = renderLoadingBlock('Carregando painel operacional...');
+  document.getElementById('dashboard-kpis').innerHTML = loading;
+  document.getElementById('city-status-counts').innerHTML = loading;
+  document.getElementById('territory-map').innerHTML = loading;
+  document.getElementById('attention-points').innerHTML = loading;
+
   try {
     const data = await dashboardService.getOverview();
     renderDashboard(data);
   } catch (error) {
     const failure = renderErrorState(error.message);
+    document.getElementById('dashboard-kpis').innerHTML = failure;
     document.getElementById('city-status-counts').innerHTML = failure;
     document.getElementById('territory-map').innerHTML = failure;
     document.getElementById('attention-points').innerHTML = failure;

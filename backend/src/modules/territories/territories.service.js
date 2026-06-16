@@ -31,6 +31,35 @@ function sortTerritories(items, sortBy, order) {
   });
 }
 
+function getPeriodStart(period) {
+  const now = Date.now();
+  const windows = {
+    '24h': 24 * 60 * 60 * 1000,
+    '7d': 7 * 24 * 60 * 60 * 1000,
+    '30d': 30 * 24 * 60 * 60 * 1000
+  };
+
+  return windows[period] ? new Date(now - windows[period]) : null;
+}
+
+function filterByPeriod(items, query = {}) {
+  const periodStart = getPeriodStart(query.period);
+  const fromDate = query.from ? new Date(query.from) : periodStart;
+  const toDate = query.to ? new Date(query.to) : null;
+
+  if ((!fromDate || Number.isNaN(fromDate.getTime())) && (!toDate || Number.isNaN(toDate.getTime()))) {
+    return items;
+  }
+
+  return items.filter((item) => {
+    const itemDate = new Date(item.updatedAt || item.createdAt);
+    if (Number.isNaN(itemDate.getTime())) return false;
+    if (fromDate && !Number.isNaN(fromDate.getTime()) && itemDate < fromDate) return false;
+    if (toDate && !Number.isNaN(toDate.getTime()) && itemDate > toDate) return false;
+    return true;
+  });
+}
+
 function filterTerritories(territories, query = {}) {
   let filtered = [...territories];
 
@@ -62,6 +91,8 @@ function filterTerritories(territories, query = {}) {
     const neighborhood = String(query.neighborhoodName).toLowerCase();
     filtered = filtered.filter((item) => item.neighborhoodName.toLowerCase().includes(neighborhood));
   }
+
+  filtered = filterByPeriod(filtered, query);
 
   return filtered;
 }

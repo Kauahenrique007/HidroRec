@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
   <header class="app-header">
     <div class="shell app-header__inner">
       <a class="brand" href="./index.html">
@@ -21,6 +23,7 @@
       <nav class="app-nav" aria-label="Navegacao principal">
         <a href="./index.html" data-nav="dashboard">Painel</a>
         <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
         <a href="./alertas.html" data-nav="alertas">Alertas</a>
         <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
         <a href="./reporte.html" data-nav="reportar">Reporte</a>
@@ -30,12 +33,12 @@
     </div>
   </header>
 
-  <main class="shell">
+  <main id="main-content" class="shell app-main">
     <section class="hero">
       <article class="hero__panel">
         <span class="hero__eyebrow">Console operacional</span>
-        <h1>Alertas ativos e fila de triagem em uma unica tela.</h1>
-        <p>Use este console para acompanhar severidade, localidade, eventos associados e, quando houver sessao operacional, atualizar o status das ocorrencias mais recentes.</p>
+        <h1>Alertas ativos e historico de triagem.</h1>
+        <p>Acompanhe severidade, localidade, eventos associados e atualizacoes de ocorrencias recentes.</p>
       </article>
       <aside class="hero__status">
         <div>
@@ -53,10 +56,14 @@
             <h2>Recorte da fila</h2>
           </div>
         </div>
-        <form class="filters" id="alerts-filter-form">
+        <form class="filters filters--six" id="alerts-filter-form">
           <div class="field">
             <label for="search">Busca</label>
             <input id="search" name="search" type="search" placeholder="Boa Viagem, drenagem, Aurora...">
+          </div>
+          <div class="field">
+            <label for="neighborhoodName">Bairro</label>
+            <input id="neighborhoodName" name="neighborhoodName" type="search" placeholder="Santo Antonio">
           </div>
           <div class="field">
             <label for="severity">Severidade</label>
@@ -86,8 +93,17 @@
             </select>
           </div>
           <div class="field">
+            <label for="period">Periodo</label>
+            <select id="period" name="period">
+              <option value="">Todo historico</option>
+              <option value="24h">Ultimas 24h</option>
+              <option value="7d">Ultimos 7 dias</option>
+              <option value="30d">Ultimos 30 dias</option>
+            </select>
+          </div>
+          <div class="field field--actions">
             <label>&nbsp;</label>
-            <button type="submit">Aplicar filtros</button>
+            <button class="button" type="submit">Aplicar</button>
           </div>
         </form>
       </section>
@@ -130,7 +146,7 @@
   <footer class="app-footer">
     <div class="shell app-footer__inner">
       <span>Console de alertas, triagem e resposta operacional do HidroRec.</span>
-      <span>&copy; <span data-current-year></span> HidroRec</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
     </div>
   </footer>
 

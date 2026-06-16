@@ -4,66 +4,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Painel administrativo do HidroRec com eficiencia, sensores, hotspots e log de atividades.">
-  <title>HidroRec | Admin</title>
+  <title>HidroRec | Governanca</title>
   <link rel="stylesheet" href="../style/style.css">
 </head>
-<body class="proto-body">
-  <header class="proto-topbar">
-    <div class="shell proto-topbar__inner">
-      <a class="proto-brand" href="./index.html">
+<body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
         <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
         <div>
-          <strong>Painel Administrativo</strong>
-          <span>Monitoramento Urbano Inteligente</span>
+          <span class="brand__eyebrow">Governanca operacional</span>
+          <strong>HidroRec</strong>
+          <span>Indicadores, auditoria e integracoes</span>
         </div>
       </a>
-      <button class="proto-cloud" type="button" aria-label="Sincronizacao em nuvem">
-        <span></span>
-      </button>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
     </div>
   </header>
 
-  <div class="proto-subnav">
-    <div class="shell proto-subnav__inner">
-      <nav class="proto-nav" aria-label="Navegacao principal">
-        <a href="./index.html" data-nav="dashboard">Inicio</a>
-        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
-        <a href="./alertas.html" data-nav="alertas">Alertas</a>
-        <a href="./admin.html" data-nav="admin">Admin</a>
-      </nav>
-      <div class="proto-system">
-        <strong>Sistema</strong>
-        <span>Operacional</span>
-      </div>
-    </div>
-  </div>
+  <main id="main-content" class="shell app-main">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Painel administrativo</span>
+        <h1>Saude da operacao e dos dados.</h1>
+        <p>Indicadores derivados da base operacional, integracoes, alertas, ocorrencias e trilha de auditoria.</p>
+      </article>
+      <aside class="hero__status">
+        <span class="brand__eyebrow">Acesso</span>
+        <strong>Disponivel para usuarios autenticados</strong>
+        <p>Entre pela area Operacao para consultar governanca.</p>
+      </aside>
+    </section>
 
-  <main class="shell proto-main">
     <section class="admin-summary-grid" id="admin-summary"></section>
 
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Acoes Rapidas</h2>
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Acoes</span>
+          <h2>Consultas rapidas</h2>
+        </div>
       </div>
       <div class="quick-actions-grid">
-        <a class="quick-action" id="export-csv" href="#">Exportar CSV</a>
-        <a class="quick-action" id="export-pdf" href="#">Exportar PDF</a>
-        <a class="quick-action quick-action--ghost" id="open-diagnostics" href="#">Diagnostico</a>
+        <a class="quick-action" id="export-csv" href="#">API Docs</a>
+        <a class="quick-action" id="export-pdf" href="#">OpenAPI</a>
+        <a class="quick-action quick-action--ghost" id="open-diagnostics" href="#">Status</a>
         <a class="quick-action quick-action--ghost" id="open-report" href="#">Relatorio</a>
       </div>
     </section>
 
     <section class="two-column-grid">
-      <section class="proto-panel">
-        <div class="panel-heading">
-          <h2>Pontos Criticos Recorrentes</h2>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Recorrencia</span>
+            <h2>Pontos criticos</h2>
+          </div>
         </div>
         <div id="hotspots-list"></div>
       </section>
 
-      <section class="proto-panel">
-        <div class="panel-heading">
-          <h2>Status dos Sensores IoT</h2>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Monitoramento</span>
+            <h2>Status dos sensores</h2>
+          </div>
         </div>
         <div class="sensor-status-shell">
           <div class="sensor-donut" id="sensor-donut"></div>
@@ -72,22 +89,35 @@
       </section>
     </section>
 
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Taxa de Resposta da Drenagem por Regiao</h2>
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Drenagem</span>
+          <h2>Resposta por regiao</h2>
+        </div>
       </div>
       <div class="chart-card" id="response-chart"></div>
     </section>
 
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Log de Atividades Recentes</h2>
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Auditoria</span>
+          <h2>Atividades recentes</h2>
+        </div>
       </div>
       <div class="activity-log" id="activity-log"></div>
     </section>
 
     <section class="bottom-kpis-grid" id="bottom-kpis"></section>
   </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Governanca operacional com dados da base HidroRec.</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
+    </div>
+  </footer>
 
   <script type="module" src="../js/modules/admin/admin.js"></script>
 </body>

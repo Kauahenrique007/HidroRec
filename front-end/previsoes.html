@@ -7,45 +7,39 @@
   <title>HidroRec | Previsoes</title>
   <link rel="stylesheet" href="../style/style.css">
 </head>
-<body class="proto-body">
-  <header class="proto-topbar">
-    <div class="shell proto-topbar__inner">
-      <a class="proto-brand" href="./index.html">
+<body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
         <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
         <div>
-          <strong>Inteligencia Preditiva</strong>
-          <span>Monitoramento Urbano Inteligente</span>
+          <span class="brand__eyebrow">Inteligencia preditiva</span>
+          <strong>HidroRec</strong>
+          <span>Chuva, mare e probabilidade de alagamento</span>
         </div>
       </a>
-      <button class="proto-cloud" type="button" aria-label="Sincronizacao em nuvem">
-        <span></span>
-      </button>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
     </div>
   </header>
 
-  <div class="proto-subnav">
-    <div class="shell proto-subnav__inner">
-      <nav class="proto-nav" aria-label="Navegacao principal">
-        <a href="./index.html" data-nav="dashboard">Inicio</a>
-        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
-        <a href="./alertas.html" data-nav="alertas">Alertas</a>
-        <a href="./admin.html" data-nav="admin">Admin</a>
-      </nav>
-      <div class="proto-system">
-        <strong>Sistema</strong>
-        <span>Operacional</span>
-      </div>
-    </div>
-  </div>
-
-  <main class="shell proto-main">
+  <main id="main-content" class="shell app-main">
     <section class="forecast-hero">
       <div>
-        <span class="section-kicker section-kicker--light">Previsao proximas 3 horas</span>
-        <strong id="forecast-probability">45%</strong>
-        <p>Probabilidade de Alagamento</p>
+        <span class="section-kicker section-kicker--light">Proximas 3 horas</span>
+        <strong id="forecast-probability">--</strong>
+        <p>Probabilidade de alagamento</p>
       </div>
-      <div class="forecast-hero__indicator"></div>
       <div class="forecast-hero__stats">
         <article class="forecast-hero__stat">
           <span>Chuva prevista</span>
@@ -58,36 +52,55 @@
       </div>
     </section>
 
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Probabilidade de Alagamento (%)</h2>
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Tendencia</span>
+          <h2>Probabilidade de alagamento</h2>
+        </div>
       </div>
       <div class="chart-card chart-card--large" id="probability-chart"></div>
     </section>
 
     <section class="two-column-grid">
-      <section class="proto-panel">
-        <div class="panel-heading">
-          <h2>Volume de Chuva (mm/h)</h2>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Chuva</span>
+            <h2>Volume previsto</h2>
+          </div>
         </div>
         <div class="chart-card" id="rain-bars-chart"></div>
       </section>
 
-      <section class="proto-panel">
-        <div class="panel-heading">
-          <h2>Altura da Mare (m)</h2>
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Mare</span>
+            <h2>Altura registrada</h2>
+          </div>
         </div>
         <div class="chart-card" id="tide-line-chart"></div>
       </section>
     </section>
 
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Historico da Ultima Semana</h2>
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Historico</span>
+          <h2>Ocorrencias da ultima semana</h2>
+        </div>
       </div>
       <div class="chart-card" id="weekly-history-chart"></div>
     </section>
   </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>Previsoes calculadas a partir da camada de monitoramento existente.</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
+    </div>
+  </footer>
 
   <script type="module" src="../js/modules/previsoes/previsoes.js"></script>
 </body>

@@ -3,93 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HidroRec: monitoramento urbano inteligente com mapa, pontos de atencao e status operacional.">
-  <title>HidroRec | Inicio</title>
+  <meta name="description" content="HidroRec: painel de prevencao a alagamentos no Recife com mapa de risco, alertas e rotas seguras.">
+  <title>HidroRec | Painel</title>
   <link rel="stylesheet" href="../style/style.css">
 </head>
-<body class="proto-body">
-  <header class="proto-topbar">
-    <div class="shell proto-topbar__inner">
-      <a class="proto-brand" href="./index.html">
-        <img src="../img/logo2.png" alt="Logomarca do HidroRec">
+<body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
+  <header class="app-header">
+    <div class="shell app-header__inner">
+      <a class="brand" href="./index.html">
+        <img src="../img/logo-hidrorec.png" alt="Logomarca do HidroRec">
         <div>
+          <span class="brand__eyebrow">Prevencao e mobilidade</span>
           <strong>HidroRec</strong>
-          <span>Monitoramento Urbano Inteligente</span>
+          <span>Mapa de risco, alertas e rotas seguras no Recife</span>
         </div>
       </a>
-      <button class="proto-cloud" type="button" aria-label="Sincronizacao em nuvem">
-        <span></span>
-      </button>
+      <nav class="app-nav" aria-label="Navegacao principal">
+        <a href="./index.html" data-nav="dashboard">Painel</a>
+        <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
+        <a href="./alertas.html" data-nav="alertas">Alertas</a>
+        <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
+        <a href="./reporte.html" data-nav="reportar">Reporte</a>
+        <a href="./admin.html" data-nav="admin">Governanca</a>
+      </nav>
+      <a class="session-chip session-chip--action" data-session-status href="./cadastro.html">Modo visitante</a>
     </div>
   </header>
 
-  <div class="proto-subnav">
-    <div class="shell proto-subnav__inner">
-      <nav class="proto-nav" aria-label="Navegacao principal">
-        <a href="./index.html" data-nav="dashboard">Inicio</a>
-        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
-        <a href="./alertas.html" data-nav="alertas">Alertas</a>
-        <a href="./admin.html" data-nav="admin">Admin</a>
-      </nav>
-      <div class="proto-system">
-        <strong>Sistema</strong>
-        <span>Operacional</span>
-      </div>
-    </div>
-  </div>
-
-  <main class="shell proto-main">
-    <section class="floating-toast">
-      <span class="floating-toast__dot"></span>
-      <p id="dashboard-toast">Chuva moderada detectada. Monitorando 3 pontos criticos.</p>
-    </section>
-
-    <section class="alert-strip" id="dashboard-alert-strip">2 alagamentos ativos detectados. Evite as areas afetadas.</section>
-
-    <section class="proto-panel">
-      <div class="proto-panel__header">
-        <div>
-          <span class="section-kicker">Status da Cidade</span>
-          <h1 id="scenario-status">Risco Alto</h1>
-        </div>
-        <a class="chip-link" href="./previsoes.html">Previsoes</a>
-      </div>
-      <div class="status-counter-grid" id="city-status-counts"></div>
-    </section>
-
-    <section class="inline-metric-grid">
-      <article class="mini-metric-card">
-        <div class="mini-metric-card__icon mini-metric-card__icon--tide"></div>
-        <div>
-          <span class="section-kicker">Mare Atual</span>
-          <strong id="dashboard-tide-level">Alta</strong>
-          <small id="dashboard-tide-meta">2.3m • Proxima mudanca: 14:35</small>
-        </div>
+  <main id="main-content" class="shell app-main">
+    <section class="hero">
+      <article class="hero__panel">
+        <span class="hero__eyebrow">Situacao hidrometeorologica</span>
+        <h1 id="scenario-status">Carregando risco atual...</h1>
+        <p id="dashboard-toast">Consolidando chuva, mare, alertas e ocorrencias recentes.</p>
       </article>
-      <article class="mini-metric-card">
-        <div class="mini-metric-card__icon mini-metric-card__icon--rain"></div>
-        <div>
-          <span class="section-kicker">Volume de Chuva</span>
-          <strong id="dashboard-rain-level">12mm/h</strong>
-          <small id="dashboard-rain-meta">Moderada • Diminuiu em 30min</small>
-        </div>
-      </article>
+      <aside class="hero__status">
+        <span class="brand__eyebrow">Alerta operacional</span>
+        <strong id="dashboard-alert-strip">Aguardando leitura dos alertas ativos.</strong>
+        <p>Use o mapa para consultar pontos de risco e calcular uma rota segura.</p>
+      </aside>
     </section>
 
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Mapa de Monitoramento</h2>
+    <section class="stats-grid" id="dashboard-kpis" aria-label="Indicadores do painel"></section>
+
+    <section class="content-card">
+      <div class="section-title">
+        <div>
+          <span class="section-title__eyebrow">Mapa operacional</span>
+          <h2>Areas de risco e rota segura</h2>
+        </div>
       </div>
       <div id="territory-map"></div>
     </section>
 
-    <section class="proto-panel">
-      <div class="panel-heading">
-        <h2>Pontos de Atencao</h2>
-      </div>
-      <div class="attention-list" id="attention-points"></div>
+    <section class="two-column-grid">
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Resumo da cidade</span>
+            <h2>Distribuicao de risco</h2>
+          </div>
+        </div>
+        <div class="status-counter-grid" id="city-status-counts"></div>
+      </section>
+
+      <section class="content-card">
+        <div class="section-title">
+          <div>
+            <span class="section-title__eyebrow">Historico recente</span>
+            <h2>Pontos de atencao</h2>
+          </div>
+        </div>
+        <div class="attention-list" id="attention-points"></div>
+      </section>
     </section>
   </main>
+
+  <footer class="app-footer">
+    <div class="shell app-footer__inner">
+      <span>HidroRec monitora risco, chuva, alertas e ocorrencias urbanas.</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
+    </div>
+  </footer>
 
   <script type="module" src="../js/modules/dashboard/dashboard.js"></script>
 </body>

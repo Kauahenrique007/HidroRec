@@ -14,6 +14,35 @@ function mapAlerts(database) {
   });
 }
 
+function getPeriodStart(period) {
+  const now = Date.now();
+  const windows = {
+    '24h': 24 * 60 * 60 * 1000,
+    '7d': 7 * 24 * 60 * 60 * 1000,
+    '30d': 30 * 24 * 60 * 60 * 1000
+  };
+
+  return windows[period] ? new Date(now - windows[period]) : null;
+}
+
+function filterByPeriod(items, query = {}) {
+  const periodStart = getPeriodStart(query.period);
+  const fromDate = query.from ? new Date(query.from) : periodStart;
+  const toDate = query.to ? new Date(query.to) : null;
+
+  if ((!fromDate || Number.isNaN(fromDate.getTime())) && (!toDate || Number.isNaN(toDate.getTime()))) {
+    return items;
+  }
+
+  return items.filter((item) => {
+    const itemDate = new Date(item.updatedAt || item.createdAt);
+    if (Number.isNaN(itemDate.getTime())) return false;
+    if (fromDate && !Number.isNaN(fromDate.getTime()) && itemDate < fromDate) return false;
+    if (toDate && !Number.isNaN(toDate.getTime()) && itemDate > toDate) return false;
+    return true;
+  });
+}
+
 function filterAlerts(alerts, query = {}) {
   let filtered = [...alerts];
 
@@ -28,6 +57,8 @@ function filterAlerts(alerts, query = {}) {
   if (query.source) {
     filtered = filtered.filter((item) => item.source === query.source);
   }
+
+  filtered = filterByPeriod(filtered, query);
 
   if (query.neighborhoodName) {
     const neighborhoodName = String(query.neighborhoodName).toLowerCase();

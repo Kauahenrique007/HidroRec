@@ -85,12 +85,18 @@ async function initAlertasPage() {
           page: 1,
           pageSize: 12,
           status: filters.incidentStatus || '',
-          search: filters.search || ''
+          search: filters.search || '',
+          neighborhoodName: filters.neighborhoodName || '',
+          severity: filters.severity || '',
+          period: filters.period || ''
         }),
         alertsService.getSummary(filters),
         incidentsService.getSummary({
           status: filters.incidentStatus || '',
-          search: filters.search || ''
+          search: filters.search || '',
+          neighborhoodName: filters.neighborhoodName || '',
+          severity: filters.severity || '',
+          period: filters.period || ''
         })
       ]);
 

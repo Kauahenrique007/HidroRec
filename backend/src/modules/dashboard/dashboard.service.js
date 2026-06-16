@@ -133,6 +133,9 @@ async function getOverview() {
   const maxRisk = territoryRisks.length > 0 ? Math.max(...territoryRisks) : 0;
   const activeAlerts = database.alerts.filter((item) => item.status === 'active').length;
   const pendingIncidents = database.incidents.filter((item) => item.status === 'pendente').length;
+  const floodedAreas = database.incidents.filter(
+    (item) => item.status !== 'resolvido' && String(item.type || '').toLowerCase().includes('alag')
+  ).length;
   const readiness = summarizeReadiness(maxRisk, activeAlerts, pendingIncidents);
   const recommendations = buildRecommendations({
     monitoring,
@@ -164,6 +167,8 @@ async function getOverview() {
       activeAlerts,
       monitoringAlerts: database.alerts.filter((item) => item.status === 'monitoring').length,
       pendingIncidents,
+      floodedAreas,
+      monitoredTerritories: database.territories.length,
       criticalTerritories: territoriesResult.data.filter((item) => item.risk.level === 'critico').length,
       averageAccumulatedRain24h: monitoring.climate?.accumulatedRain24h || 0,
       tideLevelMeters: monitoring.tide?.levelMeters || 0,

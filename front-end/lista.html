@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Diretorio territorial do HidroRec com mapa operacional, alertas e ocorrencias por area monitorada.">
-  <title>HidroRec | Diretorio Territorial</title>
+  <meta name="description" content="Diretorio territorial do HidroRec com mapa, filtros, alertas e historico de ocorrencias por area monitorada.">
+  <title>HidroRec | Territorios</title>
   <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Ir para o conteudo</a>
+
   <header class="app-header">
     <div class="shell app-header__inner">
       <a class="brand" href="./index.html">
@@ -16,12 +17,13 @@
         <div>
           <span class="brand__eyebrow">Camada territorial</span>
           <strong>HidroRec</strong>
-          <span>Leitura geografica, filas e ocorrencias</span>
+          <span>Leitura geografica, alertas e ocorrencias</span>
         </div>
       </a>
       <nav class="app-nav" aria-label="Navegacao principal">
         <a href="./index.html" data-nav="dashboard">Painel</a>
         <a href="./lista.html" data-nav="lista">Territorios</a>
+        <a href="./previsoes.html" data-nav="previsoes">Previsoes</a>
         <a href="./alertas.html" data-nav="alertas">Alertas</a>
         <a href="./cadastro.html" data-nav="cadastro">Operacao</a>
         <a href="./reporte.html" data-nav="reportar">Reporte</a>
@@ -31,41 +33,17 @@
     </div>
   </header>
 
-    <meta charset="UTF-8">
-    <meta name="description" content="Listagem de registros de monitoramento do HidroRec: áreas, níveis, status e alertas ativos.">
-    <meta name="author" content="Equipe HidroRec">
-    <link rel="shortcut icon" href="/HidroRec/img/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="lista.css">
-    <title>HidroRec · Listagem de Dados</title>
-</head>
-<body>
-    <header>
-        <h1>HidroRec</h1>
-        <p>Monitoramento Urbano Inteligente</p>
-        <img src="/HidroRec/img/logo.png" alt="HidroRec logotipo" width="150" height="80">
-        <nav>
-            <ul>
-                <li><a href="index.html" title="Página inicial">Início</a></li>
-                <li><a href="cadastro.html" title="Cadastrar nova área ou ocorrência">Cadastro</a></li>
-                <li><a href="lista.html" title="Lista completa de registros">Lista</a></li>
-                <li><a href="reporte.html" title="Reportar alagamento como colaborador">Reporte</a></li>
-            </ul>
-        </nav>
-    </header>
-  
-  <main class="shell">
+  <main id="main-content" class="shell app-main">
     <section class="hero">
       <article class="hero__panel">
         <span class="hero__eyebrow">Diretorio territorial</span>
-        <h1>Visualizacao operacional por territorio monitorado.</h1>
-        <p>Use filtros para focar bairros, nivel de risco e eventos prioritarios. O painel combina score explicavel, incidentes recentes e alertas vigentes por area.</p>
+        <h1>Mapa de risco com filtros operacionais.</h1>
+        <p>Consulte bairros, niveis de risco, status da fila e periodo para priorizar resposta e deslocamento seguro.</p>
       </article>
       <aside class="hero__status">
-        <div>
-          <span class="brand__eyebrow">Uso recomendado</span>
-          <strong>Despacho, triagem e acompanhamento de resposta</strong>
-        </div>
-        <p>As marcacoes no mapa sintetizam score de risco atual por territorio.</p>
+        <span class="brand__eyebrow">Uso recomendado</span>
+        <strong>Despacho, triagem e acompanhamento de resposta</strong>
+        <p>Os pontos no mapa sintetizam score de risco e ocorrencias recentes por territorio.</p>
       </aside>
     </section>
 
@@ -77,23 +55,27 @@
             <h2>Consulta operacional</h2>
           </div>
         </div>
-        <form class="filters" id="filters-form">
+        <form class="filters filters--six" id="filters-form">
           <div class="field">
-            <label for="search">Busca territorial</label>
-            <input id="search" name="search" type="search" placeholder="Boa Viagem, Aurora, Mascarenhas...">
+            <label for="search">Busca</label>
+            <input id="search" name="search" type="search" placeholder="Rua, avenida, territorio...">
+          </div>
+          <div class="field">
+            <label for="neighborhoodName">Bairro</label>
+            <input id="neighborhoodName" name="neighborhoodName" type="search" placeholder="Boa Viagem">
           </div>
           <div class="field">
             <label for="riskLevel">Nivel de risco</label>
             <select id="riskLevel" name="riskLevel">
               <option value="">Todos</option>
               <option value="baixo">Baixo</option>
-              <option value="moderado">Moderado</option>
+              <option value="moderado">Medio</option>
               <option value="alto">Alto</option>
               <option value="critico">Critico</option>
             </select>
           </div>
           <div class="field">
-            <label for="status">Status de ocorrencia</label>
+            <label for="status">Status</label>
             <select id="status" name="status">
               <option value="">Todos</option>
               <option value="pendente">Pendente</option>
@@ -103,8 +85,17 @@
             </select>
           </div>
           <div class="field">
+            <label for="period">Periodo</label>
+            <select id="period" name="period">
+              <option value="">Todo historico</option>
+              <option value="24h">Ultimas 24h</option>
+              <option value="7d">Ultimos 7 dias</option>
+              <option value="30d">Ultimos 30 dias</option>
+            </select>
+          </div>
+          <div class="field field--actions">
             <label>&nbsp;</label>
-            <button type="submit">Aplicar filtros</button>
+            <button class="button" type="submit">Aplicar</button>
           </div>
         </form>
       </section>
@@ -113,7 +104,7 @@
         <div class="section-title">
           <div>
             <span class="section-title__eyebrow">Mapa sintetico</span>
-            <h2>Territorios e score atual</h2>
+            <h2>Territorios, alagamentos e rota segura</h2>
           </div>
         </div>
         <div id="territory-map"></div>
@@ -145,8 +136,8 @@
       <section class="content-card">
         <div class="section-title">
           <div>
-            <span class="section-title__eyebrow">Ocorrencias</span>
-            <h2>Fila de campo e colaboracao</h2>
+            <span class="section-title__eyebrow">Historico</span>
+            <h2>Ocorrencias registradas</h2>
           </div>
         </div>
         <div class="table-shell">
@@ -180,7 +171,7 @@
   <footer class="app-footer">
     <div class="shell app-footer__inner">
       <span>Diretorio territorial integrado a ocorrencias, alertas e score de risco.</span>
-      <span>&copy; <span data-current-year></span> HidroRec</span>
+      <span>Desenvolvido e idealizado por Kauã Henrique</span>
     </div>
   </footer>
 

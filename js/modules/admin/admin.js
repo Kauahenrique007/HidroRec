@@ -9,37 +9,37 @@ function renderSummary(target, overview) {
     {
       label: 'Sensores Ativos',
       value: `${overview.sensorsSummary.online}/${overview.sensorsSummary.sensors.length}`,
-      hint: '+2 desde ontem',
+      hint: `${overview.sensorsSummary.maintenance} em manutencao`,
       tone: 'green'
     },
     {
       label: 'Alertas Ativos',
       value: String(overview.summary.alertsVolume),
-      hint: 'Alta prioridade',
+      hint: `${overview.summary.incidentVolume} ocorrencias registradas`,
       tone: 'red'
     },
     {
       label: 'Tempo Medio',
       value: `${overview.summary.averageResponseMinutes} min`,
-      hint: '-5min vs. meta',
+      hint: 'Resposta operacional media',
       tone: 'blue'
     },
     {
       label: 'Reportes Hoje',
       value: String(overview.summary.reportsToday),
-      hint: '+12 vs. ontem',
+      hint: 'Entradas criadas hoje',
       tone: 'blue'
     },
     {
       label: 'Eficiencia',
       value: `${overview.summary.efficiencyPct}%`,
-      hint: 'Meta: 85%',
+      hint: `${overview.summary.degradedRuns} integracoes degradadas`,
       tone: 'green'
     },
     {
       label: 'Tendencia',
-      value: `↓ ${overview.summary.trendPct}%`,
-      hint: 'vs. semana passada',
+      value: `${overview.summary.trendPct}%`,
+      hint: 'Indicador operacional',
       tone: 'green'
     }
   ].map((item) => `
@@ -126,12 +126,12 @@ function renderBottomKpis(target, overview) {
     <article class="bottom-kpi bottom-kpi--blue">
       <span>Tempo Medio de Normalizacao</span>
       <strong>${overview.performance.normalizationMinutes}min</strong>
-      <small>↓ 18% vs. mes anterior</small>
+      <small>Indicador consolidado da base atual</small>
     </article>
     <article class="bottom-kpi bottom-kpi--green">
       <span>Taxa de Acuracia Preditiva</span>
       <strong>${overview.performance.predictiveAccuracyPct}%</strong>
-      <small>↑ 5% vs. mes anterior</small>
+      <small>Estimativa administrativa registrada</small>
     </article>
     <article class="bottom-kpi bottom-kpi--purple">
       <span>Engajamento Cidadao</span>

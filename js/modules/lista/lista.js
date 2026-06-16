@@ -16,19 +16,29 @@ async function loadData(filters = {}) {
     sortBy: 'score',
     order: 'desc',
     search: filters.search || '',
-    riskLevel: filters.riskLevel || ''
+    riskLevel: filters.riskLevel || '',
+    neighborhoodName: filters.neighborhoodName || ''
   };
   const incidentFilters = {
     page: 1,
     pageSize: 10,
     search: filters.search || '',
-    status: filters.status || ''
+    status: filters.status || '',
+    neighborhoodName: filters.neighborhoodName || '',
+    period: filters.period || ''
+  };
+  const alertFilters = {
+    page: 1,
+    pageSize: 6,
+    search: filters.search || '',
+    neighborhoodName: filters.neighborhoodName || '',
+    period: filters.period || ''
   };
 
   const [territoriesResponse, incidentsResponse, alertsResponse, territoriesSummary, incidentsSummary] = await Promise.all([
     territoriesService.list(territoryFilters),
     incidentsService.list(incidentFilters),
-    alertsService.list({ page: 1, pageSize: 6, search: filters.search || '' }),
+    alertsService.list(alertFilters),
     territoriesService.getSummary(territoryFilters),
     incidentsService.getSummary(incidentFilters)
   ]);
@@ -102,7 +112,7 @@ function renderTables(data) {
     <tr>
       <td><a class="text-link" href="./detalhes.html?id=${territory.id}">${territory.name}</a></td>
       <td>${territory.neighborhoodName}</td>
-      <td>${formatRisk(territory.risk.level)}</td>
+      <td><span class="badge badge--${territory.risk.level}">${formatRisk(territory.risk.level)}</span></td>
       <td>${territory.risk.score}</td>
       <td>${territory.activeAlerts}</td>
     </tr>
@@ -113,7 +123,7 @@ function renderTables(data) {
       <td>${incident.neighborhoodName}</td>
       <td>${incident.address}</td>
       <td>${incident.type}</td>
-      <td>${incident.status}</td>
+      <td><span class="badge badge--status">${incident.status}</span></td>
       <td>${formatDateTime(incident.updatedAt)}</td>
     </tr>
   `).join('') : `<tr><td colspan="5">${renderEmptyState('Nenhuma ocorrencia encontrada', 'Nao ha registros para o filtro aplicado.')}</td></tr>`;
@@ -121,7 +131,10 @@ function renderTables(data) {
   alertQueue.innerHTML = data.alerts.length > 0
     ? data.alerts.map(renderAlertCard).join('')
     : renderEmptyState('Nenhum alerta relacionado', 'O recorte atual nao trouxe alertas recentes.');
-  renderTerritoryMapPanel(mapTarget, data.territories);
+  renderTerritoryMapPanel(mapTarget, data.territories, {
+    incidents: data.incidents,
+    alerts: data.alerts
+  });
 }
 
 async function initListaPage() {
